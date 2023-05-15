@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TaxiWalla-Build
-          path: build
+          path: dist
       
       - name: Success Message Print and Path
         run: |
