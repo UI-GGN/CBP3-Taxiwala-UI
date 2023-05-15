@@ -18,7 +18,7 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -38,5 +38,7 @@ jobs:
           path: build
       
       - name: Success Message Print and Path
-        run: echo "Success"
-        run: ls -a
+        run: |
+          echo "Success"
+          pwd
+          ls          
