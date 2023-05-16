@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "Running pre-commit checks..."
+
+echo "Building the application"
+yarn run build
+
+echo "Running linters"
+yarn run lint
+
+echo "Fixing lint errors"
+yarn run lintFix
+
+echo "Running tests"
+yarn run test
