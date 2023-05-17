@@ -4,7 +4,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: { 
@@ -12,6 +13,11 @@ module.exports = {
     sourceType: 'module',
     "ecmaFeatures": {
       "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "^18.2.0"
     }
   },
   plugins: ['react-refresh', 'react'],
@@ -27,7 +33,6 @@ module.exports = {
     "react/jsx-uses-vars": "error",
     "react/prop-types": "warn",
     "react/jsx-props-no-spreading": "off",
-    "react/react-in-jsx-scope": "error",
     "react/no-unused-prop-types": "error",
     "react/no-unknown-property": "error",
     "react/self-closing-comp": "error",
