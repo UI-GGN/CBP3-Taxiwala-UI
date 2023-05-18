@@ -11,7 +11,7 @@ const RouteContainer: React.FC = (): React.ReactElement => {
                 allRoutes.map(routePath => {
                     return <Route key = {routePath.path}
                         Component = {routePath.container} path = {routePath.path}
-                        isExact = {routePath.isExact} />
+                        exact = {routePath.isExact} />
                 })
             }
         </Routes>
