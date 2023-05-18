@@ -9,6 +9,6 @@ type RoutePath = {
 }
 
 export const routePaths: { [key: string]: RoutePath } = {
-    "home": { name: "home", path: "/", container: <LoginScreen />, isExact: true, protected: false },
-    "loginScreen": { name: "home", path: "/login", container: <LoginScreen />, isExact: true, protected: false }
+    "home": { name: "home", path: "/", container: LoginScreen, isExact: true, protected: false },
+    "loginScreen": { name: "home", path: "/login", container: LoginScreen, isExact: true, protected: false }
 }
