@@ -1,7 +1,8 @@
 import LoginScreen from "../screens/Employee/Login/Login";
 import NotFound from "../screens/Common/NotFound/NotFound";
+import { EmployeeRoutePaths } from "../screens/Employee/EmployeeRoutePaths";
 
-type RoutePath = {
+export type RoutePath = {
     name: string;
     path: string;
     container: React.ComponentType<any>;    
@@ -9,7 +10,7 @@ type RoutePath = {
 }
 
 export const routePaths: { [key: string]: RoutePath } = {
-    "home": { name: "home", path: "/", container: LoginScreen, protected: false },
-    "loginScreen": { name: "loginScreen", path: "/login", container: LoginScreen, protected: false },
-    "notFound": { name: "notFound", path: "*", container: NotFound, protected: false }
+    "home": { name: "home", path: "/", container: LoginScreen, protected: false },    
+    "notFound": { name: "notFound", path: "*", container: NotFound, protected: false },
+    ...EmployeeRoutePaths
 }
