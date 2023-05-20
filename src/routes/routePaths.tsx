@@ -1,14 +1,15 @@
-import LoginScreen from "../screens/login/Login";
+import LoginScreen from "../screens/Employee/Login/Login";
+import NotFound from "../screens/Common/NotFound/NotFound";
 
 type RoutePath = {
     name: string;
     path: string;
-    container: React.ComponentType<any>;
-    isExact: boolean;
+    container: React.ComponentType<any>;    
     protected: boolean
 }
 
 export const routePaths: { [key: string]: RoutePath } = {
-    "home": { name: "home", path: "/", container: LoginScreen, isExact: true, protected: false },
-    "loginScreen": { name: "home", path: "/login", container: LoginScreen, isExact: true, protected: false }
+    "home": { name: "home", path: "/", container: LoginScreen, protected: false },
+    "loginScreen": { name: "loginScreen", path: "/login", container: LoginScreen, protected: false },
+    "notFound": { name: "notFound", path: "*", container: NotFound, protected: false }
 }
