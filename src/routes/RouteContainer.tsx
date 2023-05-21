@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { routePaths } from "./RoutePaths";
+import { RoutePaths } from "./RoutePaths";
 
 const RouteContainer: React.FC = (): React.ReactElement => {
-    const allRoutes = Object.values(routePaths).filter(route => !route.protected);
+    const allRoutes = Object.values(RoutePaths).filter(route => !route.protected);
 
     return <>
         <Routes>
             {
                 allRoutes.map(routePath => {
-                    return <Route key = {routePath.path}
+                    return <Route key = {routePath.name}
                         Component = {routePath.container} path = {routePath.path} />
                 })
             }

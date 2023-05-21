@@ -9,8 +9,8 @@ export type RoutePath = {
     protected: boolean
 }
 
-export const routePaths: { [key: string]: RoutePath } = {
-    "home": { name: "home", path: "/", container: LoginScreen, protected: false },    
+export const RoutePaths: { [key: string]: RoutePath } = {
+    "home": { name: "home", path: "/", container: LoginScreen, protected: false },
     "notFound": { name: "notFound", path: "*", container: NotFound, protected: false },
     ...EmployeeRoutePaths
 }
