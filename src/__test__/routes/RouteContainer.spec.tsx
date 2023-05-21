@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import RouteContainer from "../../routes/RouteContainer";
 import { BrowserRouter } from "react-router-dom";
-import * as Routepaths from "../../routes/RoutePaths";
+import * as Routepaths from "../../routes/routePaths";
 import LoginScreen from "../../screens/Employee/Login/Login";
 import NotFound from "../../screens/Common/NotFound/NotFound";
 

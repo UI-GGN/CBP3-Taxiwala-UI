@@ -1,4 +1,4 @@
-import { RoutePath } from "../../routes/RoutePaths";
+import { RoutePath } from "../../routes/routePaths";
 import LoginScreen from "./Login/Login";
 
 export const EmployeeRoutePaths: { [key: string]: RoutePath } = {
