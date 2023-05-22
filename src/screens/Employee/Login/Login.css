@@ -1,0 +1,14 @@
+.login_coverimg{
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.login_img_grid{
+    height: 100vh;
+}
+
+.login_signin_box{
+    padding-top: 15%;
+    padding-left: 30px;
+}
