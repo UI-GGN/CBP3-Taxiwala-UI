@@ -1,27 +1,34 @@
 import React, { ReactElement } from "react";
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import logo from "../../../assets/parked_cab.jpg";
 import "./Login.css";
+import TextInput from '../../../Components/TextInput/TextInput';
 
 const LoginScreen: React.FC = (): ReactElement => {
   return <>       
     <Grid container spacing={2}>
-      <Grid xs={12} md={6} lg={6}>
+      <Grid item xs={12} md={6} lg={6}>
         <Container maxWidth="md" >
           <Box className="login_signin_box"  >
-            <h1>Sign In</h1>
-            <p>Start booking cabs now!</p>
-            <TextField id="filled-basic" label="Enter your Email id" variant="filled" />
+            <div className="signin_text">Sign In</div>
+            <div className="signin_headline">Start booking cabs now!</div>
+            <TextInput
+              placeholder='Enter your work email id'
+              type="email"
+              styles={{
+                width: "476px",
+                height: "49.4px",
+                top: "80px"
+              }}
+            />
             <br />
-            <Button variant="contained">Send OTP</Button>
+            {/* <Button variant="contained">Send OTP</Button> */}
           </Box>
         </Container>
       </Grid>
-      <Grid xs={12} md={6} lg={6} className="login_img_grid" sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <Grid item xs={12} md={6} lg={6} className="login_img_grid" sx={{ display: { xs: 'none', sm: 'block' } }}>
         <img src={logo} alt="cab parked" className="login_coverimg" />
       </Grid>
     </Grid>

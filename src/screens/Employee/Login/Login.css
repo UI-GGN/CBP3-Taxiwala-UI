@@ -12,3 +12,33 @@
     padding-top: 15%;
     padding-left: 30px;
 }
+
+.signin_text {
+    width: 391px;
+    height: 60px;
+    left: 72px;
+    top: 197px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 53px;
+    color: #595959;
+}
+
+.signin_headline {
+    width: 293px;
+    height: 26px;
+    left: 73px;
+    top: 257px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+    color: #838383;
+}
+
+.email_input {
+    position: relative;
+    top: 50px;
+    left: 0px;
+}
