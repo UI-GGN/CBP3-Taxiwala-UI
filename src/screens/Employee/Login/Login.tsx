@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import logo from "../../../assets/parked_cab.jpg";
 import "./Login.css";
 import TextInput from '../../../Components/TextInput/TextInput';
+import { Button } from '@mui/material';
 
 const LoginScreen: React.FC = (): ReactElement => {
   return <>       
@@ -18,13 +19,14 @@ const LoginScreen: React.FC = (): ReactElement => {
               placeholder='Enter your work email id'
               type="email"
               styles={{
-                width: "476px",
+                width: "390px",
                 height: "49.4px",
-                top: "80px"
+                top: "80px",
+                marginRight: "40px"
               }}
             />
             <br />
-            {/* <Button variant="contained">Send OTP</Button> */}
+            <Button variant="contained" className="send_otp_button">Send OTP</Button>
           </Box>
         </Container>
       </Grid>

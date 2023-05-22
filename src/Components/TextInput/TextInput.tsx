@@ -24,7 +24,7 @@ const TextInput: FC<ITextInputProps > = ({
                 sx: {
                     ...styles,
                     borderRadius: "25px",
-                    fontSize: "20px",
+                    fontSize: "15px",
                     color: "#656565",
                     paddingLeft: "15px"
                 },
