@@ -43,6 +43,7 @@
     left: 0px;
 }
 
-.send_otp_button {
-    top: 90px;
+.login_sendOTP_text{
+    margin-bottom: 0px ;
+    color: #838383;
 }

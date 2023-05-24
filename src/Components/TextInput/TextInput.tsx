@@ -6,20 +6,26 @@ interface ITextInputProps {
     placeholder: string;
     type: string;
     styles: CSS.Properties;
+    handleChange: ()=>void;
+    disabled?: boolean
 }
 
 const TextInput: FC<ITextInputProps > = ({ 
     placeholder,
     type,
-    styles
+    styles,
+    handleChange,
+    disabled
 }): JSX.Element => {
     
     return <>       
         <TextField
             hiddenLabel
             variant="filled"
+            disabled={disabled || false}
             placeholder={placeholder}
             type={type}
+            onChange={(e) => handleChange(e.target.value)}
             InputProps={{
                 sx: {
                     ...styles,
