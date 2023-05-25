@@ -35,7 +35,7 @@ const LoginScreen: React.FC = (): ReactElement => {
               type="email"
               value={email}
               disabled={showOTPFields}
-              handleChange={value => setEmail(value)}
+              handleChange={(text: string) => setEmail(text)}
               styles={{
                 width: "390px",
                 height: "49.4px",
@@ -49,7 +49,7 @@ const LoginScreen: React.FC = (): ReactElement => {
               placeholder='Enter OTP sent to your Email ID'
               type="number"
               value={otp}
-              handleChange={value => setOtp(value)}
+              handleChange={(text: string) => setOtp(text)}
               styles={{
                 width: "390px",
                 height: "49.4px",
