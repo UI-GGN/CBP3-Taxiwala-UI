@@ -58,7 +58,7 @@ const LoginScreen: React.FC = (): ReactElement => {
               }}
             />
             <p className="login_sendOTP_text">Didn't receive OTP? <span 
-            onClick={() => window.location.reload(false)} style={{color: 'steelblue', cursor: "pointer"}}>Try again.</span></p>
+            onClick={() => window.location.reload()} style={{color: 'steelblue', cursor: "pointer"}}>Try again.</span></p>
             </>
             }
             <br />

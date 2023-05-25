@@ -11,6 +11,7 @@ describe("Test Input tests", () => {
         type="email"
         handleChange={handleChange}
         styles={{}} 
+        value=""
     />);
 
     const emailInput: HTMLElement = screen.getByPlaceholderText(/Enter email/i);
@@ -24,6 +25,7 @@ describe("Test Input tests", () => {
         type="email"
         handleChange={handleChange}
         styles={{}} 
+        value=""
     />);
     const emailInput: HTMLElement = screen.getByPlaceholderText(/Enter email/i);
     const email: string = 'CBP@gmail.com';

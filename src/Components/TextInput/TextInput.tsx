@@ -8,7 +8,8 @@ interface ITextInputProps {
     styles: CSS.Properties;
     // eslint-disable-next-line no-unused-vars
     handleChange: (text: string) => void;
-    disabled?: boolean
+    disabled?: boolean;
+    value: string;
 }
 
 const TextInput: FC<ITextInputProps > = ({ 
@@ -16,7 +17,8 @@ const TextInput: FC<ITextInputProps > = ({
     type,
     styles,
     handleChange,
-    disabled
+    disabled,
+    value
 }): JSX.Element => {
     
     return <>       
@@ -26,6 +28,7 @@ const TextInput: FC<ITextInputProps > = ({
             disabled={disabled || false}
             placeholder={placeholder}
             type={type}
+            value={value}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => handleChange(e.target.value)}
             InputProps={{
                 sx: {
