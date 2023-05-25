@@ -6,7 +6,8 @@ interface ITextInputProps {
     placeholder: string;
     type: string;
     styles: CSS.Properties;
-    handleChange: ()=>void;
+    // eslint-disable-next-line no-unused-vars
+    handleChange: (value: string) => void;
     disabled?: boolean
 }
 
