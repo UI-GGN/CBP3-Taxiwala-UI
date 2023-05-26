@@ -19,7 +19,7 @@ describe("RouteContainer", () => {
       <RouteContainer />
     </BrowserRouter>)
 
-    expect(getByText("Employee Login Screen")).toBeInTheDocument()
+    expect(getByText("Sign In")).toBeInTheDocument()
   });
 
   test("Should not render protected routes", () => {

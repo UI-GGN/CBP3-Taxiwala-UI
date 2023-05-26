@@ -11,6 +11,7 @@ export type RoutePath = {
 
 export const RoutePaths: { [key: string]: RoutePath } = {
     "home": { name: "home", path: "/", container: LoginScreen, protected: false },
+    "EmployeeLogin": { name: "EmployeeLogin", path: "/login", container: LoginScreen, protected: false },
     "notFound": { name: "notFound", path: "*", container: NotFound, protected: false },
     ...EmployeeRoutePaths
 }
