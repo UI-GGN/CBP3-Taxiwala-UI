@@ -3,17 +3,9 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import { Button } from "@mui/material";
 
-function Caption() {
-  return (
-    <Typography
-      variant="caption"
-      sx={{ fontSize: "10px", fontWeight: 400, color: "#838383" }}
-    >
-      Made with brain by Gurgaon office
-    </Typography>
-  );
-}
+
 function Thoughtworks() {
   return (
     <Typography
@@ -30,37 +22,26 @@ function Thoughtworks() {
   );
 }
 
-function Links(title: string, marginTop: string) {
-  return (
-    <Typography
-      variant="body2"
-      sx={{ color: "#838383", fontSize: "13px", marginTop: {marginTop} }}
-    >
-      {title}
-    </Typography>
-  );
-}
-
+const navItems = ["Profile","All Requests"];
 
 const defaultTheme = createTheme();
 
-export default function StickyFooter() {
+export default function HeaderBar() {
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box 
-        component="footer"
+        component="header"
         sx={{
-          py: 2,
-          px: 1,
+          py: 1,
+          px: 0,
           mt: "auto",
-          borderTop: 1,
           color: "#ADADAD",
-          marginTop: "calc(10% + 60px)",
           position: "fixed",
-          bottom: 0,
           width: "100%",
           display: { xs: "none", sm: "block"},
-          //fontWeight:'700px',
+          fontWeight:"700px",
+          margin:"10px",
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
               ? theme.palette.grey[100]
@@ -77,19 +58,21 @@ export default function StickyFooter() {
                   fontWeight: 700,
                   color: "#595959",
                   justifyContent: "right",
+                  marginTop:"5px",
                 }}
               >
                 TaxiWala
                 <Thoughtworks />
               </Typography>
-
-              <Caption />
             </Container>
           </Grid>
-          <Grid item xs={12} md={3} lg={3} sx={{marginTop:1}}>
-            <Container sx={{ float: "right", color: "#838383", marginTop: 1 }}>
-              { Links("Know the Team behind TaxiWala", "0px")}
-              { Links("Terms of Use", "7px")}
+          <Grid item xs={12} md={3} lg={3} sx={{marginTop:0}}>
+            <Container sx={{ float: "right", color: "#838383", marginTop: 1,borderRight:0 }}>
+              {navItems.map((item) => (
+                <Button key={item} sx={{ color: "#000000" , float:"right", paddingRight:"10%"}}>
+                  {item}
+                </Button>
+              ))}
             </Container>
           </Grid>
         </Grid>
