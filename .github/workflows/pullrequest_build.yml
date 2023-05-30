@@ -1,17 +1,36 @@
-name: Build TaxiWalla
+name: PR Merge Build TaxiWalla
 
-on:
-  push:
-    branches:
-      - master
-      - feature/*
+on:  
   pull_request:
     branches:
       - master
+      
 
 jobs:
+  test:
+    runs-on: ubuntu-latest    
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Running tests
+        run: npm run test
+
   build:
     runs-on: ubuntu-latest
+    needs: test
     strategy:
       matrix:
         node-version: [14.x]
@@ -35,10 +54,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TaxiWalla-Build
-          path: dist
-      
-      - name: Success Message Print and Path
-        run: |
-          echo "Success"
-          pwd
-          ls          
+          path: dist         
