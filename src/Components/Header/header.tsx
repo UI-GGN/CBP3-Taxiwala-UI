@@ -39,7 +39,7 @@ export default function HeaderBar() {
           color: "#ADADAD",
           position: "fixed",
           width: "100%",
-          display: { xs: "none", sm: "block"},
+          // display: { xs: "none", sm: "block"},
           fontWeight:"700px",
           margin:"0px",
           backgroundColor: (theme) =>
@@ -66,7 +66,8 @@ export default function HeaderBar() {
               </Typography>
             </Container>
           </Grid>
-          <Grid item xs={12} md={3} lg={3} sx={{marginTop:0}}>
+          <Grid item xs={12} md={3} lg={3} 
+            sx={{marginTop:0, display: { xs: "none", sm: "block" } }}>
             <Container sx={{ float: "right", color: "#838383", marginTop: 1,borderRight:0 }}>
               {navItems.map((item) => (
                 <Button key={item} sx={{ color: "#000000" , float:"right", paddingRight:"10%"}}>

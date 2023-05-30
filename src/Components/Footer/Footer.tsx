@@ -57,7 +57,7 @@ export default function StickyFooter() {
           color: "#ADADAD",          
           bottom: 0,
           width: "100%",
-          display: { xs: "none", sm: "block"},
+          // display: { xs: "none", sm: "block"},
           //fontWeight:'700px',
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
@@ -84,7 +84,7 @@ export default function StickyFooter() {
               <Caption />
             </Container>
           </Grid>
-          <Grid item xs={12} md={3} lg={3} sx={{marginTop:1}}>
+          <Grid item xs={12} md={3} lg={3} sx={{marginTop:1, display: { xs: "none", sm: "block"}}}>
             <Container sx={{ float: "right", color: "#838383", marginTop: 1 }}>
               { Links("Know the Team behind TaxiWala", "0px")}
               { Links("Terms of Use", "7px")}
