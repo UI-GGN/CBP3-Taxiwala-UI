@@ -41,6 +41,7 @@ const TextInput: FC<ITextInputProps > = ({
                 disableUnderline: true
               }}
             className="TextInput"
+            fullWidth
         />
     </>;
 }
