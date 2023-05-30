@@ -13,13 +13,13 @@ describe("RouteContainer", () => {
       value: {
         "home": { name: "home", path: "/", container: LoginScreen, protected: false },
       }
-    })
+    });
 
     const { getByText } = render(<BrowserRouter>
       <RouteContainer />
-    </BrowserRouter>)
+    </BrowserRouter>);
 
-    expect(getByText("Sign In")).toBeInTheDocument()
+    expect(getByText("Sign In")).toBeInTheDocument();
   });
 
   test("Should not render protected routes", () => {
@@ -29,13 +29,13 @@ describe("RouteContainer", () => {
         "home": { name: "home", path: "/", container: LoginScreen, protected: true },
         "notFound": { name: "notFound", path: "*", container: NotFound, protected: false },
       }
-    })
+    });
 
     const {getByText} =  render(<BrowserRouter>
       <RouteContainer />
-    </BrowserRouter>)
+    </BrowserRouter>);
     
-    expect(getByText("Not Found")).toBeInTheDocument()
+    expect(getByText("Not Found")).toBeInTheDocument();
   });
 
 });

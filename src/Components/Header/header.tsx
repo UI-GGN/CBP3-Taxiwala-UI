@@ -33,15 +33,15 @@ export default function HeaderBar() {
       <Box 
         component="header"
         sx={{
-          py: 1,
-          px: 0,
-          mt: "auto",
+          pt: 2,
+          pb: 1,
+          px: 0,           
           color: "#ADADAD",
           position: "fixed",
           width: "100%",
           display: { xs: "none", sm: "block"},
           fontWeight:"700px",
-          margin:"10px",
+          margin:"0px",
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
               ? theme.palette.grey[100]
