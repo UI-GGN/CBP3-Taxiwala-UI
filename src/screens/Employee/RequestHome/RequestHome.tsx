@@ -10,6 +10,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TextInput from "../../../Components/TextInput/TextInput";
 import "./RequestHome.css";
+import Dropdown from '../../../Components/TextInput/Dropdown';
 
 const RightWindow = () => {
   return <img src={logo} alt="cab parked" className="login_coverimg" />;
@@ -154,6 +155,10 @@ const LeftWindow = () => {
       setAlignment(newAlignment);
     };
 
+    const onTimeSelect = (text: string) => {
+      console.log(text);
+    };
+
 
     return <>
       <Typography>
@@ -176,12 +181,32 @@ const LeftWindow = () => {
       <Typography>
       Ad-Hoc requests are request on demand basis. These are to be made 1 hour before atleast.
       </Typography>
+      <br/>
+      <Dropdown 
+        label="Check in Time"
+        handleChange={onTimeSelect}
+      />
+      <br/>
+      <Dropdown 
+        label="Check out Time"
+        handleChange={onTimeSelect}
+      />
       </div>
     }
     {alignment=="Regular"&&<div>
       <Typography>
       Regular requests are qhen you plan to come for many days to office. These are to be made 1 day before by 10pm.
       </Typography>
+      <br/>
+      <Dropdown 
+        label="Check in Time"
+        handleChange={onTimeSelect}
+      />
+      <br/>
+      <Dropdown 
+        label="Check out Time"
+        handleChange={onTimeSelect}
+      />
       </div>
     }
     </>;
