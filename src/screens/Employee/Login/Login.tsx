@@ -27,7 +27,7 @@ const LoginScreen: React.FC = (): ReactElement => {
     navigate("/employee/home");
   };
 
-  return <>       
+  return <>
     <Grid container spacing={2}>
       <Grid item xs={12} md={6} lg={6}>
         <Container maxWidth="md" >

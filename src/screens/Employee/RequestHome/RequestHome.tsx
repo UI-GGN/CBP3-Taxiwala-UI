@@ -31,7 +31,7 @@ const LeftWindow = () => {
       >
         <Typography>Enter your Pickup location</Typography>
       </AccordionSummary>
-      <AccordionDetails style={{ width: "100%" }}>
+      <AccordionDetails>
         <div>
         <Typography>
         Pickup point is where you will be coming from towards office!
