@@ -1,37 +1,56 @@
 import React, { FC } from 'react';
 import { InputLabel, Select, MenuItem, FormControl, SelectChangeEvent} from '@mui/material';
 
+
+type DropdownValue = {
+  value: string,
+  label: string
+}
+
 interface IDropdownProps {
     label: string;
     handleChange: (text: string) => void;
+    value: string;
+    dropdownvalues: DropdownValue[],
 }
 
 const Dropdown: FC<IDropdownProps > = ({ 
-    label,
-    handleChange
+  label,    
+  handleChange,
+  value="",
+  dropdownvalues = [
+    {
+      value: "9:00",
+      label: "9:00"
+    },
+    {
+      value: "10:00",
+      label: "10:00"
+    }, 
+  ]
 }: IDropdownProps): JSX.Element => {
     
   return (
     <>
-    <FormControl sx={{ m: 1, minWidth: "100%" }}>
-    <InputLabel id="demo-simple-select-helper-label">{label}</InputLabel>
+      <FormControl sx={{ mb: 2, minWidth: "100%" }}>
+        <InputLabel id="demo-simple-select-helper-label">{label}</InputLabel>
         <Select
           variant="filled"
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          onChange={(e: SelectChangeEvent) => handleChange(e.target.value)}
+          onChange={(e: SelectChangeEvent) => handleChange(e.target.value)} 
           label={label}
           fullWidth
+          value={value}
           displayEmpty
         >
-          <MenuItem value={"9:00"}>9:00</MenuItem>
-          <MenuItem value={"9:15"}>9:15</MenuItem>
-          <MenuItem value={"9:30"}>9:30</MenuItem>
-          <MenuItem value={"9:45"}>9:45</MenuItem>
+          {dropdownvalues.map((value, label) => (
+            <MenuItem value={value.value}>{value.label}</MenuItem>
+          ))}          
         </Select>
-        </FormControl>
+      </FormControl>
     </>
   );
-}
+};
 
 export default Dropdown;
