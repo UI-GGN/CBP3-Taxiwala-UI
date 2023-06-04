@@ -1,11 +1,13 @@
 import React, { ReactElement } from "react";
 import WindowLayout from "../../../Components/WindowLayout";
-import logo from "../../../assets/parked_cab.jpg";
+import daycab from "../../../assets/parked_cab.jpg";
+import nightcab from "../../../assets/night-cab.jpeg";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { Button, Accordion, AccordionSummary, AccordionDetails, Typography, Grid,
   ToggleButtonGroup, ToggleButton, Alert
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TextInput from "../../../Components/TextInput/TextInput";
@@ -19,10 +21,10 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import "./RequestHome.css";
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
 const RightWindow = () => {
-  return <img src={logo} alt="cab parked" className="login_coverimg" />;
+  const theme = useTheme();
+
+  return <img src={ theme.palette.mode ==="light"?daycab:nightcab} alt="cab parked" className="login_coverimg" />;
 };
 
 const LeftWindow = () => {
@@ -119,6 +121,8 @@ const LeftWindow = () => {
           }
           label="No End Date decided"
         />
+        <br />
+        <br />
         <Dropdown 
           label="Check In Time"          
           handleChange={(value: string) => setCheckintime(value)}
@@ -265,7 +269,7 @@ const LeftWindow = () => {
   return <>
     <Box style={{ marginTop: '8rem' }} className="left_box">
       <Typography color="typography.primary" style={{margin: "0px", marginBottom: "-13px"}} >
-        Looking for office cab?</Typography>      
+        Looking for office cab?</Typography>
       {/* <Typography variant="h3">Request one now</Typography> */}
       <h1 className="request_headline" style={{margin: "0px"}}>Request one now</h1>
       <div>
