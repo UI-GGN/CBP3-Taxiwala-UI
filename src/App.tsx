@@ -8,21 +8,31 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { ScopedCssBaseline } from '@mui/material';
 import { LightMode, DarkMode } from "./colorConstants";
+import { useEffect } from "react";
+import { getLocalTheme, updateThemeLocalState } from "./utils/theme";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const ColorContext = createContext({ toggleColor: () => {} });
 
 const App = (): ReactElement => {
   const [mode, setMode] = useState('light');
+
+  useEffect(() => {
+    const theme = getLocalTheme();
+    console.log(theme);
+    setMode(theme);
+  }, [mode]);
   
   const colorMode = useMemo(
     () => ({
       toggleColor: () => {
+        updateThemeLocalState();
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
     }),
     [],
   );
+
   const theme = createTheme({
     palette: {
       mode: mode,
