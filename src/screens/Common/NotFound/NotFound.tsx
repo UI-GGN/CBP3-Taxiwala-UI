@@ -2,7 +2,8 @@ import React, { ReactElement } from "react";
 
 const NotFound: React.FC = (): ReactElement => {
     return <>
-        <p>Not Found</p>
+    <br />
+        <p style={{marginTop: '5rem'}}>Not Found</p>
     </>
 }
 

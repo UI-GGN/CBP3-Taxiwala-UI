@@ -21,7 +21,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import "./RequestHome.css";
 
-const RightWindow = () => {
+export const RightWindow = () => {
   const theme = useTheme();
 
   return <img src={ theme.palette.mode ==="light"?daycab:nightcab} alt="cab parked" className="login_coverimg" />;

@@ -1,7 +1,7 @@
 export const updateThemeLocalState = () => {
   const theme = localStorage.getItem("theme");
   if(theme == undefined){
-    localStorage.setItem("theme", 'light')
+    localStorage.setItem("theme", 'dark')
   }else{
     localStorage.setItem("theme", theme == 'light'?"dark":"light");
   }

@@ -42,6 +42,7 @@ export default function HeaderBar() {
         
         position: "fixed",
         width: "100%",
+        zIndex: 999,
         // display: { xs: "none", sm: "block"},
         fontWeight:"700px",
         margin:"0px",
