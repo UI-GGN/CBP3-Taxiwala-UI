@@ -1,4 +1,4 @@
-import { ReactElement, React } from "react";
+import React, { ReactElement } from "react";
 import WindowLayout from "../../../Components/WindowLayout";
 import { RightWindow } from "./RequestHome";
 import { Box, Typography, Button } from "@mui/material";

@@ -5,4 +5,6 @@ fileignoreconfig:
     checksum: 49ad670fe7af109f76723d7bd1f67b55fc27235f21e038c1ed504d8f89180f2d
   - filename: src/Components/Header/header.tsx
     checksum: 7b97ac1765e17dfbd41d560f2c578e9afaad70452aa402efe738e409992f1993
+  - filename: src/Components/TextInput/Dropdown.tsx
+    checksum: b5c95dcaf5d4e82477d0c66beed0b8536ccde38cff0ee406317f4aafd0b818f5
 version: ""
