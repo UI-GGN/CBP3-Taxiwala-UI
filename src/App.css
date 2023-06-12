@@ -1,0 +1,18 @@
+.stepsBox{
+    background: black;
+    border-radius: 20px;
+    width: fit-content;
+    color: whitesmoke;
+    font-size: 14px;
+    padding: 4px 10px 4px 10px;
+}
+
+.left_box{
+    padding-left: 30px;
+}
+
+@media screen and (max-width: 500px) {
+    .left_box{
+        padding-left: 0px;
+    }   
+}

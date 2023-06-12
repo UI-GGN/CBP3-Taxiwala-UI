@@ -20,6 +20,7 @@ describe("Test Input tests", () => {
   });
 
   test("Should be able to type in text input box", () => {
+    const handleChange = jest.fn();
     render(<TextInput 
         placeholder="Enter email" 
         type="email"
@@ -31,9 +32,9 @@ describe("Test Input tests", () => {
     const email: string = 'CBP@gmail.com';
 
     expect(emailInput).toHaveValue('');
-
+    
     fireEvent.change(emailInput, {target: {value: email}});
     
-    expect(emailInput).toHaveValue(email);
+    expect(handleChange).toHaveBeenCalledWith(email);
   });
 });

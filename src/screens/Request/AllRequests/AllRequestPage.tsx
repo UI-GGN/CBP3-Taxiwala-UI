@@ -30,7 +30,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={6}>
-          <Container maxWidth="md" sx={{ marginBottom: "120px" }}>
+          <Container maxWidth="md">
             <Box className="allrequests_box">
               <div className="allrequests_text">All requests</div>
               {items.map((elem) => (
