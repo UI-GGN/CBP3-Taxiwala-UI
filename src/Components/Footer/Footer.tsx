@@ -60,7 +60,6 @@ export default function StickyFooter() {
           bottom: 0,
           width: "100%",
           display: { xs: 'none', sm: 'block'},
-          //fontWeight:'700px',
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
               ? theme.palette.grey[100]
