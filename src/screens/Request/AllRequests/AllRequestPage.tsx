@@ -13,18 +13,7 @@ import items from "../../../../.github/workflows/item.json";
 import logo from "../../../assets/image1.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-const AllRequestPage: React.FC = (): ReactElement => {
-  const requests = [
-    {
-      ReqID: 345678,
-      pickupPoint: "xyz",
-      dropPoint: "abc",
-      date: "20th January",
-      pickupTime: new Date(),
-      dropTime: new Date(),
-      status: "Request in Pending",
-    },
-  ];
+const AllRequestPage: React.FC = (): ReactElement => {  
 
   return (
     <>

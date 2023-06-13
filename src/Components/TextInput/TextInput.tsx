@@ -33,14 +33,15 @@ const TextInput: FC<ITextInputProps > = ({
             InputProps={{
                 sx: {
                     ...styles,
-                    borderRadius: "25px",
+                    // borderRadius: "25px",
                     fontSize: "15px",
-                    color: "#656565",
+                    color: "typography.primary",
                     paddingLeft: "15px"
                 },
-                disableUnderline: true
+                // disableUnderline: true
               }}
             className="TextInput"
+            fullWidth
         />
     </>;
 }

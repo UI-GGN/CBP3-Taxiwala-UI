@@ -3,6 +3,11 @@ import "@testing-library/jest-dom";
 import LoginScreen from "../../../../screens/Employee/Login/Login";
 
 
+jest.mock("react-router-dom", () => ({
+  ...(jest.requireActual("react-router-dom") as any),
+  useNavigate: () => jest.fn()
+}));
+
 describe("Employee Login Screen", () => {
   test("Should render Sign In text", () => {
     render(<LoginScreen />);

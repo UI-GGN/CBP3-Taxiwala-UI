@@ -2,18 +2,21 @@ import React, { ReactElement } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import logo from "../../../assets/parked_cab.jpg";
+import daycab from "../../../assets/parked_cab.jpg";
+import nightcab from "../../../assets/night-cab.jpeg"
 import "./Login.css";
 import TextInput from "../../../Components/TextInput/TextInput";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from '@mui/material/styles';
 
 const LoginScreen: React.FC = (): ReactElement => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [showOTPFields, setShowOTPFields] = useState(false);
   const navigate = useNavigate();
+  const theme = useTheme();
   
 
   const sendOTP = () => {
@@ -27,13 +30,14 @@ const LoginScreen: React.FC = (): ReactElement => {
     navigate("/employee/home");
   };
 
-  return <>       
+  return <>
     <Grid container spacing={2}>
       <Grid item xs={12} md={6} lg={6}>
         <Container maxWidth="md" >
-          <Box className="left_box login_signin_box">
-            <div className="signin_text">Sign In</div>
-            <div className="signin_headline">Start booking cabs now!</div>
+          <Box className="left_box login_signin_box">            
+            <h1 className="request_headline" style={{margin: "0px"}}>Sign in!</h1>
+            <Typography color="typography.primary" variant="h6" style={{margin: "0px", marginTop: "-10px"}} >
+            Start booking office cabs now!</Typography>
             <TextInput
               placeholder='Enter your work Email ID'
               type="email"
@@ -86,7 +90,7 @@ const LoginScreen: React.FC = (): ReactElement => {
         </Container>
       </Grid>
       <Grid item xs={12} md={6} lg={6} className="login_img_grid" sx={{ display: { xs: "none", sm: "block" } }}>
-        <img src={logo} alt="cab parked" className="login_coverimg" />
+        <img src={theme.palette.mode === "light"?daycab:nightcab} alt="cab parked" className="login_coverimg" />
       </Grid>
     </Grid>
   </>;

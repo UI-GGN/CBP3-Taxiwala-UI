@@ -14,8 +14,16 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.16",
+<<<<<<< HEAD
     "@mui/material": "^5.13.5",
+=======
+    "@mui/lab": "^5.0.0-alpha.133",
+    "@mui/material": "^5.13.1",
+    "@mui/x-date-pickers": "^6.6.0",
+    "dayjs": "^1.11.7",
+>>>>>>> master
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2"

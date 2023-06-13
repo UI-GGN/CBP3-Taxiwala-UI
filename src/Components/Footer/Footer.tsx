@@ -8,7 +8,7 @@ function Caption() {
   return (
     <Typography
       variant="caption"
-      sx={{ fontSize: "10px", fontWeight: 400, color: "#838383" }}
+      sx={{ fontSize: "10px", fontWeight: 400, color: "typography.secondary" }}
     >
       Made with brain by Gurgaon office
     </Typography>
@@ -34,7 +34,7 @@ function Links(title: string, marginTop: string) {
   return (
     <Typography
       variant="body2"
-      sx={{ color: "#838383", fontSize: "13px", marginTop: {marginTop} }}
+      sx={{ color: "typography.secondary", fontSize: "13px", marginTop: {marginTop} }}
     >
       {title}
     </Typography>
@@ -42,56 +42,49 @@ function Links(title: string, marginTop: string) {
 }
 
 
-const defaultTheme = createTheme();
-
 export default function StickyFooter() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Box 
-        component="footer"
-        sx={{
-          py: 2,
-          px: 1,
-          mt: "auto",
-          borderTop: 1,
-          color: "#ADADAD",
-          bottom: 0,
-          width: "100%",
-          // display: { xs: "none", sm: "block"},
-          //fontWeight:'700px',
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[800],
-        }}
-      >
-        <Grid container >
-          <Grid item xs={12} md={9} lg={9}>
-            <Container>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: "28px",
-                  fontWeight: 700,
-                  color: "#595959",
-                  justifyContent: "right",
-                }}
-              >
+  return (   
+    <Box 
+      component="footer"
+      sx={{
+        py: 2,
+        px: 1,
+        mt: "auto",
+        borderTop: 1,
+        color: "linecolor",
+        bottom: 0,
+        width: "100%",
+        // display: { xs: "none", sm: "block"},
+        //fontWeight:'700px',
+        backgroundColor: "background.header",
+      }}
+    >
+      <Grid container >
+        <Grid item xs={12} md={9} lg={9}>
+          <Container>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "28px",
+                fontWeight: 700,
+                color: "typography.secondary",
+                justifyContent: "right",
+              }}
+            >
                 TaxiWala
-                <Thoughtworks />
-              </Typography>
+              <Thoughtworks />
+            </Typography>
 
-              <Caption />
-            </Container>
-          </Grid>
-          <Grid item xs={12} md={3} lg={3} sx={{marginTop:1, display: { xs: "none", sm: "block"}}}>
-            <Container sx={{ float: "right", color: "#838383", marginTop: 1 }}>
-              { Links("Know the Team behind TaxiWala", "0px")}
-              { Links("Terms of Use", "7px")}
-            </Container>
-          </Grid>
+            <Caption />
+          </Container>
         </Grid>
-      </Box>
-    </ThemeProvider>
+        <Grid item xs={12} md={3} lg={3} sx={{marginTop:1, display: { xs: "none", sm: "block"}}}>
+          <Container sx={{ float: "right", color: "typography.secondary", marginTop: 1 }}>
+            { Links("Know the Team behind TaxiWala", "0px")}
+            { Links("Terms of Use", "7px")}
+          </Container>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
