@@ -28,6 +28,15 @@ import Checkbox from "@mui/material/Checkbox";
 // import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from "@mui/material/FormControlLabel";
 import "./RequestHome.css";
+import {
+	setDropAndPickUpLocation,
+	shouldNextButtonDisabled,
+} from "../../../utils/CabRequestValidation";
+import {
+	ITimeIntervals,
+	getTodaysDate,
+	getTimeSlotsAfterOneHour,
+} from "../../../utils/CabRequestHelper";
 
 export const RightWindow = () => {
 	const theme = useTheme();
@@ -49,16 +58,20 @@ const LeftWindow = () => {
 	const [checkintime, setCheckintime] = useState("");
 	const [checkouttime, setCheckouttime] = useState("");
 	const [noEndDateNeeded, setNoEndDateNeeded] = useState(false);
-	const dropdownvalues = [
-		{
-			value: "9:00",
-			label: "9:00",
-		},
-		{
-			value: "10:00",
-			label: "10:00",
-		},
-	];
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null);
+	const [pickupLocation, setPickupLocation] = useState({
+		location: "",
+		pincode: "",
+		landmark: "",
+	});
+	const [dropLocation, setDropLocation] = useState({
+		location: "",
+		pincode: "",
+		landmark: "",
+	});
+	const [dateForAdHoc, setDateForAdHoc] = useState(null);
+	const dropdownvalues: ITimeIntervals[] = getTimeSlotsAfterOneHour();
 
 	const Step1 = () => {
 		const handleChange = (
@@ -91,7 +104,25 @@ const LeftWindow = () => {
 							These are to be made 1 hour before atleast.
 						</Alert>
 						<br />
-
+						<LocalizationProvider dateAdapter={AdapterDayjs}>
+							<DemoContainer components={["DatePicker"]}>
+								<DatePicker
+									label="Select date"
+									value={dateForAdHoc}
+									shouldDisableDate={(date: Date) => {
+										const currentDate = getTodaysDate();
+										return date < currentDate;
+									}}
+									onChange={(date: any) => setDateForAdHoc(date)}
+									slotProps={{
+										textField: {
+											error: false,
+										},
+									}}
+								/>
+							</DemoContainer>
+						</LocalizationProvider>
+						<br />
 						<Dropdown
 							label="Select specific cab need"
 							handleChange={(value: string) => setCabtype(value)}
@@ -99,11 +130,10 @@ const LeftWindow = () => {
 							dropdownvalues={[
 								{ value: "pick", label: "Need cab for pickup only" },
 								{ value: "drop", label: "Need cab for drop only" },
-								{ value: "both", label: "Need cab for both pick and drop" },
 							]}
 						/>
 						<br />
-						{(cabtype == "pick" || cabtype == "both") && (
+						{cabtype == "pick" && (
 							<Dropdown
 								label="Check In Time"
 								handleChange={(value: string) => setCheckintime(value)}
@@ -111,7 +141,7 @@ const LeftWindow = () => {
 								dropdownvalues={dropdownvalues}
 							/>
 						)}
-						{(cabtype == "drop" || cabtype == "both") && (
+						{cabtype == "drop" && (
 							<Dropdown
 								label="Check Out Time"
 								handleChange={(value) => setCheckouttime(value)}
@@ -131,10 +161,24 @@ const LeftWindow = () => {
 						<div>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<DemoContainer components={["DatePicker"]}>
-									<DatePicker label="Select start date" />
+									<DatePicker
+										label="Select start date"
+										value={startDate}
+										onChange={(date: any) => setStartDate(date)}
+										shouldDisableDate={(date: Date) => {
+											const currentDate = new Date();
+											return date < currentDate;
+										}}
+									/>
 									<DatePicker
 										label="Select end date"
+										value={endDate}
 										disabled={noEndDateNeeded}
+										onChange={(date: any) => setEndDate(date)}
+										shouldDisableDate={(date: Date) => {
+											const currentDate = new Date();
+											return date < currentDate;
+										}}
 									/>
 								</DemoContainer>
 							</LocalizationProvider>
@@ -144,7 +188,10 @@ const LeftWindow = () => {
 							control={
 								<Checkbox
 									checked={noEndDateNeeded}
-									onChange={(e) => setNoEndDateNeeded(e.target.checked)}
+									onChange={(e) => {
+										setNoEndDateNeeded(e.target.checked);
+										setEndDate(null);
+									}}
 									name="isEndDate"
 								/>
 							}
@@ -167,6 +214,31 @@ const LeftWindow = () => {
 						/>
 					</div>
 				)}
+				<Button
+					variant="contained"
+					disabled={shouldNextButtonDisabled(
+						alignment,
+						cabtype,
+						checkintime,
+						checkouttime,
+						startDate,
+						endDate,
+						noEndDateNeeded,
+						dateForAdHoc
+					)}
+					onClick={() => {
+						currentstep < TotalSteps - 1 &&
+							setCurrentstep((prevStep) => prevStep + 1);
+						setDropAndPickUpLocation(
+							alignment,
+							cabtype,
+							setDropLocation,
+							setPickupLocation
+						);
+					}}
+				>
+					Next
+				</Button>
 			</>
 		);
 	};
@@ -190,7 +262,7 @@ const LeftWindow = () => {
 							<TextInput
 								placeholder="Enter your pickup location"
 								type="text"
-								value={""}
+								value={pickupLocation.location}
 								handleChange={(text: string) => console.log(text)}
 								styles={{
 									width: "100%",
@@ -204,7 +276,7 @@ const LeftWindow = () => {
 									<TextInput
 										placeholder="PIN Code"
 										type="text"
-										value={""}
+										value={pickupLocation.pincode}
 										handleChange={(text: string) => console.log(text)}
 										styles={{
 											width: "100%",
@@ -218,7 +290,7 @@ const LeftWindow = () => {
 									<TextInput
 										placeholder="Nearest Landmark"
 										type="text"
-										value={""}
+										value={pickupLocation.landmark}
 										handleChange={(text: string) => console.log(text)}
 										styles={{
 											width: "100%",
@@ -249,7 +321,7 @@ const LeftWindow = () => {
 							<TextInput
 								placeholder="Enter your pickup location"
 								type="text"
-								value={""}
+								value={dropLocation.location}
 								handleChange={(text: string) => console.log(text)}
 								styles={{
 									width: "100%",
@@ -263,7 +335,7 @@ const LeftWindow = () => {
 									<TextInput
 										placeholder="PIN Code"
 										type="text"
-										value={""}
+										value={dropLocation.pincode}
 										handleChange={(text: string) => console.log(text)}
 										styles={{
 											width: "100%",
@@ -277,7 +349,7 @@ const LeftWindow = () => {
 									<TextInput
 										placeholder="Nearest Landmark"
 										type="text"
-										value={""}
+										value={dropLocation.landmark}
 										handleChange={(text: string) => console.log(text)}
 										styles={{
 											width: "100%",
@@ -292,6 +364,36 @@ const LeftWindow = () => {
 					</AccordionDetails>
 				</Accordion>
 				<br />
+				<div style={{ display: "flex" }}>
+					<Button
+						variant="outlined"
+						sx={{
+							mr: 1,
+						}}
+						onClick={() => {
+							currentstep > 0 && setCurrentstep((prevStep) => prevStep - 1);
+						}}
+					>
+						<ArrowBackIcon />
+					</Button>
+					<Button
+						variant="contained"
+						disabled={
+							pickupLocation.landmark === "" ||
+							pickupLocation.location === "" ||
+							pickupLocation.pincode === "" ||
+							dropLocation.landmark === "" ||
+							dropLocation.location === "" ||
+							dropLocation.pincode === ""
+						}
+						onClick={() => {
+							currentstep < TotalSteps - 1 &&
+								setCurrentstep((prevStep) => prevStep + 1);
+						}}
+					>
+						Submit
+					</Button>
+				</div>
 			</>
 		);
 	};
@@ -315,35 +417,8 @@ const LeftWindow = () => {
 					</p>
 				</div>
 				<br />
-
 				{currentstep == 0 && <Step1 />}
 				{currentstep == 1 && <Step2 />}
-
-				<div style={{ display: "flex" }}>
-					{currentstep > 0 && (
-						<Button
-							variant="outlined"
-							sx={{
-								mr: 1,
-							}}
-							onClick={() => {
-								currentstep > 0 && setCurrentstep((prevStep) => prevStep - 1);
-							}}
-						>
-							<ArrowBackIcon />
-						</Button>
-					)}
-					<Button
-						variant="contained"
-						disableElevation
-						onClick={() => {
-							currentstep < TotalSteps - 1 &&
-								setCurrentstep((prevStep) => prevStep + 1);
-						}}
-					>
-						{currentstep == TotalSteps - 1 ? "Submit" : "Next"}
-					</Button>
-				</div>
 			</Box>
 		</>
 	);

@@ -18,7 +18,7 @@ const LeftWindow = () => {
 				<Box>
 					<Box
 						sx={{
-							width: "100%",
+							width: "60%",
 							height: "fit-content",
 							backgroundColor: "#EDEDED",
 							borderRadius: "20px",
@@ -35,7 +35,7 @@ const LeftWindow = () => {
 					<br />
 					<Box
 						sx={{
-							width: "100%",
+							width: "60%",
 							height: "fit-content",
 							backgroundColor: "#EDEDED",
 							borderRadius: "20px",
