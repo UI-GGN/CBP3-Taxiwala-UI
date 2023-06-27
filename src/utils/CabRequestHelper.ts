@@ -41,3 +41,40 @@ export const getTodaysDate: () => Date = () => {
 
 	return newDate;
 };
+
+export const extractDate: (dateObject: any) => Date = (dateObject: any) => {
+	const dateString = dateObject.$d;
+	return new Date(dateString);
+};
+
+export const hasThreeDayGap: (date1: Date, date2: Date) => boolean = (
+	date1: Date,
+	date2: Date
+) => {
+	date1.setHours(0, 0, 0, 0);
+	date2.setHours(0, 0, 0, 0);
+
+	const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
+
+	const diffInDays = Math.floor(diffInMilliseconds / (24 * 60 * 60 * 1000));
+
+	return diffInDays >= 3;
+};
+
+export const isBefore: (date1: Date, date2: Date) => boolean = (
+	date1: Date,
+	date2: Date
+) => {
+	const date1WithoutTime = new Date(
+		date1.getFullYear(),
+		date1.getMonth(),
+		date1.getDate()
+	);
+	const date2WithoutTime = new Date(
+		date2.getFullYear(),
+		date2.getMonth(),
+		date2.getDate()
+	);
+
+	return date1WithoutTime < date2WithoutTime;
+};

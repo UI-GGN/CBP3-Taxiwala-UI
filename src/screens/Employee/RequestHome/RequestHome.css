@@ -5,3 +5,14 @@
 .request_headline{
     font-size: 2.5rem;
 }
+
+.start_date {
+    margin-right: 30px !important;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    color: red;
+    font-size: 12px;
+}

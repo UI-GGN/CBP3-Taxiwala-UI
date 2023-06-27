@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useMemo } from "react";
 import WindowLayout from "../../../Components/WindowLayout";
 import daycab from "../../../assets/parked_cab.jpg";
 import nightcab from "../../../assets/night-cab.jpeg";
@@ -23,7 +23,7 @@ import Dropdown from "../../../Components/TextInput/Dropdown";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import Checkbox from "@mui/material/Checkbox";
 // import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -33,10 +33,13 @@ import {
 	shouldNextButtonDisabled,
 } from "../../../utils/CabRequestValidation";
 import {
-	ITimeIntervals,
 	getTodaysDate,
-	getTimeSlotsAfterOneHour,
+	extractDate,
+	isBefore,
+	hasThreeDayGap,
 } from "../../../utils/CabRequestHelper";
+import { TimePicker } from "@mui/x-date-pickers";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 export const RightWindow = () => {
 	const theme = useTheme();
@@ -71,7 +74,24 @@ const LeftWindow = () => {
 		landmark: "",
 	});
 	const [dateForAdHoc, setDateForAdHoc] = useState(null);
-	const dropdownvalues: ITimeIntervals[] = getTimeSlotsAfterOneHour();
+	const [textInputChanged, setTextInputChanged] = useState(0);
+
+	const isStartDateGreaterThanEndDate: boolean = useMemo(() => {
+		if (startDate !== null && endDate !== null) {
+			return isBefore(extractDate(endDate), extractDate(startDate));
+		}
+		return false;
+	}, [startDate, endDate]);
+
+	const isEndDateThreeDaysAfterStartDate: boolean = useMemo(() => {
+		if (isStartDateGreaterThanEndDate) {
+			return true;
+		}
+		if (startDate !== null && endDate !== null) {
+			return hasThreeDayGap(extractDate(endDate), extractDate(startDate));
+		}
+		return true;
+	}, [startDate, endDate]);
 
 	const Step1 = () => {
 		const handleChange = (
@@ -105,23 +125,24 @@ const LeftWindow = () => {
 						</Alert>
 						<br />
 						<LocalizationProvider dateAdapter={AdapterDayjs}>
-							<DemoContainer components={["DatePicker"]}>
-								<DatePicker
-									label="Select date"
-									value={dateForAdHoc}
-									shouldDisableDate={(date: Date) => {
-										const currentDate = getTodaysDate();
-										return date < currentDate;
-									}}
-									onChange={(date: any) => setDateForAdHoc(date)}
-									slotProps={{
-										textField: {
-											error: false,
-										},
-									}}
-								/>
-							</DemoContainer>
+							{/* <DemoContainer components={["DatePicker"]}> */}
+							<DatePicker
+								label="Select date"
+								value={dateForAdHoc}
+								shouldDisableDate={(date: Date) => {
+									const currentDate = getTodaysDate();
+									return date < currentDate;
+								}}
+								onChange={(date: any) => setDateForAdHoc(date)}
+								slotProps={{
+									textField: {
+										error: false,
+									},
+								}}
+							/>
+							{/* </DemoContainer> */}
 						</LocalizationProvider>
+						<br />
 						<br />
 						<Dropdown
 							label="Select specific cab need"
@@ -133,22 +154,31 @@ const LeftWindow = () => {
 							]}
 						/>
 						<br />
-						{cabtype == "pick" && (
-							<Dropdown
-								label="Check In Time"
-								handleChange={(value: string) => setCheckintime(value)}
-								value={checkintime}
-								dropdownvalues={dropdownvalues}
-							/>
+						{(cabtype === "pick" || cabtype === "drop") && (
+							<>
+								<br />
+								<LocalizationProvider dateAdapter={AdapterDayjs}>
+									<TimePicker
+										label={
+											cabtype === "pick" ? "Check in time" : "Check out time"
+										}
+										value={cabtype === "pick" ? checkintime : checkouttime}
+										onChange={(time: any) => {
+											cabtype === "pick"
+												? setCheckintime(time)
+												: setCheckouttime(time);
+										}}
+										slotProps={{
+											textField: {
+												error: false,
+											},
+										}}
+									/>
+								</LocalizationProvider>
+								<br />
+							</>
 						)}
-						{cabtype == "drop" && (
-							<Dropdown
-								label="Check Out Time"
-								handleChange={(value) => setCheckouttime(value)}
-								value={checkouttime}
-								dropdownvalues={dropdownvalues}
-							/>
-						)}
+						<br />
 					</div>
 				)}
 				{alignment == "Regular" && (
@@ -158,32 +188,46 @@ const LeftWindow = () => {
 							These are to be made 1 day before by 10pm.
 						</Alert>
 						<br />
-						<div>
+						<div className="date_picker">
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
-								<DemoContainer components={["DatePicker"]}>
-									<DatePicker
-										label="Select start date"
-										value={startDate}
-										onChange={(date: any) => setStartDate(date)}
-										shouldDisableDate={(date: Date) => {
-											const currentDate = new Date();
-											return date < currentDate;
-										}}
-									/>
-									<DatePicker
-										label="Select end date"
-										value={endDate}
-										disabled={noEndDateNeeded}
-										onChange={(date: any) => setEndDate(date)}
-										shouldDisableDate={(date: Date) => {
-											const currentDate = new Date();
-											return date < currentDate;
-										}}
-									/>
-								</DemoContainer>
+								{/* <DemoContainer components={["DatePicker"]}> */}
+								<DatePicker
+									className="start_date"
+									label="Select start date"
+									value={startDate}
+									onChange={(date: any) => setStartDate(date)}
+									shouldDisableDate={(date: Date) => {
+										const currentDate = new Date();
+										return date < currentDate;
+									}}
+								/>
+								<DatePicker
+									label="Select end date"
+									value={endDate}
+									disabled={noEndDateNeeded}
+									onChange={(date: any) => setEndDate(date)}
+									shouldDisableDate={(date: Date) => {
+										const currentDate = new Date();
+										return date < currentDate;
+									}}
+								/>
+								{/* </DemoContainer> */}
 							</LocalizationProvider>
 						</div>
-
+						<div className="error">
+							{(isStartDateGreaterThanEndDate ||
+								!isEndDateThreeDaysAfterStartDate) && (
+								<ErrorOutlineIcon
+									style={{ fontSize: "12px", marginRight: "5px" }}
+								/>
+							)}
+							{isStartDateGreaterThanEndDate && (
+								<span> Start date cannot be greater than end date</span>
+							)}
+							{!isEndDateThreeDaysAfterStartDate && (
+								<span> There should be minimum 3 days </span>
+							)}
+						</div>
 						<FormControlLabel
 							control={
 								<Checkbox
@@ -200,18 +244,40 @@ const LeftWindow = () => {
 						<br />
 						<br />
 						<Dropdown
-							label="Check In Time"
-							handleChange={(value: string) => setCheckintime(value)}
-							value={checkintime}
-							dropdownvalues={dropdownvalues}
+							label="Select specific cab need"
+							handleChange={(value: string) => setCabtype(value)}
+							value={cabtype}
+							dropdownvalues={[
+								{ value: "pick", label: "Need cab for pickup only" },
+								{ value: "drop", label: "Need cab for drop only" },
+							]}
 						/>
 						<br />
-						<Dropdown
-							label="Check Out Time"
-							handleChange={(value) => setCheckouttime(value)}
-							value={checkouttime}
-							dropdownvalues={dropdownvalues}
-						/>
+						{(cabtype === "pick" || cabtype === "drop") && (
+							<>
+								<br />
+								<LocalizationProvider dateAdapter={AdapterDayjs}>
+									<TimePicker
+										label={
+											cabtype === "pick" ? "Check in time" : "Check out time"
+										}
+										value={cabtype === "pick" ? checkintime : checkouttime}
+										onChange={(time: any) => {
+											cabtype === "pick"
+												? setCheckintime(time)
+												: setCheckouttime(time);
+										}}
+										slotProps={{
+											textField: {
+												error: false,
+											},
+										}}
+									/>
+								</LocalizationProvider>
+								<br />
+							</>
+						)}
+						<br />
 					</div>
 				)}
 				<Button
@@ -230,7 +296,6 @@ const LeftWindow = () => {
 						currentstep < TotalSteps - 1 &&
 							setCurrentstep((prevStep) => prevStep + 1);
 						setDropAndPickUpLocation(
-							alignment,
 							cabtype,
 							setDropLocation,
 							setPickupLocation
@@ -246,7 +311,7 @@ const LeftWindow = () => {
 	const Step2 = () => {
 		return (
 			<>
-				<Accordion>
+				<Accordion defaultExpanded>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
@@ -263,13 +328,23 @@ const LeftWindow = () => {
 								placeholder="Enter your pickup location"
 								type="text"
 								value={pickupLocation.location}
-								handleChange={(text: string) => console.log(text)}
+								handleChange={(text: string) => {
+									setPickupLocation((prevLocation) => {
+										return {
+											...prevLocation,
+											location: text,
+										};
+									});
+									setTextInputChanged(0);
+								}}
 								styles={{
 									width: "100%",
 									height: "49.4px",
 									marginTop: "10px",
 									marginRight: "40px",
 								}}
+								id={0}
+								id_changed={textInputChanged}
 							/>
 							<Grid container spacing={2}>
 								<Grid item xs={12} md={6} lg={6}>
@@ -277,13 +352,23 @@ const LeftWindow = () => {
 										placeholder="PIN Code"
 										type="text"
 										value={pickupLocation.pincode}
-										handleChange={(text: string) => console.log(text)}
+										handleChange={(text: string) => {
+											setPickupLocation((prevLocation) => {
+												return {
+													...prevLocation,
+													pincode: text,
+												};
+											});
+											setTextInputChanged(1);
+										}}
 										styles={{
 											width: "100%",
 											height: "49.4px",
 											marginTop: "10px",
 											marginRight: "40px",
 										}}
+										id={1}
+										id_changed={textInputChanged}
 									/>
 								</Grid>
 								<Grid item xs={12} md={6} lg={6}>
@@ -291,13 +376,23 @@ const LeftWindow = () => {
 										placeholder="Nearest Landmark"
 										type="text"
 										value={pickupLocation.landmark}
-										handleChange={(text: string) => console.log(text)}
+										handleChange={(text: string) => {
+											setPickupLocation((prevLocation) => {
+												return {
+													...prevLocation,
+													landmark: text,
+												};
+											});
+											setTextInputChanged(2);
+										}}
 										styles={{
 											width: "100%",
 											height: "49.4px",
 											marginTop: "10px",
 											marginRight: "40px",
 										}}
+										id={2}
+										id_changed={textInputChanged}
 									/>
 								</Grid>
 							</Grid>
@@ -305,7 +400,7 @@ const LeftWindow = () => {
 					</AccordionDetails>
 				</Accordion>
 				<br />
-				<Accordion>
+				<Accordion defaultExpanded>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
@@ -322,13 +417,23 @@ const LeftWindow = () => {
 								placeholder="Enter your pickup location"
 								type="text"
 								value={dropLocation.location}
-								handleChange={(text: string) => console.log(text)}
+								handleChange={(text: string) => {
+									setDropLocation((prevLocation) => {
+										return {
+											...prevLocation,
+											location: text,
+										};
+									});
+									setTextInputChanged(3);
+								}}
 								styles={{
 									width: "100%",
 									height: "49.4px",
 									marginTop: "10px",
 									marginRight: "40px",
 								}}
+								id={3}
+								id_changed={textInputChanged}
 							/>
 							<Grid container spacing={2}>
 								<Grid item xs={12} md={6} lg={6}>
@@ -336,13 +441,23 @@ const LeftWindow = () => {
 										placeholder="PIN Code"
 										type="text"
 										value={dropLocation.pincode}
-										handleChange={(text: string) => console.log(text)}
+										handleChange={(text: string) => {
+											setDropLocation((prevLocation) => {
+												return {
+													...prevLocation,
+													pincode: text,
+												};
+											});
+											setTextInputChanged(4);
+										}}
 										styles={{
 											width: "100%",
 											height: "49.4px",
 											marginTop: "10px",
 											marginRight: "40px",
 										}}
+										id={4}
+										id_changed={textInputChanged}
 									/>
 								</Grid>
 								<Grid item xs={12} md={6} lg={6}>
@@ -350,13 +465,23 @@ const LeftWindow = () => {
 										placeholder="Nearest Landmark"
 										type="text"
 										value={dropLocation.landmark}
-										handleChange={(text: string) => console.log(text)}
+										handleChange={(text: string) => {
+											setDropLocation((prevLocation) => {
+												return {
+													...prevLocation,
+													landmark: text,
+												};
+											});
+											setTextInputChanged(5);
+										}}
 										styles={{
 											width: "100%",
 											height: "49.4px",
 											marginTop: "10px",
 											marginRight: "40px",
 										}}
+										id={5}
+										id_changed={textInputChanged}
 									/>
 								</Grid>
 							</Grid>
@@ -379,10 +504,8 @@ const LeftWindow = () => {
 					<Button
 						variant="contained"
 						disabled={
-							pickupLocation.landmark === "" ||
 							pickupLocation.location === "" ||
 							pickupLocation.pincode === "" ||
-							dropLocation.landmark === "" ||
 							dropLocation.location === "" ||
 							dropLocation.pincode === ""
 						}
