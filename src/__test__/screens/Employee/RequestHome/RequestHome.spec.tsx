@@ -1,7 +1,9 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import RequestHome from "../../../../screens/Employee/RequestHome/RequestHome";
+import { fireEvent, render, screen } from "@testing-library/react";
 import App from "../../../../App";
+import RequestHome from "../../../../screens/Employee/RequestHome/RequestHome";
+import RequestStep2 from "../../../../screens/Employee/RequestHome/RequestStep2";
+import userEvent from "@testing-library/user-event";
 
 const LoginToApp = () => {
 	const emailInputContainer: HTMLElement = screen.getByTestId("text_input");
@@ -76,14 +78,14 @@ describe("Request Home Screen", () => {
 		expect(screen.getByDisplayValue("06/10/2023")).toBeInTheDocument();
 	});
 
-	it("should disable next button if all input fields are not filled in Ad-Hoc request", async () => {
+	it("should disable next button if all input fields are not filled in Ad-Hoc request", () => {
+		jest.useFakeTimers().setSystemTime(new Date("2023-06-08"));
+
 		render(<App />);
 		LoginToApp();
 
 		const nextButton: HTMLElement = screen.getByText("Next");
 		const chooseDateButton: HTMLElement = screen.getByLabelText("Choose date");
-		const cabTypeDropdownIcon: HTMLElement =
-			screen.getByTestId("ArrowDropDownIcon");
 
 		fireEvent.click(chooseDateButton);
 
@@ -92,4 +94,66 @@ describe("Request Home Screen", () => {
 
 		expect(nextButton).toBeDisabled();
 	});
+
+	// it("Should disable submit button when all mandatory fields are not entered in Step 2", () => {
+	// 	render(
+	// 		<RequestStep2
+	// 			location={{
+	// 				address: "",
+	// 				pincode: "",
+	// 				landmark: "",
+	// 			}}
+	// 			setLocation={() => {}}
+	// 			currentstep={1}
+	// 			setCurrentstep={() => {}}
+	// 			cabType={"pick"}
+	// 			employeeDetails={{
+	// 				id: "",
+	// 				projectCode: "",
+	// 			}}
+	// 			setEmployeeDetails={() => {}}
+	// 		/>
+	// 	);
+	// 	const inputBox: HTMLElement[] = screen.getAllByTestId("text_input");
+	// 	const submitButton: HTMLElement = screen.getByTestId("submit_button");
+	// 	const addressInput: HTMLElement = inputBox[0];
+	// 	const pinCode: HTMLElement = inputBox[1];
+	// 	const employeeID: HTMLElement = inputBox[3];
+	// 	const projectCode: HTMLElement = inputBox[4];
+
+	// 	console.log(inputBox.length);
+
+	// 	expect(submitButton).toBeDisabled();
+
+	// 	userEvent.type(addressInput.children[0].children[0], "Gurugram");
+	// 	expect(submitButton).toBeDisabled();
+
+	// 	fireEvent.change(pinCode.children[0].children[0], {
+	// 		target: {
+	// 			value: "120002",
+	// 		},
+	// 	});
+	// 	expect(submitButton).toBeDisabled();
+
+	// 	fireEvent.change(employeeID.children[0].children[0], {
+	// 		target: {
+	// 			value: "39240",
+	// 		},
+	// 	});
+	// 	expect(submitButton).toBeDisabled();
+
+	// 	fireEvent.change(projectCode.children[0].children[0], {
+	// 		target: {
+	// 			value: "TW-internal",
+	// 		},
+	// 	});
+
+	// 	fireEvent.change(inputBox[2].children[0].children[0], {
+	// 		target: {
+	// 			value: "TW-internal",
+	// 		},
+	// 	});
+
+	// 	expect(submitButton).toBeEnabled();
+	// });
 });

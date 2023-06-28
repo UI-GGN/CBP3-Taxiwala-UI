@@ -1,23 +1,24 @@
 import { Dispatch } from "react";
+import { IEmmployeeDetails, ILocation } from "../Interfaces";
 
 export const shouldNextButtonDisabled: (
 	alignment: string,
 	cabtype: string,
 	checkintime: string,
 	checkouttime: string,
-	startDate: {} | null,
-	endDate: {} | null,
+	startDate: Date | null,
+	endDate: Date | null,
 	noEndDateNeeded: boolean | undefined,
-	dateForAdHoc: {} | null
+	dateForAdHoc: Date | null
 ) => boolean = (
 	alignment: string,
 	cabtype: string,
 	checkintime: string,
 	checkouttime: string,
-	startDate: {} | null,
-	endDate: {} | null,
+	startDate: Date | null,
+	endDate: Date | null,
 	noEndDateNeeded: boolean | undefined,
-	dateForAdHoc: {} | null
+	dateForAdHoc: Date | null
 ) => {
 	if (alignment === "Ad-Hoc") {
 		if (cabtype === "") return true;
@@ -27,8 +28,6 @@ export const shouldNextButtonDisabled: (
 			return checkouttime === "" || dateForAdHoc === null;
 		}
 	}
-
-	console.log(endDate);
 
 	if (alignment === "Regular") {
 		if (noEndDateNeeded === true) {
@@ -51,28 +50,16 @@ export const shouldNextButtonDisabled: (
 	return false;
 };
 
-export const setDropAndPickUpLocation: (
-	cabtype: string,
-	setDropLocation: Dispatch<any>,
-	setPickupLocation: Dispatch<any>
-) => void = (
-	cabtype: string,
-	setDropLocation: Dispatch<any>,
-	setPickupLocation: Dispatch<any>
-) => {
-	if (cabtype === "pick") {
-		setPickupLocation({ location: "", pincode: "", landmark: "" });
-		setDropLocation({
-			location: "International Tech Park, Sector 59, Gurugram, Haryana",
-			pincode: "122102",
-			landmark: "",
-		});
-	} else if (cabtype === "drop") {
-		setDropLocation({ location: "", pincode: "", landmark: "" });
-		setPickupLocation({
-			location: "International Tech Park, Sector 59, Gurugram, Haryana",
-			pincode: "122102",
-			landmark: "",
-		});
-	}
+export const shouldSubmitButtonDisabled: (
+	location: ILocation,
+	employeeDetails: IEmmployeeDetails
+) => boolean = (location: ILocation, employeeDetails: IEmmployeeDetails) => {
+	console.log(location);
+	console.log(employeeDetails);
+	return (
+		location.address === "" ||
+		location.pincode === "" ||
+		employeeDetails.id === "" ||
+		employeeDetails.projectCode === ""
+	);
 };

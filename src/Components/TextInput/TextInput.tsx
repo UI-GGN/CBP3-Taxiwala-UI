@@ -12,7 +12,6 @@ interface ITextInputProps {
 	disabled?: boolean;
 	value: string;
 	id?: number;
-	id_changed?: number;
 }
 
 const TextInput: FC<ITextInputProps> = ({
@@ -23,14 +22,12 @@ const TextInput: FC<ITextInputProps> = ({
 	disabled,
 	value,
 	id,
-	id_changed,
 }: ITextInputProps): JSX.Element => {
 	return (
 		<>
 			<TextField
 				key={id}
 				data-testid="text_input"
-				autoFocus={id === id_changed}
 				hiddenLabel
 				variant="filled"
 				disabled={disabled || false}

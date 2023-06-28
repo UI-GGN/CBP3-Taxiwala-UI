@@ -16,3 +16,7 @@
     color: red;
     font-size: 12px;
 }
+
+.employee_details {
+    display: flex;
+}
