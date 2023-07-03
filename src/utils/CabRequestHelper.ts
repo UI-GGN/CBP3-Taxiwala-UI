@@ -50,3 +50,29 @@ export const isBefore: (date1: Date, date2: Date) => boolean = (
 
 	return date1WithoutTime < date2WithoutTime;
 };
+
+// covert 2023-06-29T19:15:53.742Z to 7:15 PM
+export const convertTimeFormat: (date: string) => string = (date: string) => {
+	const [dateString, timeString] = date.split("T");
+	const timeObj = new Date(`${dateString}T${timeString.split(".")[0]}`);
+
+	const formattedTime = timeObj.toLocaleString("en-US", {
+		hour: "numeric",
+		minute: "numeric",
+		hour12: true,
+	});
+	return formattedTime;
+};
+
+// covert 2023-06-29T19:15:53.742Z to 29 June, 2023
+export const convertDateFormat: (date: string) => string = (date: string) => {
+	const [dateString] = date.split("T");
+	const dateObj = new Date(dateString);
+
+	const formattedTime = dateObj.toLocaleString("en-GB", {
+		day: "numeric",
+		month: "short",
+		year: "numeric",
+	});
+	return formattedTime;
+};

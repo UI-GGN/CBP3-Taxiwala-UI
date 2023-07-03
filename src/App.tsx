@@ -6,12 +6,7 @@ import Footer from "./Components/Footer/Footer";
 import HeaderBar from "./Components/Header/header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
-import {
-	Palette,
-	PaletteMode,
-	PaletteOptions,
-	ScopedCssBaseline,
-} from "@mui/material";
+import { ScopedCssBaseline } from "@mui/material";
 import { LightMode, DarkMode } from "./colorConstants";
 import { useEffect } from "react";
 import { getLocalTheme, updateThemeLocalState } from "./utils/theme";
@@ -40,7 +35,7 @@ const App = (): ReactElement => {
 
 	const theme = createTheme({
 		palette: {
-			mode: mode as PaletteMode,
+			mode: mode,
 			type: mode,
 			...(mode === "light"
 				? {

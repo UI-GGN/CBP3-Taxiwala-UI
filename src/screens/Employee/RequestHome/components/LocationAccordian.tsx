@@ -11,8 +11,6 @@ import TextInput from "../../../../Components/TextInput/TextInput";
 import { ILocation, ILocationAccordianProps } from "../../../../Interfaces";
 import "./../RequestHome.css";
 
-const TotalSteps = 2;
-
 const LocationAccordian: FC<ILocationAccordianProps> = ({
 	location,
 	setLocation,

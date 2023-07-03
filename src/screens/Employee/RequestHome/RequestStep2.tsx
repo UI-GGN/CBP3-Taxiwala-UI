@@ -58,6 +58,7 @@ const RequestStep2: FC<IRequestStep2Props> = ({
 					type="text"
 					styles={{
 						width: "200px",
+						marginBottom: "10px",
 					}}
 					handleChange={(text: string) => {
 						setEmployeeDetails((x: IEmmployeeDetails) => {
@@ -90,6 +91,7 @@ const RequestStep2: FC<IRequestStep2Props> = ({
 			<br />
 			<div style={{ display: "flex" }}>
 				<Button
+					data-testid="back_button"
 					variant="outlined"
 					sx={{
 						mr: 1,

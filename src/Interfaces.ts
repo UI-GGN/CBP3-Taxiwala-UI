@@ -52,3 +52,25 @@ export interface ILocationAccordianProps {
 	setLocation: React.Dispatch<React.SetStateAction<ILocation>>;
 	cabType: string;
 }
+
+export interface IRoute {}
+
+export interface ICabRequest {
+	createdAt: string;
+	updatedAt: string;
+	employeeId: string;
+	employeeName: string;
+	projectCode: string;
+	phoneNumber: string;
+	pickupLocation: string;
+	dropLocation: string;
+	pickupTime: string;
+	expireDate: string;
+	status: string;
+	deleted: boolean;
+	routeId: IRoute | null;
+}
+
+export interface IRequestCardProps {
+	request: ICabRequest;
+}

@@ -54,7 +54,11 @@ const LeftWindow = () => {
 						</Typography>
 					</Box>
 					<br />
-					<TimelineComponent />
+					<TimelineComponent
+						pickupTime={"2023-07-04T10:30:29.252Z"}
+						pickUpLocation={"Guru Dronacharya Metro Station"}
+						dropLocation={"Thoughtworks Technologies"}
+					/>
 					<hr />
 					<br />
 					<Typography
