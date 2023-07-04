@@ -11,7 +11,6 @@ import "./admin.css";
 
 const data: ICabRequest[] = RequestData;
 const routeData: IRoute[] = RouteData;
-
 const dropdownvalues: { value: string; label: string }[] = routeData.map(
 	(route) => {
 		return {
@@ -23,7 +22,6 @@ const dropdownvalues: { value: string; label: string }[] = routeData.map(
 
 export const AllRequests: React.FC = (): ReactElement => {
 	const theme = getLocalTheme();
-
 	const style = {
 		position: "absolute",
 		top: "50%",
@@ -35,7 +33,6 @@ export const AllRequests: React.FC = (): ReactElement => {
 		color: theme === "light" ? "black" : "white",
 		p: 4,
 	};
-
 	const [cabRequestData, setCabRequestData]: UseStateType<ICabRequest[]> =
 		useState(data);
 	const [showModal, setShowModal]: UseStateType<boolean> = useState(false);
@@ -44,6 +41,9 @@ export const AllRequests: React.FC = (): ReactElement => {
 		setSelectedCabRequestIndex,
 	]: UseStateType<number> = useState(0);
 	const [selectedRoute, setSelectedRoute]: UseStateType<string> = useState("");
+	const [selectedStatus, setSelectedStatus]: UseStateType<string[]> = useState(
+		[] as string[]
+	);
 
 	const handleModal: (index: number) => void = (index: number) => {
 		setSelectedCabRequestIndex(index);
@@ -188,7 +188,44 @@ export const AllRequests: React.FC = (): ReactElement => {
 					md={2}
 					lg={2}
 					sx={{ display: { xs: "none", sm: "block" } }}
-				></Grid>
+				>
+					{/* <Grid item xs={12} md={2} lg={2}>
+						<FormControlLabel
+							control={
+								<Checkbox
+									onChange={() => {
+										selectedStatus.push("PENDING");
+									}}
+								/>
+							}
+							label="Pending"
+						/>
+					</Grid>
+					<Grid item xs={12} md={2} lg={2}>
+						<FormControlLabel
+							control={
+								<Checkbox
+									onChange={() => {
+										selectedStatus.push("ASSIGNED");
+									}}
+								/>
+							}
+							label="Assigned"
+						/>
+					</Grid>
+					<Grid item xs={12} md={2} lg={2}>
+						<FormControlLabel
+							control={
+								<Checkbox
+									onChange={() => {
+										selectedStatus.push("DECLINED");
+									}}
+								/>
+							}
+							label="Declined"
+						/>
+					</Grid> */}
+				</Grid>
 			</Grid>
 		</>
 	);
