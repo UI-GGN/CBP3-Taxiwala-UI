@@ -1,19 +1,18 @@
-import { ReactElement, createContext, useMemo } from "react";
-import "./App.css";
+import { PaletteMode, ScopedCssBaseline } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+	ReactElement,
+	createContext,
+	useEffect,
+	useMemo,
+	useState,
+} from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import RouteContainer from "./routes/RouteContainer";
+import "./App.css";
 import Footer from "./Components/Footer/Footer";
 import HeaderBar from "./Components/Header/header";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
-import {
-	Palette,
-	PaletteMode,
-	PaletteOptions,
-	ScopedCssBaseline,
-} from "@mui/material";
-import { LightMode, DarkMode } from "./colorConstants";
-import { useEffect } from "react";
+import { DarkMode, LightMode } from "./colorConstants";
+import RouteContainer from "./routes/RouteContainer";
 import { getLocalTheme, updateThemeLocalState } from "./utils/theme";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
