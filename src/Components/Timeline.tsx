@@ -30,11 +30,10 @@ const TimelineComponent: FC<ITimelineProps> = ({
 				},
 				marginTop: "0px",
 				marginBottom: "0px",
-				color: "black",
 			}}
 		>
 			<TimelineItem>
-				<TimelineOppositeContent>
+				<TimelineOppositeContent whiteSpace={"nowrap"}>
 					{convertTimeFormat(pickupTime)}
 				</TimelineOppositeContent>
 				<TimelineSeparator>
@@ -46,7 +45,7 @@ const TimelineComponent: FC<ITimelineProps> = ({
 			<TimelineItem>
 				<TimelineOppositeContent
 					color="textSecondary"
-					marginLeft="40px"
+					marginLeft="68px"
 				></TimelineOppositeContent>
 				<TimelineSeparator>
 					<TimelineDot />

@@ -3,3 +3,10 @@
     object-fit: cover;
     width: 100%;
 }
+
+.modal_buttons {
+    float: right;
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+}

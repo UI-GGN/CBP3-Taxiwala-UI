@@ -6,6 +6,7 @@ import {
 	Grid,
 	Stack,
 	Chip,
+	Button,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { IRequestCardProps } from "../../Interfaces";
@@ -18,6 +19,8 @@ import {
 
 export const RequestCard: FC<IRequestCardProps> = ({
 	request,
+	index,
+	handleModal,
 }: IRequestCardProps): JSX.Element => {
 	return (
 		<Card sx={{ minWidth: 275 }}>
@@ -59,18 +62,63 @@ export const RequestCard: FC<IRequestCardProps> = ({
 			</CardContent>
 			<Box sx={{ ml: 2, mb: 2 }}>
 				<Grid container spacing={1}>
-					<Grid item xs={11} md={11} lg={11}>
+					<Grid item xs={10} md={10} lg={10}>
 						<Stack direction="row" spacing={1}>
 							<Chip
 								color="secondary"
 								label="Ad Hoc Request"
 								variant="outlined"
 							/>
-							<Chip label={request.status} />
+							{request.status === "PENDING" && (
+								<Chip
+									label={request.status}
+									style={{
+										backgroundColor: "#BDDFFF",
+										color: "#1E3583",
+									}}
+								/>
+							)}
+							{request.status === "DECLINED" && (
+								<Chip
+									label={request.status}
+									style={{
+										backgroundColor: "#FFBDBD",
+										color: "#831E1E",
+									}}
+								/>
+							)}
+							{request.status === "ASSIGNED" && (
+								<>
+									<Chip
+										label={request.status}
+										style={{
+											backgroundColor: "#BDFFC0",
+											color: "#1E8371",
+										}}
+									/>
+									<Chip
+										label={request.routeName}
+										style={{
+											backgroundColor: "#FFD8B0",
+											color: "#824303",
+										}}
+									/>
+								</>
+							)}
 						</Stack>
 					</Grid>
-					<Grid item xs={1} md={1} lg={1}>
-						<ArrowForwardIcon sx={{ color: "typography.primary" }} />
+					<Grid item xs={2} md={2} lg={2}>
+						<Button
+							sx={{
+								float: "right",
+								width: "15px",
+								marginRight: "30px",
+								":hover": "backgroundColor: red",
+							}}
+							onClick={() => handleModal(index)}
+						>
+							<ArrowForwardIcon sx={{ color: "typography.primary" }} />
+						</Button>
 					</Grid>
 				</Grid>
 				<Typography sx={{ pt: 1, paddingLeft: "12px" }}>

@@ -53,9 +53,8 @@ export interface ILocationAccordianProps {
 	cabType: string;
 }
 
-export interface IRoute {}
-
 export interface ICabRequest {
+	id: number;
 	createdAt: string;
 	updatedAt: string;
 	employeeId: string;
@@ -68,9 +67,39 @@ export interface ICabRequest {
 	expireDate: string;
 	status: string;
 	deleted: boolean;
-	routeId: IRoute | null;
+	routeId: number | null;
+	routeName?: string;
 }
 
 export interface IRequestCardProps {
 	request: ICabRequest;
+	index: number;
+	handleModal: (index: number) => void;
+}
+
+export interface IRoute {
+	id: number;
+	name: string;
+	startLocation: string;
+	endLocation: string;
+	pickupTime: string;
+	startDate: string;
+	expireDate: string;
+	vehicleId: string;
+	deleted: boolean;
+	vehicle: IVehicle;
+}
+
+export interface IVehicle {
+	id: string;
+	driverName: string;
+	vendorId: number;
+	deleted: boolean;
+	vendor: IVendor;
+}
+
+export interface IVendor {
+	id: number;
+	name: string;
+	deleted: boolean;
 }
