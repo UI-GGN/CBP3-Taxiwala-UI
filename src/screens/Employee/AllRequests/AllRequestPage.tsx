@@ -20,24 +20,23 @@ const AllRequestPage: React.FC = (): ReactElement => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={6}>
           <Container maxWidth="md">
-            <Box className="allrequests_box">
+            <Box className="left_box allrequest_box">
               <div className="allrequests_text">All requests</div>
+              <br />
               {items.map((elem) => (
                 <Grid
-                  className="test"
                   item
-                  xs={10}
+                  xs={12}
                   md={9}
                   lg={9}
                   key={items.indexOf(elem)}
                 >
-                  <Card className="card">
+                  <Card sx={{ boxShadow: 2, mb: 4}}>
                     <Typography
                       variant="caption"
                       sx={{
                         marginLeft: "10px",
-                        color: "#B0B0B0",
-                        fontSize: "10px",
+                        // fontSize: "10px",
                         marginTop: "5px",
                       }}
                     >
@@ -49,8 +48,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
                       sx={{
                         float: "right",
                         marginRight: "10px",
-                        color: "#838383",
-                        fontSize: "10px",
+                        // fontSize: "10px",
                         marginTop: "5px",
                       }}
                     >
@@ -58,21 +56,22 @@ const AllRequestPage: React.FC = (): ReactElement => {
                     </Typography>
 
                     <CardContent className="card-content">
-                      <Typography variant="caption" className="heading">
+                      <Typography variant="subtitle2" sx={{mb: 1}}><b>
                         Ride dates:
+                        </b>
                       </Typography>
                       <Grid container className="grid">
                         <Grid item xs={6} md={6} lg={6}>
-                          <Typography variant="caption">
-                            Pickup point:
+                          <Typography variant="subtitle2">
+                            <b>Pickup point:</b>
                             <span className="details">
                               {`${elem.pickupLocation}`}
                             </span>
                           </Typography>
                         </Grid>
                         <Grid item xs={6} md={6} lg={6}>
-                          <Typography variant="caption">
-                            Pickup time:
+                          <Typography variant="subtitle2">
+                            <b>Pickup time:</b>
                             <span className="details">
                               {" "}
                               {`${elem.pickupTime.split("T")[1]}`}
@@ -80,35 +79,32 @@ const AllRequestPage: React.FC = (): ReactElement => {
                           </Typography>
                         </Grid>
                         <Grid item xs={6} md={6} lg={6}>
-                          <Typography variant="caption">
-                            Drop point:
+                          <Typography variant="subtitle2">
+                            <b>Drop point:</b>
                             <span className="details">
                               {`${elem.dropLocation}`}
                             </span>
                           </Typography>
                         </Grid>
-                        <Grid item xs={6} md={6} lg={6}>
-                          <Typography variant="caption">Drop time:</Typography>
-                        </Grid>
-                            <Grid container className="status-box" >
 
-                        <Grid item xs={6} md={6} lg={6}>
-                          <div
-                            className={`status ${
-                              elem.status == "PENDING" ? "pending" : ""
-                            } ${elem.status == "DECLINED" ? "declined" : ""} ${
-                              elem.status == "ASSIGNED" ? "assigned" : ""
-                            }`}
-                          >
-                            {elem.status == "PENDING" && "Request in pending"}
-                            {elem.status == "DECLINED" && "Request in Declined"}
-                            {elem.status == "ASSIGNED" && "Route assigned"}
-                          </div>
-                        </Grid>
-                        <Grid className="arrow" item xs={6} md={6} lg={6}>
-                          <ArrowForwardIcon />
-                        </Grid>
-                        </Grid>
+                            <Grid container className="status-box" >
+                              <Grid item xs={6} md={6} lg={6}>
+                                <div
+                                  className={`status ${
+                                    elem.status == "PENDING" ? "pending" : ""
+                                  } ${elem.status == "DECLINED" ? "declined" : ""} ${
+                                    elem.status == "ASSIGNED" ? "assigned" : ""
+                                  }`}
+                                >
+                                  {elem.status == "PENDING" && "Request in pending"}
+                                  {elem.status == "DECLINED" && "Request in Declined"}
+                                  {elem.status == "ASSIGNED" && "Route assigned"}
+                                </div>
+                              </Grid>
+                              <Grid className="arrow" item xs={6} md={6} lg={6}>
+                                <ArrowForwardIcon />
+                              </Grid>
+                            </Grid>
 
                       </Grid>
                     </CardContent>

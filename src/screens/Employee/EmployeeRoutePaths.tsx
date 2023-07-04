@@ -1,5 +1,5 @@
 import { RoutePath } from "../../routes/routePaths";
-import AllRequestPage from "../Request/AllRequests/AllRequestPage";
+import AllRequestPage from "./AllRequests/AllRequestPage";
 import LoginScreen from "./Login/Login";
 import RequestDeclined from "./RequestHome/RequestDeclined";
 import RequestHome from "./RequestHome/RequestHome";
