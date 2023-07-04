@@ -1,8 +1,6 @@
 import React, { ReactElement } from "react";
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-
 
 const WindowLayout: React.FC = ({
     leftWindow,

@@ -11,6 +11,10 @@
     padding-left: 30px;
 }
 
+.m0{
+    margin: 0px !important;
+}
+
 @media screen and (max-width: 500px) {
     .left_box{
         padding-left: 0px;

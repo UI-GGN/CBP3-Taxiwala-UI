@@ -28,7 +28,7 @@ module.exports = {
     "semi": ["error", "always"],
     "no-unused-vars": "error",
     "prefer-const": "error",
-    "max-len": ["error", { "code": 100 }],
+    "max-len": ["error", { "code": 120 }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/prop-types": "warn",
@@ -39,7 +39,7 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"
   },
-}
+};
 
 
    
