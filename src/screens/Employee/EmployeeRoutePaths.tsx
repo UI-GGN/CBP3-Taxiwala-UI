@@ -1,6 +1,7 @@
 import { RoutePath } from "../../routes/routePaths";
 import AllRequestPage from "./AllRequests/AllRequestPage";
 import LoginScreen from "./Login/Login";
+import AssignedRoute from "./RequestHome/AssignedRoute";
 import RequestDeclined from "./RequestHome/RequestDeclined";
 import RequestHome from "./RequestHome/RequestHome";
 import RequestProgress from "./RequestHome/RequestProgress";
@@ -17,5 +18,7 @@ export const EmployeeRoutePaths: { [key: string]: RoutePath } = {
   "Request": { name: "request", path: "/employee/request/:id",
     container: Request, protected: false },
   "EmployeeRequestHome": 
-    { name: "requestHomeScreen", path: "/employee/home", container: RequestHome, protected: false }
+    { name: "requestHomeScreen", path: "/employee/home", container: RequestHome, protected: false },
+  "AssignedRoute": 
+    { name: "assignedRouteScreen", path: "/employee/route/assigned", container: AssignedRoute, protected: false }
 };

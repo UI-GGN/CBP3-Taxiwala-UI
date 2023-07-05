@@ -5,3 +5,29 @@
 .request_headline{
     font-size: 2.5rem;
 }
+
+.start_date {
+    margin-right: 30px !important;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    color: red;
+    font-size: 12px;
+}
+
+.employee_details {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 1010px) {
+    .employee_details {
+        display: flex;
+        flex-direction: column;
+        height: 90px;
+        justify-content: space-between;
+    }    
+  }
