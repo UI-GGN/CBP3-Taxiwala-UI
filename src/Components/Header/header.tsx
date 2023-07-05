@@ -75,15 +75,15 @@ export default function HeaderBar() {
           sx={{marginTop:0, display: { xs: "none", sm: "block" } }}>
           <Container sx={{ float: "right", marginTop: 1,borderRight:0 }}>            
 
-              {navItems.map((item) => (
-                <Button
+            {navItems.map((item) => (
+              <Button
                 onClick={()=>navigate(item.route)}
-                  key={item.label}
-                  sx={{ color: "typography.primary", float: "right", paddingRight: "10%" }}
-                >
-                  {item.label}
-                </Button>
-              ))}
+                key={item.label}
+                sx={{ color: "typography.primary", float: "right", paddingRight: "10%" }}
+              >
+                {item.label}
+              </Button>
+            ))}
 
             <IconButton sx={{ color: "typography.primary" , float:"right"}} onClick={color.toggleColor} 
               color="inherit">

@@ -7,23 +7,19 @@ const apiStatus = {
   error: "error"
 };
 
-export const GetApiEffect = (service) => {
+export const GetApiEffect = (service, params) => {
   const [status, setStatus] = useState(apiStatus.loading);
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const callService = async () => {
-      const response = await service();
-      console.log(response);
-      setData(response);
-    };
 
-    try{
-      callService();
+    service(params).then(data => {
+      console.log(data);
+      setData(data);
       setStatus(apiStatus.complete);
-    } catch(error) {
+    }).catch(error => {
       setStatus(apiStatus.error);
-    }
+    });
   }, []);
 
   return [

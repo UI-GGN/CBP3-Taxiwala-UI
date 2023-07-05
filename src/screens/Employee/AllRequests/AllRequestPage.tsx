@@ -4,34 +4,39 @@ import {
   Card,
   CardContent,
   Typography,
-  CardHeader,
   Box,
   Container,
 } from "@mui/material/";
 import "./AllRequestPage.css";
-import items from "../../../../.github/workflows/item.json";
 import logo from "../../../assets/image1.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
+import { CabRequestService } from "../../../Services/CabRequestService";
+import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
+import { useNavigate } from "react-router-dom";
 
 const AllRequestPage: React.FC = (): ReactElement => {  
+  const [ isLoading, isError, data ] = GetApiEffect(CabRequestService.get, {"id": "13577"});
+  const navigate = useNavigate();
 
   return (
     <>
-      <Grid container spacing={2}>
+    <ApiStateHandler isLoading={isLoading} isError={isError}>
+      {data&&<Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={6}>
           <Container maxWidth="md">
             <Box className="left_box allrequest_box">
               <div className="allrequests_text">All requests</div>
               <br />
-              {items.map((elem) => (
+              {data.map((req, index) => (
                 <Grid
                   item
                   xs={12}
                   md={9}
                   lg={9}
-                  key={items.indexOf(elem)}
+                  key={index}
                 >
-                  <Card sx={{ boxShadow: 2, mb: 4}}>
+                  <Card sx={{ boxShadow: 2, mb: 4, cursor: "pointer"}} onClick={() => navigate("/employee/request/progress")}>
                     <Typography
                       variant="caption"
                       sx={{
@@ -40,7 +45,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
                         marginTop: "5px",
                       }}
                     >
-                      {`Req Id : ${elem.id}`}
+                      {`Req Id : ${req.id}`}
                     </Typography>
 
                     <Typography
@@ -52,60 +57,66 @@ const AllRequestPage: React.FC = (): ReactElement => {
                         marginTop: "5px",
                       }}
                     >
-                      {`${elem.createdAt.split("T")[0]}`}
+                      {`${req.createdAt.split("T")[0]}`}
                     </Typography>
 
                     <CardContent className="card-content">
                       <Typography variant="subtitle2" sx={{mb: 1}}><b>
-                        Ride dates:
+                        Ride dates: {`${req.pickupTime.split("T")[0]}`}
                         </b>
                       </Typography>
                       <Grid container className="grid">
                         <Grid item xs={6} md={6} lg={6}>
                           <Typography variant="subtitle2">
-                            <b>Pickup point:</b>
+                            <b>Pickup point: </b>
                             <span className="details">
-                              {`${elem.pickupLocation}`}
+                              {`${req.pickupLocation}`}
                             </span>
                           </Typography>
                         </Grid>
                         <Grid item xs={6} md={6} lg={6}>
                           <Typography variant="subtitle2">
-                            <b>Pickup time:</b>
+                            <b>Pickup time: </b>
                             <span className="details">
                               {" "}
-                              {`${elem.pickupTime.split("T")[1]}`}
+                              {`${req.pickupTime.split("T")[1]}`}
                             </span>
                           </Typography>
                         </Grid>
                         <Grid item xs={6} md={6} lg={6}>
                           <Typography variant="subtitle2">
-                            <b>Drop point:</b>
+                            <b>Drop point: </b>
                             <span className="details">
-                              {`${elem.dropLocation}`}
+                              {`${req.dropLocation}`}
                             </span>
                           </Typography>
                         </Grid>
 
                             <Grid container className="status-box" >
                               <Grid item xs={6} md={6} lg={6}>
-                                <div
-                                  className={`status ${
-                                    elem.status == "PENDING" ? "pending" : ""
-                                  } ${elem.status == "DECLINED" ? "declined" : ""} ${
-                                    elem.status == "ASSIGNED" ? "assigned" : ""
-                                  }`}
+                                {
+                                  req.deleted?<div
+                                  className={"status declined"}
                                 >
-                                  {elem.status == "PENDING" && "Request in pending"}
-                                  {elem.status == "DECLINED" && "Request in Declined"}
-                                  {elem.status == "ASSIGNED" && "Route assigned"}
+                                 Request is Declined
+                                </div>:
+                                <div
+                                className={`status ${
+                                  req.status == "PENDING" ? "pending" : ""
+                                } ${req.status == "DECLINED" ? "declined" : ""} ${
+                                  req.status == "APPROVED" ? "assigned" : ""
+                                }`}
+                                >
+                                  {req.status == "PENDING" && "Request in pending"}
+                                  {req.status == "DECLINED" && "Request in Declined"}
+                                  {req.status == "APPROVED" && "Request Approved"}
                                 </div>
+                                }
                               </Grid>
                               <Grid className="arrow" item xs={6} md={6} lg={6}>
                                 <ArrowForwardIcon />
                               </Grid>
                             </Grid>
-
                       </Grid>
                     </CardContent>
                   </Card>
@@ -125,6 +136,8 @@ const AllRequestPage: React.FC = (): ReactElement => {
           <img src={logo} alt="notes img" className="requests_image" />
         </Grid>
       </Grid>
+      }
+    </ApiStateHandler>
     </>
   );
 };

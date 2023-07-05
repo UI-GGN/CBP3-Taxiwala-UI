@@ -39,12 +39,12 @@
   background: #fec1c1 !important;
 }
 .pending {
-    color: #0666BE    !important;
-    background: #A6DAFF !important;
+    color: #073d6f    !important;
+    background: #8bcfff9f !important;
   }
 .assigned{
-    color: #0666BE    !important;
-    background: #A6DAFF !important;
+    color: #01452d    !important;
+    background: #87fa98a5 !important;
 }
 
 .status-box{
