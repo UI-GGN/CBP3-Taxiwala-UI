@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
-import WindowLayout from "../../../Components/WindowLayout";
-import { RightWindow } from "./RequestHome";
-import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Button, Typography } from "@mui/material";
+import React, { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import TimelineComponent from "../../../Components/Timeline";
+import WindowLayout from "../../../Components/WindowLayout";
+import { RightWindow } from "./RequestHome";
 
 const LeftWindow = () => {
 	const navigate = useNavigate();
@@ -27,7 +27,10 @@ const LeftWindow = () => {
 					>
 						<Typography
 							variant="body2"
-							sx={{ color: "typography.secondary", fontSize: "19px" }}
+							sx={{
+								color: "black",
+								fontSize: "19px",
+							}}
 						>
 							Driver assigned: Name, 987654321
 						</Typography>
@@ -44,7 +47,10 @@ const LeftWindow = () => {
 					>
 						<Typography
 							variant="body2"
-							sx={{ color: "typography.secondary", fontSize: "19px" }}
+							sx={{
+								color: "black",
+								fontSize: "19px",
+							}}
 						>
 							Dates: 3rd June 2023
 							<br />
@@ -63,7 +69,10 @@ const LeftWindow = () => {
 					<br />
 					<Typography
 						variant="body2"
-						sx={{ color: "typography.secondary", fontSize: "19px" }}
+						sx={{
+							color: "black",
+							fontSize: "19px",
+						}}
 					>
 						Change of Plans?
 					</Typography>

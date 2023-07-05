@@ -41,9 +41,9 @@ export const AllRequests: React.FC = (): ReactElement => {
 		setSelectedCabRequestIndex,
 	]: UseStateType<number> = useState(0);
 	const [selectedRoute, setSelectedRoute]: UseStateType<string> = useState("");
-	const [selectedStatus, setSelectedStatus]: UseStateType<string[]> = useState(
-		[] as string[]
-	);
+	// const [selectedStatus, setSelectedStatus]: UseStateType<string[]> = useState(
+	// 	[] as string[]
+	// );
 
 	const handleModal: (index: number) => void = (index: number) => {
 		setSelectedCabRequestIndex(index);

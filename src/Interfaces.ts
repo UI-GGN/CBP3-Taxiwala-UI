@@ -103,3 +103,7 @@ export interface IVendor {
 	name: string;
 	deleted: boolean;
 }
+
+export interface IRouteCardProps {
+	route: IRoute;
+}

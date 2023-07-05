@@ -9,6 +9,7 @@ import TimelineOppositeContent, {
 } from "@mui/lab/TimelineOppositeContent";
 import { FC } from "react";
 import { convertTimeFormat } from "../utils/CabRequestHelper";
+import { getLocalTheme } from "../utils/theme";
 
 interface ITimelineProps {
 	pickupTime: string;
@@ -21,6 +22,8 @@ const TimelineComponent: FC<ITimelineProps> = ({
 	pickUpLocation,
 	dropLocation,
 }: ITimelineProps): JSX.Element => {
+	const theme = getLocalTheme();
+
 	return (
 		<Timeline
 			sx={{
@@ -30,11 +33,14 @@ const TimelineComponent: FC<ITimelineProps> = ({
 				},
 				marginTop: "0px",
 				marginBottom: "0px",
+				color: theme === "light" ? "black" : "white",
 			}}
 		>
 			<TimelineItem>
 				<TimelineOppositeContent whiteSpace={"nowrap"}>
-					{convertTimeFormat(pickupTime)}
+					{pickupTime.includes("T")
+						? convertTimeFormat(pickupTime)
+						: pickupTime}
 				</TimelineOppositeContent>
 				<TimelineSeparator>
 					<TimelineDot />
@@ -43,10 +49,11 @@ const TimelineComponent: FC<ITimelineProps> = ({
 				<TimelineContent>{pickUpLocation}</TimelineContent>
 			</TimelineItem>
 			<TimelineItem>
-				<TimelineOppositeContent
-					color="textSecondary"
-					marginLeft="68px"
-				></TimelineOppositeContent>
+				<TimelineOppositeContent whiteSpace={"nowrap"} visibility={"hidden"}>
+					{pickupTime.includes("T")
+						? convertTimeFormat(pickupTime)
+						: pickupTime}
+				</TimelineOppositeContent>
 				<TimelineSeparator>
 					<TimelineDot />
 				</TimelineSeparator>
