@@ -23,7 +23,7 @@ import Dropdown from "../../../Components/TextInput/Dropdown";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+// import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import Checkbox from "@mui/material/Checkbox";
 // import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -130,13 +130,13 @@ const LeftWindow = () => {
 						<br />
 						<div>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
-								<DemoContainer components={["DatePicker"]}>
-									<DatePicker label="Select start date" />
-									<DatePicker
-										label="Select end date"
-										disabled={noEndDateNeeded}
-									/>
-								</DemoContainer>
+								{/* <DemoContainer components={["DatePicker"]}> */}
+								<DatePicker label="Select start date" />
+								<DatePicker
+									label="Select end date"
+									disabled={noEndDateNeeded}
+								/>
+								{/* </DemoContainer> */}
 							</LocalizationProvider>
 						</div>
 
