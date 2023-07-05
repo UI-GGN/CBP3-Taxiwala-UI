@@ -1,0 +1,240 @@
+{
+  "info": {
+    "_postman_id": "69f4c931-769a-4509-97f0-0c451323dea6",
+    "name": "cab-schedule apis",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get cab requests for employee",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/cab-request/employee/12345",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "cab-request", "employee", "12345"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create cab request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"employeeId\": \"11111\",\n    \"employeeName\": \"xyz\",\n    \"pickupLocation\": \"here\",\n    \"dropLocation\": \"there\",\n    \"pickupTime\": \"2023-05-30T08:55:18.252Z\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/cab-request",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "cab-request"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all cab requests",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/cab-request",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "cab-request"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get routes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/route",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "route"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create route with vehicle data and vendor data",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"pickupTime\": \"08:00\",\n    \"startLocation\": \"here\",\n    \"endLocation\": \"there\",\n    \"startDate\": \"2023-05-26\",\n    \"expireDate\": \"2023-06-29\",\n    \"vehicle\": {\n        \"id\": \"AB123456\",\n        \"driverName\": \"driver name\",\n        \"vendor\": {\n            \"name\": \"vendor name\"\n        }\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/route",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "route"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create route with vehicle data and vendor id",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"pickupTime\": \"08:00\",\n    \"startLocation\": \"here\",\n    \"endLocation\": \"there\",\n    \"startDate\": \"2023-05-26\",\n    \"expireDate\": \"2023-06-29\",\n    \"vehicle\": {\n        \"id\": \"AB1111111\",\n        \"driverName\": \"driver name new\",\n        \"vendorId\": 1\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/route",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "route"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create route with vehicle id",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"pickupTime\": \"10:00\",\n    \"startLocation\": \"here\",\n    \"endLocation\": \"there\",\n    \"startDate\": \"2023-05-26\",\n    \"expireDate\": \"2023-06-29\",\n    \"vehicleId\": \"AB123456\" \n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/route",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "route"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get vendors",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/vendor",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "vendor"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create vendor",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"vendor name\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/vendor",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "vendor"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get vehicles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/vehicle",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "vehicle"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create vehicle with vendor data",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"ZZ123456\",\n    \"driverName\": \"some name\",\n    \"vendor\": {\n        \"name\": \"new name for vendor\"\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/vehicle",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "vehicle"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create vehicle with vendor id",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"ZZ111111\",\n    \"driverName\": \"some name\",\n    \"vendorId\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://cab-schedule-serverless.vercel.app/api/v1/vehicle",
+          "protocol": "https",
+          "host": ["cab-schedule-serverless", "vercel", "app"],
+          "path": ["api", "v1", "vehicle"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
