@@ -7,35 +7,53 @@ import LoginScreen from "../../screens/Employee/Login/Login";
 import NotFound from "../../screens/Common/NotFound/NotFound";
 
 describe("RouteContainer", () => {
-  test("Should render login screen route", () => {
-    Object.defineProperty(Routepaths, 'RoutePaths', {
-      writable: true,
-      value: {
-        "home": { name: "home", path: "/", container: LoginScreen, protected: false },
-      }
-    });
+	test("Should render login screen route", () => {
+		Object.defineProperty(Routepaths, "RoutePaths", {
+			writable: true,
+			value: {
+				home: {
+					name: "home",
+					path: "/",
+					container: LoginScreen,
+					protected: false,
+				},
+			},
+		});
 
-    const { getByText } = render(<BrowserRouter>
-      <RouteContainer />
-    </BrowserRouter>);
+		const { getByText } = render(
+			<BrowserRouter>
+				<RouteContainer />
+			</BrowserRouter>
+		);
 
-    expect(getByText("Sign In")).toBeInTheDocument();
-  });
+		expect(getByText("Sign in!")).toBeInTheDocument();
+	});
 
-  test("Should not render protected routes", () => {
-    Object.defineProperty(Routepaths, 'RoutePaths', {
-      writable: true,
-      value: {
-        "home": { name: "home", path: "/", container: LoginScreen, protected: true },
-        "notFound": { name: "notFound", path: "*", container: NotFound, protected: false },
-      }
-    });
+	test("Should not render protected routes", () => {
+		Object.defineProperty(Routepaths, "RoutePaths", {
+			writable: true,
+			value: {
+				home: {
+					name: "home",
+					path: "/",
+					container: LoginScreen,
+					protected: true,
+				},
+				notFound: {
+					name: "notFound",
+					path: "*",
+					container: NotFound,
+					protected: false,
+				},
+			},
+		});
 
-    const {getByText} =  render(<BrowserRouter>
-      <RouteContainer />
-    </BrowserRouter>);
-    
-    expect(getByText("Not Found")).toBeInTheDocument();
-  });
+		const { getByText } = render(
+			<BrowserRouter>
+				<RouteContainer />
+			</BrowserRouter>
+		);
 
+		expect(getByText("Not Found")).toBeInTheDocument();
+	});
 });
