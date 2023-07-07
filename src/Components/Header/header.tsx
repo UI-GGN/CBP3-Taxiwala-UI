@@ -28,7 +28,7 @@ function Thoughtworks() {
 
 const navItems = [
   { label: "Profile", route: "/" },
-  { label: "All Requests", route: "/employee/allrequests" },
+  { label: "All Requests", route: "/employee/allrequests/12345" },
 ];
 
 
@@ -56,7 +56,7 @@ export default function HeaderBar() {
     >
       <Grid container >
         <Grid item xs={12} md={9} lg={9}>
-          <Container>
+          <Container sx={{cursor: "pointer"}} onClick={() => navigate("/")}>
             <Typography
               variant="body1"
               sx={{

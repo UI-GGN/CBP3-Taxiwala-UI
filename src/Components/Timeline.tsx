@@ -30,7 +30,7 @@ const TimelineComponent: FC<ITimelineProps> = ({
 				},
 				marginTop: "0px",
 				marginBottom: "0px",
-				color: "black",
+				color: "typography.primary",
 			}}
 		>
 			<TimelineItem>
@@ -45,7 +45,7 @@ const TimelineComponent: FC<ITimelineProps> = ({
 			</TimelineItem>
 			<TimelineItem>
 				<TimelineOppositeContent
-					color="textSecondary"
+					color="typography.primary"
 					marginLeft="40px"
 				></TimelineOppositeContent>
 				<TimelineSeparator>

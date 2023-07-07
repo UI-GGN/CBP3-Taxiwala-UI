@@ -42,6 +42,7 @@ const App = (): ReactElement => {
           background: {
             default: LightMode.background,
             header: LightMode.headerBackground,
+            secondary: LightMode.backgroundSecondary,
           },
           primary: {
             main: LightMode.primary,
@@ -57,7 +58,7 @@ const App = (): ReactElement => {
             default: DarkMode.background,
             header: DarkMode.headerBackground,
             primary: "#121212",
-            secondary: "rgba(255, 255, 255, 0.08)",
+            secondary: DarkMode.backgroundSecondary,
           },
           primary: {
             main: DarkMode.primary,

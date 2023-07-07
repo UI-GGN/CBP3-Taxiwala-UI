@@ -14,9 +14,11 @@ import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
 import { CabRequestService } from "../../../Services/CabRequestService";
 import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const AllRequestPage: React.FC = (): ReactElement => {  
-  const [ isLoading, isError, data ] = GetApiEffect(CabRequestService.get, {"id": "13577"});
+  const params = useParams();
+  const [ isLoading, isError, data ] = GetApiEffect(CabRequestService.get, {"id": params.id});
   const navigate = useNavigate();
 
   return (
@@ -36,7 +38,9 @@ const AllRequestPage: React.FC = (): ReactElement => {
                   lg={9}
                   key={index}
                 >
-                  <Card sx={{ boxShadow: 2, mb: 4, cursor: "pointer"}} onClick={() => navigate("/employee/request/progress")}>
+                  <Card sx={{ boxShadow: 2, mb: 4, cursor: "pointer"}} 
+                  onClick={() => navigate(`/employee/request/${params.id}/${req.id}`)}
+                  >
                     <Typography
                       variant="caption"
                       sx={{
