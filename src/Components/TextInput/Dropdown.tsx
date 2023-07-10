@@ -1,11 +1,11 @@
-import { FC } from "react";
 import {
-	InputLabel,
-	Select,
-	MenuItem,
 	FormControl,
+	InputLabel,
+	MenuItem,
+	Select,
 	SelectChangeEvent,
 } from "@mui/material";
+import { FC } from "react";
 
 type DropdownValue = {
 	value: string;

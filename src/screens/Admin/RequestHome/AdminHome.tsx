@@ -1,10 +1,10 @@
+import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import React, { ReactElement } from "react";
 import adminSat from "../../../assets/admin-satellite.jpg";
-import { Box, Typography, Tabs, Tab } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import "./admin.css";
 import { AllRequests } from "./AllRequests";
 import { AllRoutes } from "./AllRoutes";
+import "./admin.css";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -44,7 +44,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		console.log(event.target);
+		console.log(event);
 		setValue(newValue);
 	};
 

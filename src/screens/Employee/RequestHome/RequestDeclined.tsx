@@ -1,9 +1,10 @@
-import React, { ReactElement } from "react";
-import WindowLayout from "../../../Components/WindowLayout";
-import { RightWindow } from "./RequestHome";
-import { Box, Typography, Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Button, Typography } from "@mui/material";
+import React, { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
+import WindowLayout from "../../../Components/WindowLayout";
+import "../../../index.css";
+import { RightWindow } from "./RequestHome";
 
 const LeftWindow = () => {
 	const navigate = useNavigate();
@@ -25,11 +26,13 @@ const LeftWindow = () => {
 				<br />
 				<Button
 					variant="outlined"
+					className="actions"
 					onClick={() => {
-						navigate("/employee/home");
+						navigate("/employee/allrequests");
 					}}
 				>
-					<ArrowBackIcon /> Back to Home
+					<ArrowBackIcon />
+					Back to Requests
 				</Button>
 			</Box>
 		</>
