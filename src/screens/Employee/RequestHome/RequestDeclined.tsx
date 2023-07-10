@@ -28,7 +28,7 @@ const LeftWindow = () => {
 					variant="outlined"
 					className="actions"
 					onClick={() => {
-						navigate("/employee/allrequests");
+						navigate("/employee/allrequests/");
 					}}
 				>
 					<ArrowBackIcon />

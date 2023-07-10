@@ -1,13 +1,14 @@
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import { Button, IconButton } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { ColorContext } from "../../App";
+import { Button, IconButton } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { ColorContext } from "../../App";
 
 function Thoughtworks() {
 	return (
@@ -25,10 +26,14 @@ function Thoughtworks() {
 	);
 }
 
-const navItems = ["Profile", "All Requests"];
+const navItems = [
+	{ label: "Profile", route: "/" },
+	{ label: "All Requests", route: "/employee/allrequests/12345" },
+];
 
 export default function HeaderBar() {
 	const theme = useTheme();
+	const navigate = useNavigate();
 	const color = useContext(ColorContext);
 
 	return (
@@ -50,7 +55,7 @@ export default function HeaderBar() {
 		>
 			<Grid container>
 				<Grid item xs={12} md={9} lg={9}>
-					<Container>
+					<Container sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
 						<Typography
 							variant="body1"
 							sx={{
@@ -72,27 +77,21 @@ export default function HeaderBar() {
 					lg={3}
 					sx={{ marginTop: 0, display: { xs: "none", sm: "block" } }}
 				>
-					<Container
-						sx={{
-							float: "right",
-							color: "#838383",
-							marginTop: 1,
-							borderRight: 0,
-						}}
-					>
+					<Container sx={{ float: "right", marginTop: 1, borderRight: 0 }}>
 						{navItems.map((item) => (
 							<Button
-								key={item}
+								onClick={() => navigate(item.route)}
+								key={item.label}
 								sx={{
 									color: "typography.primary",
 									float: "right",
-									mr: 2,
-									ml: 2,
+									paddingRight: "10%",
 								}}
 							>
-								{item}
+								{item.label}
 							</Button>
 						))}
+
 						<IconButton
 							sx={{ color: "typography.primary", float: "right" }}
 							onClick={color.toggleColor}
