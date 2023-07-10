@@ -3,7 +3,7 @@ import { Button, Typography } from "@mui/material";
 import { FC } from "react";
 import { IEmmployeeDetails, IRequestStep2Props } from "../../../Interfaces";
 import "./RequestHome.css";
-import LocationAccordian from "./components/LocationAccordian";
+import LocationAccordian from "../../../Components/Accordians/LocationAccordian";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import TextInput from "../../../Components/TextInput/TextInput";
 import { shouldSubmitButtonDisabled } from "../../../utils/CabRequestValidation";

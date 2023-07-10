@@ -114,3 +114,26 @@ export interface IVendor {
 export interface IRouteCardProps {
 	route: IRoute;
 }
+
+export interface ICreateRouteAccordian {
+	pickupTime: string;
+	setPickupTime: React.Dispatch<React.SetStateAction<string>>;
+	startDate: Date | null;
+	setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+	endDate: Date | null;
+	setEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
+	pickupLocation: string;
+	setPickupLocation: React.Dispatch<React.SetStateAction<string>>;
+	dropLocation: string;
+	setDropLocation: React.Dispatch<React.SetStateAction<string>>;
+	vehicleType: string;
+	setVehicleType: React.Dispatch<React.SetStateAction<string>>;
+	existingVehicleID: string;
+	setExistingVehicleID: React.Dispatch<React.SetStateAction<string>>;
+	newVehicleID: string;
+	setNewVehicleID: React.Dispatch<React.SetStateAction<string>>;
+	driverName: string;
+	setDriverName: React.Dispatch<React.SetStateAction<string>>;
+	vendorName: string;
+	setVendorName: React.Dispatch<React.SetStateAction<string>>;
+}

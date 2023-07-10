@@ -7,9 +7,9 @@ import {
 	Typography,
 } from "@mui/material";
 import { FC } from "react";
-import TextInput from "../../../../Components/TextInput/TextInput";
-import { ILocation, ILocationAccordianProps } from "../../../../Interfaces";
-import "./../RequestHome.css";
+import TextInput from "../TextInput/TextInput";
+import { ILocation, ILocationAccordianProps } from "../../Interfaces";
+import "./../../screens/Employee/RequestHome/RequestHome.css";
 
 const LocationAccordian: FC<ILocationAccordianProps> = ({
 	location,

@@ -20,17 +20,18 @@ export const RouteCard: FC<IRouteCardProps> = ({
 								{route.name}, {route.id}
 							</b>
 						</Typography>
-						<Typography
-							sx={{ fontSize: 16, display: "flex", alignItems: "center" }}
-							color="text.secondary"
-							gutterBottom
-						>
-							{convertDateFormat(route.startDate)}
-							&nbsp;
+						<Box sx={{ fontSize: 16, display: "flex", alignItems: "center" }}>
+							<Typography color="text.secondary" gutterBottom>
+								{convertDateFormat(route.startDate)}
+								&nbsp;
+							</Typography>
+
 							<ArrowForwardIcon sx={{ fontSize: 16 }} />
-							&nbsp;
-							{convertDateFormat(route.expireDate)}
-						</Typography>
+							<Typography color="text.secondary" gutterBottom>
+								&nbsp;
+								{convertDateFormat(route.expireDate)}
+							</Typography>
+						</Box>
 					</Grid>
 					<Grid item xs={3} md={3} lg={3}>
 						<Typography sx={{ fontSize: 12 }} color="text.secondary">
