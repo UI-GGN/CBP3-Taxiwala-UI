@@ -23,7 +23,6 @@ const App = (): ReactElement => {
 
 	useEffect(() => {
 		const theme = getLocalTheme();
-		console.log(theme);
 		setMode(theme);
 	}, [mode]);
 

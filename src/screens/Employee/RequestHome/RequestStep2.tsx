@@ -19,8 +19,6 @@ const RequestStep2: FC<IRequestStep2Props> = ({
 	employeeDetails,
 	setEmployeeDetails,
 }: IRequestStep2Props): JSX.Element => {
-	console.log(location);
-
 	return (
 		<>
 			{cabType === "pick" ? (

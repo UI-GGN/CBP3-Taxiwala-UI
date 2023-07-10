@@ -7,6 +7,20 @@
 .modal_buttons {
     float: right;
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-evenly;
+}
+
+.date_picker {
+    display: flex;
+}
+
+.modal_box {
+   width: 400px;
+}
+
+@media screen and (max-width: 500px) {
+    .modal_box {
+        width: 100%;
+     }
 }

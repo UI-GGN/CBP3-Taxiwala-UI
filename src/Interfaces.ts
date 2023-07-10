@@ -87,7 +87,15 @@ export interface IRoute {
 	expireDate: string;
 	vehicleId: string;
 	deleted: boolean;
-	vehicle: IVehicle;
+	vehicle: IVehicleForRoute;
+}
+
+export interface IVehicleForRoute {
+	id: string;
+	driverName: string;
+	vendorId: number;
+	deleted: boolean;
+	vendor: IVendor;
 }
 
 export interface IVehicle {
@@ -95,7 +103,6 @@ export interface IVehicle {
 	driverName: string;
 	vendorId: number;
 	deleted: boolean;
-	vendor: IVendor;
 }
 
 export interface IVendor {

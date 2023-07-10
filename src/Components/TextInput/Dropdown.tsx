@@ -17,6 +17,7 @@ interface IDropdownProps {
 	handleChange: (text: string) => void;
 	value: string;
 	dropdownvalues: DropdownValue[];
+	width?: string;
 }
 
 const Dropdown: FC<IDropdownProps> = ({
@@ -33,10 +34,11 @@ const Dropdown: FC<IDropdownProps> = ({
 			label: "10:00",
 		},
 	],
+	width = "100%",
 }: IDropdownProps): JSX.Element => {
 	return (
 		<>
-			<FormControl sx={{ mb: 2, minWidth: "100%" }}>
+			<FormControl sx={{ mb: 2, minWidth: { width } }}>
 				<InputLabel id="demo-simple-select-helper-label">{label}</InputLabel>
 				<Select
 					variant="filled"

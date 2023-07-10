@@ -19,13 +19,10 @@ const LoginScreen: React.FC = (): ReactElement => {
 	const theme = useTheme();
 
 	const sendOTP = () => {
-		console.log(email);
 		setShowOTPFields(true);
 	};
 
 	const submitOTP = () => {
-		console.log(email);
-		console.log(otp);
 		navigate("/employee/home");
 	};
 

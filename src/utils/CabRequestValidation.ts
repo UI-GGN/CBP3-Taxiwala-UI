@@ -53,8 +53,6 @@ export const shouldSubmitButtonDisabled: (
 	location: ILocation,
 	employeeDetails: IEmmployeeDetails
 ) => boolean = (location: ILocation, employeeDetails: IEmmployeeDetails) => {
-	console.log(location);
-	console.log(employeeDetails);
 	return (
 		location.address === "" ||
 		location.pincode === "" ||

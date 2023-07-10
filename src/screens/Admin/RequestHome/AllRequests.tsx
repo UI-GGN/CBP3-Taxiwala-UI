@@ -27,7 +27,6 @@ export const AllRequests: React.FC = (): ReactElement => {
 		top: "50%",
 		left: "50%",
 		transform: "translate(-50%, -50%)",
-		width: 400,
 		border: theme === "light" ? "2px solid #242424" : "2px solid white",
 		backgroundColor: theme === "light" ? "white" : "#242424",
 		color: theme === "light" ? "black" : "white",
@@ -92,7 +91,7 @@ export const AllRequests: React.FC = (): ReactElement => {
 					border: "0",
 				}}
 			>
-				<Box sx={style}>
+				<Box sx={style} className="modal_box">
 					<Typography
 						sx={{
 							fontSize: 16,
@@ -136,7 +135,11 @@ export const AllRequests: React.FC = (): ReactElement => {
 					<div className="modal_buttons">
 						<Button
 							variant="contained"
-							sx={{ backgroundColor: "red", color: "white" }}
+							sx={{
+								backgroundColor: "red",
+								color: "white",
+								marginRight: "5px",
+							}}
 							onClick={() => handleDeclineRequest()}
 						>
 							Decline
