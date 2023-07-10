@@ -11,10 +11,6 @@ import { CabRequestService } from "../../../Services/CabRequestService";
 import nightcab from "../../../assets/night-cab.jpeg";
 import daycab from "../../../assets/parked_cab.jpg";
 import { ICabRequest } from "../../../Interfaces";
-import {
-	convertDateFormat,
-	convertTimeFormat,
-} from "../../../utils/CabRequestHelper";
 
 const RequestStatusText: FC<{ status: string }> = ({ status }): JSX.Element => {
 	switch (status) {
@@ -116,9 +112,9 @@ const LeftWindow = () => {
 												variant="body2"
 												sx={{ color: "typography.secondary", fontSize: "19px" }}
 											>
-												Dates: {convertDateFormat(req.expireDate)}
+												Dates: {req.expireDate}
 												<br />
-												Checkin Time: {convertTimeFormat(req.pickupTime)}
+												Checkin Time: {req.pickupTime}
 											</Typography>
 										</Box>
 										<br />

@@ -16,10 +16,6 @@ import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { ICabRequest } from "../../../Interfaces";
-import {
-	convertDateFormat,
-	convertTimeFormat,
-} from "../../../utils/CabRequestHelper";
 
 const AllRequestPage: React.FC = (): ReactElement => {
 	const params = useParams();
@@ -72,8 +68,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
 												<CardContent className="card-content">
 													<Typography variant="subtitle2" sx={{ mb: 1 }}>
 														<b>
-															Ride dates:{" "}
-															{`${convertDateFormat(req.pickupTime)}`}
+															Ride dates: {`${req.pickupTime.split("T")[0]}`}
 														</b>
 													</Typography>
 													<Grid container className="grid">
@@ -90,7 +85,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
 																<b>Pickup time: </b>
 																<span className="details">
 																	{" "}
-																	{`${convertTimeFormat(req.pickupTime)}`}
+																	{`${req.pickupTime.split("T")[1]}`}
 																</span>
 															</Typography>
 														</Grid>
