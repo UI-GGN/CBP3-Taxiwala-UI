@@ -30,6 +30,36 @@ export const AllRoutes: React.FC = (): ReactElement => {
 
 	return (
 		<Grid container spacing={10}>
+			<Grid
+				item
+				xs={12}
+				md={4}
+				lg={4}
+				sx={{ display: { xs: "block", sm: "none" } }}
+			>
+				<CreateRouteAccordian
+					pickupTime={pickupTime}
+					setPickupTime={setPickupTime}
+					startDate={startDate}
+					setStartDate={setStartDate}
+					endDate={endDate}
+					setEndDate={setEndDate}
+					pickupLocation={pickupLocation}
+					setPickupLocation={setPickupLocation}
+					dropLocation={dropLocation}
+					setDropLocation={setDropLocation}
+					vehicleType={vehicleType}
+					setVehicleType={setVehicleType}
+					existingVehicleID={existingVehicleID}
+					setExistingVehicleID={setExistingVehicleID}
+					newVehicleID={newVehicleID}
+					setNewVehicleID={setNewVehicleID}
+					driverName={driverName}
+					setDriverName={setDriverName}
+					vendorName={vendorName}
+					setVendorName={setVendorName}
+				/>
+			</Grid>
 			<Grid item xs={12} md={8} lg={8}>
 				<Box>
 					<Grid container spacing={6}>
@@ -43,7 +73,13 @@ export const AllRoutes: React.FC = (): ReactElement => {
 					</Grid>
 				</Box>
 			</Grid>
-			<Grid item xs={12} md={4} lg={4}>
+			<Grid
+				item
+				xs={12}
+				md={4}
+				lg={4}
+				sx={{ display: { xs: "none", sm: "block" } }}
+			>
 				<CreateRouteAccordian
 					pickupTime={pickupTime}
 					setPickupTime={setPickupTime}

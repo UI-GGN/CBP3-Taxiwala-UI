@@ -1,15 +1,16 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { Box, Button, Grid, Modal, Typography } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import { RequestCard } from "../../../Components/Cards/RequestCard";
 import Dropdown from "../../../Components/TextInput/Dropdown";
 import { ICabRequest, IRoute, UseStateType } from "../../../Interfaces";
-import RequestData from "./../../../utils/RequestData.json";
+import { AdminService } from "../../../Services/AdminService";
+import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
 import RouteData from "./../../../utils/RouteData.json";
 import { getLocalTheme } from "./../../../utils/theme";
 import "./admin.css";
 
-const data: ICabRequest[] = RequestData;
 const routeData: IRoute[] = RouteData;
 const dropdownvalues: { value: string; label: string }[] = routeData.map(
 	(route) => {
@@ -32,19 +33,18 @@ export const AllRequests: React.FC = (): ReactElement => {
 		color: theme === "light" ? "black" : "white",
 		p: 4,
 	};
-	const [cabRequestData, setCabRequestData]: UseStateType<ICabRequest[]> =
-		useState(data);
-	const [showModal, setShowModal]: UseStateType<boolean> = useState(false);
-	const [
-		selectedCabRequestIndex,
-		setSelectedCabRequestIndex,
-	]: UseStateType<number> = useState(0);
-	const [selectedRoute, setSelectedRoute]: UseStateType<string> = useState("");
-	// const [selectedStatus, setSelectedStatus]: UseStateType<string[]> = useState(
-	// 	[] as string[]
-	// );
 
-	const handleModal: (index: number) => void = (index: number) => {
+	const [isLoading, isError, data] = GetApiEffect(AdminService.getAllRequests);
+
+	const [cabRequestData, setCabRequestData]: UseStateType<ICabRequest[]> =
+		useState([] as ICabRequest[]);
+
+	const [showModal, setShowModal]: UseStateType<boolean> = useState(false);
+	const [selectedCabRequestIndex, setSelectedCabRequestIndex] = useState(null);
+	const [selectedRoute, setSelectedRoute]: UseStateType<string> = useState("");
+
+	const handleModal: (index: any) => void = (index: any) => {
+		console.log(index);
 		setSelectedCabRequestIndex(index);
 		setShowModal(true);
 	};
@@ -79,6 +79,12 @@ export const AllRequests: React.FC = (): ReactElement => {
 		);
 	};
 
+	useEffect(() => {
+		setCabRequestData(data);
+	}, [data]);
+
+	console.log(cabRequestData);
+
 	return (
 		<>
 			<Modal
@@ -101,8 +107,11 @@ export const AllRequests: React.FC = (): ReactElement => {
 					>
 						<b>For</b>
 						&nbsp;
-						{data[selectedCabRequestIndex].employeeName},{" "}
-						{data[selectedCabRequestIndex].employeeId}
+						{selectedCabRequestIndex != null &&
+							cabRequestData[selectedCabRequestIndex].employeeName}
+						,{" "}
+						{selectedCabRequestIndex != null &&
+							cabRequestData[selectedCabRequestIndex].employeeId}
 					</Typography>
 					<br />
 					<br />
@@ -166,70 +175,37 @@ export const AllRequests: React.FC = (): ReactElement => {
 					</Button>
 				</Box>
 			</Modal>
-			<Grid container spacing={2}>
-				<Grid item xs={12} md={10} lg={10}>
-					<Box>
-						<Grid container spacing={6}>
-							{cabRequestData.map((request: ICabRequest, index: number) => {
-								return (
-									<Grid item xs={12} md={6} lg={6}>
-										<RequestCard
-											key={index}
-											request={request}
-											index={index}
-											handleModal={handleModal}
-										/>
-									</Grid>
-								);
-							})}
+			<ApiStateHandler isLoading={isLoading} isError={isError}>
+				{cabRequestData && (
+					<Grid container spacing={2}>
+						<Grid item xs={12} md={10} lg={10}>
+							<Box>
+								<Grid container spacing={6}>
+									{cabRequestData.map((request: ICabRequest, index: number) => {
+										return (
+											<Grid item xs={12} md={6} lg={6}>
+												<RequestCard
+													key={index}
+													request={request}
+													index={index}
+													handleModal={handleModal}
+												/>
+											</Grid>
+										);
+									})}
+								</Grid>
+							</Box>
 						</Grid>
-					</Box>
-				</Grid>
-				<Grid
-					item
-					xs={12}
-					md={2}
-					lg={2}
-					sx={{ display: { xs: "none", sm: "block" } }}
-				>
-					{/* <Grid item xs={12} md={2} lg={2}>
-						<FormControlLabel
-							control={
-								<Checkbox
-									onChange={() => {
-										selectedStatus.push("PENDING");
-									}}
-								/>
-							}
-							label="Pending"
-						/>
+						<Grid
+							item
+							xs={12}
+							md={2}
+							lg={2}
+							sx={{ display: { xs: "none", sm: "block" } }}
+						></Grid>
 					</Grid>
-					<Grid item xs={12} md={2} lg={2}>
-						<FormControlLabel
-							control={
-								<Checkbox
-									onChange={() => {
-										selectedStatus.push("ASSIGNED");
-									}}
-								/>
-							}
-							label="Assigned"
-						/>
-					</Grid>
-					<Grid item xs={12} md={2} lg={2}>
-						<FormControlLabel
-							control={
-								<Checkbox
-									onChange={() => {
-										selectedStatus.push("DECLINED");
-									}}
-								/>
-							}
-							label="Declined"
-						/>
-					</Grid> */}
-				</Grid>
-			</Grid>
+				)}
+			</ApiStateHandler>
 		</>
 	);
 };

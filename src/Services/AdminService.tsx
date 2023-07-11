@@ -1,9 +1,16 @@
 import { api } from "./ApiService/ApiConfig";
 
-export const CabRequestService = {
-	get: async function (params: { id: string }) {
+export const AdminService = {
+	getAllRequests: async function () {
 		const response = await api.request({
-			url: `/cab-request/employee/${params.id}`,
+			url: "/cab-request",
+			method: "GET",
+		});
+		return response.data;
+	},
+	getAllRoutes: async function () {
+		const response = await api.request({
+			url: "/cab-request",
 			method: "GET",
 		});
 		return response.data;

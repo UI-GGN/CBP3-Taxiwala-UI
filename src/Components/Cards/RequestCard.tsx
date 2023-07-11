@@ -63,7 +63,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 			<Box sx={{ ml: 2, mb: 2 }}>
 				<Grid container spacing={1}>
 					<Grid item xs={10} md={10} lg={10}>
-						<Stack direction="row" spacing={1}>
+						<Stack direction="row" spacing={1} flexWrap="wrap">
 							<Chip
 								color="secondary"
 								label="Ad Hoc Request"
@@ -75,6 +75,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 									style={{
 										backgroundColor: "#BDDFFF",
 										color: "#1E3583",
+										marginBottom: "5px",
 									}}
 								/>
 							)}
@@ -84,6 +85,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 									style={{
 										backgroundColor: "#FFBDBD",
 										color: "#831E1E",
+										marginBottom: "5px",
 									}}
 								/>
 							)}
@@ -94,6 +96,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 										style={{
 											backgroundColor: "#BDFFC0",
 											color: "#1E8371",
+											marginBottom: "5px",
 										}}
 									/>
 									<Chip
@@ -101,6 +104,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 										style={{
 											backgroundColor: "#FFD8B0",
 											color: "#824303",
+											marginBottom: "5px",
 										}}
 									/>
 								</>

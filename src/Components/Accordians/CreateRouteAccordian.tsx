@@ -51,7 +51,7 @@ const vehicleDropdownValues: { value: string; label: string }[] =
 		};
 	});
 
-export const CreateRouteAccordian: React.FC<ICreateRouteAccordian> = ({
+export const CreateRouteAccordian = ({
 	pickupTime,
 	setPickupTime,
 	startDate,
