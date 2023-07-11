@@ -50,8 +50,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 
 	return (
 		<>
-			<br />
-			<Box style={{ marginTop: "3rem", position: "relative" }}>
+			<Box style={{ position: "relative" }}>
 				<img
 					src={theme.palette.mode === "light" ? adminSat : adminSat}
 					alt="cab parked"
