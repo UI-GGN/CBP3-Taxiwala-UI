@@ -112,7 +112,6 @@ export const CreateRouteAccordian = ({
 							label="Select end date"
 							value={endDate}
 							onChange={(date: any) => {
-								console.log(date);
 								setEndDate(date);
 							}}
 							shouldDisableDate={(date: Date) => {

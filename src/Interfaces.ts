@@ -95,7 +95,11 @@ export interface IVehicleForRoute {
 	driverName: string;
 	vendorId: number;
 	deleted: boolean;
-	vendor: IVendor;
+	vendor: {
+		id: number;
+		name: string;
+		deleted: boolean;
+	};
 }
 
 export interface IVehicle {
@@ -109,6 +113,7 @@ export interface IVendor {
 	id: number;
 	name: string;
 	deleted: boolean;
+	phoneNumber?: string;
 }
 
 export interface IRouteCardProps {

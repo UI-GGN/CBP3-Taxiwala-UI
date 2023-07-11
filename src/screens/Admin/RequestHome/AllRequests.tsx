@@ -44,7 +44,6 @@ export const AllRequests: React.FC = (): ReactElement => {
 	const [selectedRoute, setSelectedRoute]: UseStateType<string> = useState("");
 
 	const handleModal: (index: any) => void = (index: any) => {
-		console.log(index);
 		setSelectedCabRequestIndex(index);
 		setShowModal(true);
 	};
@@ -82,8 +81,6 @@ export const AllRequests: React.FC = (): ReactElement => {
 	useEffect(() => {
 		setCabRequestData(data);
 	}, [data]);
-
-	console.log(cabRequestData);
 
 	return (
 		<>

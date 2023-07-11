@@ -15,6 +15,13 @@ export const AdminService = {
 		});
 		return response.data;
 	},
+	getAllVendors: async function () {
+		const response = await api.request({
+			url: "/vendor",
+			method: "GET",
+		});
+		return response.data;
+	},
 	create: async function () {
 		return await api.request({
 			url: "/cab-request",

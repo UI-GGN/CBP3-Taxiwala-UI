@@ -1,10 +1,15 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import adminSat from "../../../assets/admin-satellite.jpg";
 import { AllRequests } from "./AllRequests";
 import { AllRoutes } from "./AllRoutes";
 import "./admin.css";
+import { Vendors } from "./Vendors";
+import { AdminService } from "../../../Services/AdminService";
+import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
+import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
+import { IVendor, UseStateType } from "../../../Interfaces";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -48,6 +53,16 @@ export const AdminHome: React.FC = (): ReactElement => {
 		setValue(newValue);
 	};
 
+	const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
+		[] as IVendor[]
+	);
+
+	const [isLoading, isError, data] = GetApiEffect(AdminService.getAllVendors);
+
+	useEffect(() => {
+		setVendors(data);
+	}, [data]);
+
 	return (
 		<>
 			<Box style={{ position: "relative" }}>
@@ -77,6 +92,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 					>
 						<Tab label="ALL REQUESTS" {...a11yProps(0)} />
 						<Tab label="ALL ROUTES" {...a11yProps(1)} />
+						<Tab label="VENDORS" {...a11yProps(1)} />
 					</Tabs>
 				</Box>
 				<TabPanel value={value} index={0}>
@@ -84,6 +100,11 @@ export const AdminHome: React.FC = (): ReactElement => {
 				</TabPanel>
 				<TabPanel value={value} index={1}>
 					<AllRoutes />
+				</TabPanel>
+				<TabPanel value={value} index={2}>
+					<ApiStateHandler isLoading={isLoading} isError={isError}>
+						{vendors && <Vendors vendors={vendors} />}
+					</ApiStateHandler>
 				</TabPanel>
 			</Box>
 		</>

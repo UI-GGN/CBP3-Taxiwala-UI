@@ -8,7 +8,7 @@ describe("Admin Screen tests", () => {
 
 		expect(screen.getByText("ALL ROUTES")).toBeInTheDocument();
 		expect(screen.getByText("ALL REQUESTS")).toBeInTheDocument();
-		// expect(screen.getByText("VENDORS")).toBeInTheDocument();
+		expect(screen.getByText("VENDORS")).toBeInTheDocument();
 		// expect(screen.getByText("VEHICLES")).toBeInTheDocument();
 	});
 
