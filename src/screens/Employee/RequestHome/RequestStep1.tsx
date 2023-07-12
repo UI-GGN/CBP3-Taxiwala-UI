@@ -240,16 +240,18 @@ const RequestStep1: FC<IRequestStep1Props> = ({
 			)}
 			<Button
 				variant="contained"
-				disabled={shouldNextButtonDisabled(
-					alignment,
-					cabType,
-					checkInTime,
-					checkOutTime,
-					startDate,
-					endDate,
-					noEndDateNeeded,
-					dateForAdHoc
-				)}
+				disabled={
+					shouldNextButtonDisabled(
+						alignment,
+						cabType,
+						checkInTime,
+						checkOutTime,
+						startDate,
+						endDate,
+						noEndDateNeeded,
+						dateForAdHoc
+					) || isStartDateGreaterThanEndDate
+				}
 				onClick={() => {
 					currentstep < TotalSteps - 1 &&
 						setCurrentstep((prevStep) => prevStep + 1);
