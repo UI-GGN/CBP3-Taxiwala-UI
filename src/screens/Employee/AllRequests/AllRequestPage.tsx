@@ -16,6 +16,7 @@ import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { ICabRequest } from "../../../Interfaces";
+import { convertTimeFormat } from "../../../utils/CabRequestHelper";
 
 const AllRequestPage: React.FC = (): ReactElement => {
 	const params = useParams();
@@ -85,7 +86,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
 																<b>Pickup time: </b>
 																<span className="details">
 																	{" "}
-																	{`${req.pickupTime.split("T")[1]}`}
+																	{`${convertTimeFormat(req.pickupTime)}`}
 																</span>
 															</Typography>
 														</Grid>
