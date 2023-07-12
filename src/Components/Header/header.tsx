@@ -1,9 +1,8 @@
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import { useContext } from "react";
@@ -54,8 +53,64 @@ export default function HeaderBar() {
 				backgroundColor: "background.header",
 			}}
 		>
-			<Grid container>
-				<Grid item xs={12} md={9} lg={9}>
+			{/* <Grid container> */}
+			<Stack
+				flexDirection="row"
+				justifyContent="space-around"
+				alignItems="center"
+			>
+				<Container sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
+					<Typography
+						variant="body1"
+						sx={{
+							fontSize: "28px",
+							fontWeight: 700,
+							justifyContent: "right",
+							marginTop: "5px",
+							marginLeft: "50px",
+						}}
+					>
+						TaxiWala
+						<Thoughtworks />
+					</Typography>
+				</Container>
+				<Container
+					sx={{
+						float: "right",
+						marginTop: 1,
+						borderRight: 0,
+						marginRight: "20px",
+					}}
+				>
+					{navItems.map((item) => (
+						<Button
+							onClick={() => navigate(item.route)}
+							key={item.label}
+							sx={{
+								color: "typography.primary",
+								float: "right",
+								padding: "auto",
+								marginRight: "10px",
+							}}
+						>
+							{item.label}
+						</Button>
+					))}
+
+					<IconButton
+						sx={{ color: "typography.primary", float: "right" }}
+						onClick={color.toggleColor}
+						color="inherit"
+					>
+						{theme.palette.mode === "dark" ? (
+							<Brightness7Icon />
+						) : (
+							<Brightness4Icon />
+						)}
+					</IconButton>
+				</Container>
+			</Stack>
+			{/* <Grid item xs={12} md={9} lg={9}>
 					<Container sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
 						<Typography
 							variant="body1"
@@ -70,8 +125,8 @@ export default function HeaderBar() {
 							<Thoughtworks />
 						</Typography>
 					</Container>
-				</Grid>
-				<Grid
+				</Grid> */}
+			{/* <Grid
 					item
 					xs={12}
 					md={3}
@@ -106,7 +161,7 @@ export default function HeaderBar() {
 						</IconButton>
 					</Container>
 				</Grid>
-			</Grid>
+			</Grid> */}
 		</Box>
 	);
 }

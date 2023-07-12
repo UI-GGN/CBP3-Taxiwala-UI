@@ -1,15 +1,10 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import adminSat from "../../../assets/admin-satellite.jpg";
 import { AllRequests } from "./AllRequests";
 import { AllRoutes } from "./AllRoutes";
 import "./admin.css";
-import { Vendors } from "./Vendors";
-import { AdminService } from "../../../Services/AdminService";
-import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
-import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
-import { IVendor, UseStateType } from "../../../Interfaces";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -47,21 +42,31 @@ function a11yProps(index: number) {
 export const AdminHome: React.FC = (): ReactElement => {
 	const theme = useTheme();
 	const [value, setValue] = React.useState(0);
+	// const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
+	// 	[] as IVendor[]
+	// );
+	// const [vehicles, setVehicles]: UseStateType<IVehicle[]> = useState(
+	// 	[] as IVehicle[]
+	// );
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		console.log(event);
 		setValue(newValue);
 	};
+	// const [vendorDataLoading, vendorDataError, vendorData] = GetApiEffect(
+	// 	AdminService.getAllVendors
+	// );
+	// const [vehicleDataLoading, vehicleDataError, vehicleData] = GetApiEffect(
+	// 	AdminService.getAllVehicles
+	// );
 
-	const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
-		[] as IVendor[]
-	);
+	// useEffect(() => {
+	// 	setVendors(vendorData);
+	// }, [vendorData]);
 
-	const [isLoading, isError, data] = GetApiEffect(AdminService.getAllVendors);
-
-	useEffect(() => {
-		setVendors(data);
-	}, [data]);
+	// useEffect(() => {
+	// 	setVehicles(vehicleData);
+	// }, [vehicleData]);
 
 	return (
 		<>
@@ -92,7 +97,8 @@ export const AdminHome: React.FC = (): ReactElement => {
 					>
 						<Tab label="ALL REQUESTS" {...a11yProps(0)} />
 						<Tab label="ALL ROUTES" {...a11yProps(1)} />
-						<Tab label="VENDORS" {...a11yProps(1)} />
+						{/* <Tab label="VENDORS" {...a11yProps(2)} />
+						<Tab label="VEHICLES" {...a11yProps(3)} /> */}
 					</Tabs>
 				</Box>
 				<TabPanel value={value} index={0}>
@@ -101,11 +107,24 @@ export const AdminHome: React.FC = (): ReactElement => {
 				<TabPanel value={value} index={1}>
 					<AllRoutes />
 				</TabPanel>
-				<TabPanel value={value} index={2}>
-					<ApiStateHandler isLoading={isLoading} isError={isError}>
+				{/* <TabPanel value={value} index={2}>
+					<ApiStateHandler
+						isLoading={vendorDataLoading}
+						isError={vendorDataError}
+					>
 						{vendors && <Vendors vendors={vendors} />}
 					</ApiStateHandler>
 				</TabPanel>
+				<TabPanel value={value} index={3}>
+					<ApiStateHandler
+						isLoading={vehicleDataLoading}
+						isError={vehicleDataError}
+					>
+						{vehicles && vendors && (
+							<Vehicles vehicles={vehicles} vendors={vendors} />
+						)}
+					</ApiStateHandler>
+				</TabPanel> */}
 			</Box>
 		</>
 	);

@@ -22,6 +22,13 @@ export const AdminService = {
 		});
 		return response.data;
 	},
+	getAllVehicles: async function () {
+		const response = await api.request({
+			url: "/vehicle",
+			method: "GET",
+		});
+		return response.data;
+	},
 	create: async function () {
 		return await api.request({
 			url: "/cab-request",
