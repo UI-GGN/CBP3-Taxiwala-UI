@@ -45,6 +45,9 @@ export interface IRequestStep2Props {
 	cabType: string;
 	employeeDetails: IEmmployeeDetails;
 	setEmployeeDetails: React.Dispatch<React.SetStateAction<IEmmployeeDetails>>;
+	submitFn?: any,
+	isLoading: boolean,
+	isError: boolean
 }
 
 export interface ILocationAccordianProps {

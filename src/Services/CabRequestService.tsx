@@ -14,10 +14,11 @@ export const CabRequestService = {
       method: "GET"
     });
   },
-  create: async function () {
+  create: async function (body: any) {
     return await api.request({
       url: "/cab-request",
-      method: "POST"
+      method: "POST",
+      data: body
     });
   } 
 };

@@ -5,6 +5,8 @@ import { useTheme } from "@mui/material/styles";
 import "./admin.css";
 import { AllRequests } from "./AllRequests";
 import { AllRoutes } from "./AllRoutes";
+import HeaderBar from "../../../Components/Header/header";
+import { headerType } from "../../../constants";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -50,6 +52,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 
 	return (
 		<>
+			<HeaderBar headerType={headerType.Admin}/>
 			<br />
 			<Box style={{ marginTop: "3rem", position: "relative" }}>
 				<img

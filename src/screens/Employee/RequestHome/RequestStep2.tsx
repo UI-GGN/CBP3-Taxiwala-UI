@@ -7,8 +7,9 @@ import LocationAccordian from "./components/LocationAccordian";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import TextInput from "../../../Components/TextInput/TextInput";
 import { shouldSubmitButtonDisabled } from "../../../utils/CabRequestValidation";
-
-const TotalSteps = 2;
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const RequestStep2: FC<IRequestStep2Props> = ({
 	location,
@@ -18,6 +19,9 @@ const RequestStep2: FC<IRequestStep2Props> = ({
 	cabType,
 	employeeDetails,
 	setEmployeeDetails,
+	submitFn,
+	isLoading,
+	isError
 }: IRequestStep2Props): JSX.Element => {
 	console.log(location);
 
@@ -89,6 +93,12 @@ const RequestStep2: FC<IRequestStep2Props> = ({
 			</div>
 			<br />
 			<br />
+			{
+			isError&&<Alert severity="error">
+			<AlertTitle>Error</AlertTitle>
+			Something went wrong. Try again!
+			</Alert>
+			}
 			<div style={{ display: "flex" }}>
 				<Button
 					data-testid="back_button"
@@ -102,17 +112,20 @@ const RequestStep2: FC<IRequestStep2Props> = ({
 				>
 					<ArrowBackIcon />
 				</Button>
-				<Button
+				{
+					isLoading?
+					<CircularProgress />
+					:
+					<Button
 					data-testid="submit_button"
 					variant="contained"
 					disabled={shouldSubmitButtonDisabled(location, employeeDetails)}
-					onClick={() => {
-						currentstep < TotalSteps - 1 &&
-							setCurrentstep((prevStep) => prevStep + 1);
-					}}
+					onClick={() => submitFn()}
 				>
 					Submit
 				</Button>
+				}
+				
 			</div>
 		</>
 	);

@@ -11,6 +11,8 @@ import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
 import { CabRequestService } from "../../../Services/CabRequestService";
 import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import TimelineComponent from "../../../Components/Timeline";
+import HeaderBar from "../../../Components/Header/header";
+import { headerType } from "../../../constants";
 
 
 const RequestStatusText = ({status}) => {
@@ -63,6 +65,16 @@ const LeftWindow = () => {
   return <>
     <ApiStateHandler isLoading={isLoading} isError={isError}>
       <Box style={{ marginTop: '8rem' }} className="left_box">
+        <Button
+          variant="outlined"
+          onClick={() => {
+            navigate("/employee/home");
+          }}
+        >
+          <ArrowBackIcon /> Back to Home
+        </Button>
+        <br />
+        <br />
         {data&&<>
           {data.filter(req => req.id == params.routeId).map((req, index) => (
             <>
@@ -112,16 +124,6 @@ const LeftWindow = () => {
               >
                 Delete your request
               </Button>
-              <br />
-              <br />
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  navigate("/employee/home");
-                }}
-              >
-                <ArrowBackIcon /> Back to Home
-              </Button>
             </>
           ))}
         </>}
@@ -133,6 +135,7 @@ const LeftWindow = () => {
 
 const Request: React.FC = (): ReactElement => {
   return <>
+    <HeaderBar headerType={headerType.Employee}/>
     <WindowLayout 
       leftWindow={<LeftWindow />}
       rightWindow={<RightWindow />}

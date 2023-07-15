@@ -3,7 +3,6 @@ import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import RouteContainer from "./routes/RouteContainer";
 import Footer from "./Components/Footer/Footer";
-import HeaderBar from "./Components/Header/header";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { ScopedCssBaseline } from "@mui/material";
@@ -78,7 +77,6 @@ const App = (): ReactElement => {
         <ThemeProvider theme={theme}>
           <ScopedCssBaseline enableColorScheme>
             <Router>
-              <HeaderBar />
               <RouteContainer />
               <Footer />
             </Router>

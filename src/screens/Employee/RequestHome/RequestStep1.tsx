@@ -119,9 +119,7 @@ const RequestStep1: FC<IRequestStep1Props> = ({
 							<br />
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<TimePicker
-									label={
-										cabType === "pick" ? "Check in time" : "Check out time"
-									}
+									label={"Pick up time"}
 									value={cabType === "pick" ? checkInTime : checkOutTime}
 									onChange={(time: any) => {
 										cabType === "pick"
@@ -216,9 +214,7 @@ const RequestStep1: FC<IRequestStep1Props> = ({
 							<br />
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<TimePicker
-									label={
-										cabType === "pick" ? "Check in time" : "Check out time"
-									}
+									label={"Pick up time"}
 									value={cabType === "pick" ? checkInTime : checkOutTime}
 									onChange={(time: any) => {
 										cabType === "pick"

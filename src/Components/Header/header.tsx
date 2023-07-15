@@ -9,6 +9,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { ColorContext } from "../../App";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { headerType } from "../../constants";
 
 function Thoughtworks() {
   return (
@@ -27,12 +28,12 @@ function Thoughtworks() {
 }
 
 const navItems = [
-  { label: "Profile", route: "/" },
+  { label: "Profile", route: "/profile" },
   { label: "All Requests", route: "/employee/allrequests/12345" },
 ];
 
 
-export default function HeaderBar() {
+export default function HeaderBar(props) {
   const theme = useTheme();
   const navigate = useNavigate();
   const color = useContext(ColorContext);
@@ -55,7 +56,7 @@ export default function HeaderBar() {
       }}
     >
       <Grid container >
-        <Grid item xs={12} md={9} lg={9}>
+        <Grid item xs={12} md={8} lg={8}>
           <Container sx={{cursor: "pointer"}} onClick={() => navigate("/")}>
             <Typography
               variant="body1"
@@ -64,6 +65,7 @@ export default function HeaderBar() {
                 fontWeight: 700,                
                 justifyContent: "right",
                 marginTop:"5px",
+                paddingLeft: "30px"
               }}
             >
                 TaxiWala
@@ -71,23 +73,33 @@ export default function HeaderBar() {
             </Typography>
           </Container>
         </Grid>
-        <Grid item xs={12} md={3} lg={3} 
+        <Grid item xs={12} md={4} lg={4} 
           sx={{marginTop:0, display: { xs: "none", sm: "block" } }}>
           <Container sx={{ float: "right", marginTop: 1,borderRight:0 }}>            
 
-            {navItems.map((item) => (
+            { ( props.headerType === headerType.Employee || props.headerType === headerType.Admin ) && <Button
+              onClick={ () => {} }
+              key={"logout"}
+              sx={{ color: "typography.primary", float: "right", marginRight: "10px" }}
+            >
+                LogOut
+            </Button> }
+
+            {props.headerType === headerType.Employee && navItems.map((item) => (
               <Button
                 onClick={()=>navigate(item.route)}
                 key={item.label}
-                sx={{ color: "typography.primary", float: "right", paddingRight: "10%" }}
+                sx={{ color: "typography.primary", float: "right", marginRight: "10px" }}
               >
                 {item.label}
               </Button>
             ))}
+            
 
-            <IconButton sx={{ color: "typography.primary" , float:"right"}} onClick={color.toggleColor} 
+            <IconButton sx={{ color: "typography.primary" , float:"right", marginRight: "5px"}}
+              onClick={color.toggleColor} 
               color="inherit">
-              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+              {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>            
           </Container>
         </Grid>
