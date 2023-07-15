@@ -8,6 +8,7 @@ export type RoutePath = {
   path: string;
   container: React.ComponentType<any>;
   protected: boolean;
+  userType?: string;
 };
 
 export const RoutePaths: { [key: string]: RoutePath } = {

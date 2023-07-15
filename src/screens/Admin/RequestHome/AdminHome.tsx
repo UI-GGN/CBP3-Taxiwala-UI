@@ -5,6 +5,8 @@ import adminSat from "../../../assets/admin-satellite.jpg";
 import { AllRequests } from "./AllRequests";
 import { AllRoutes } from "./AllRoutes";
 import "./admin.css";
+import HeaderBar from "../../../Components/Header/header";
+import { headerType } from "../../../constants";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -70,7 +72,9 @@ export const AdminHome: React.FC = (): ReactElement => {
 
 	return (
 		<>
-			<Box style={{ position: "relative" }}>
+			<HeaderBar headerType={headerType.Admin}/>
+			<br />
+			<Box style={{ marginTop: "3rem", position: "relative" }}>
 				<img
 					src={theme.palette.mode === "light" ? adminSat : adminSat}
 					alt="cab parked"
