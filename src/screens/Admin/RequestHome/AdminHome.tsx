@@ -118,12 +118,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 					<AllRoutes />
 				</TabPanel>
 				<TabPanel value={value} index={2}>
-					<ApiStateHandler
-						isLoading={isVendorDataLoading}
-						isError={isVendorDataError}
-					>
-						{vendors && <Vendors vendors={vendors} />}
-					</ApiStateHandler>
+					<Vendors />
 				</TabPanel>
 				<TabPanel value={value} index={3}>
 					<ApiStateHandler

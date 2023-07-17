@@ -12,14 +12,12 @@ import {
 	Grid,
 	Stack,
 } from "@mui/material";
-import React, { ReactElement, useState } from "react";
-import { IVendor, UseStateType } from "../../../Interfaces";
+import { ReactElement, useEffect, useState } from "react";
+import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import TextInput from "../../../Components/TextInput/TextInput";
+import { IVendor, UseStateType } from "../../../Interfaces";
 import { AdminService } from "../../../Services/AdminService";
-
-interface IVendorProps {
-	vendors: IVendor[];
-}
+import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
 
 const Vendor = ({ id, name, phoneNumber }: IVendor): ReactElement => {
 	return (
@@ -52,48 +50,48 @@ const Vendor = ({ id, name, phoneNumber }: IVendor): ReactElement => {
 	);
 };
 
-export const Vendors: React.FC<IVendorProps> = ({
-	vendors,
-}: IVendorProps): ReactElement => {
+export const Vendors = (): ReactElement => {
+	const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
+		[] as IVendor[]
+	);
 	const [name, setName]: UseStateType<string> = useState("");
 	const [phoneNo, setPhoneNo]: UseStateType<string> = useState("");
 
-	console.log("name" + name);
+	const [isLoading, isError, vendorData] = GetApiEffect(
+		AdminService.getAllVendors
+	);
+
+	useEffect(() => {
+		setVendors(vendorData);
+	}, [vendorData]);
 
 	return (
-		<Grid container spacing={4}>
-			<Grid item xs={12} md={8} lg={8}>
-				<Box>
-					<Grid container spacing={2}>
-						{vendors.map((vendor: IVendor, index: number) => {
-							return (
-								<>
-									<Grid item xs={8} md={6} lg={4}>
-										<Vendor
-											key={index}
-											id={vendor.id}
-											name={vendor.name}
-											phoneNumber={vendor.phoneNumber}
-											deleted={vendor.deleted}
-										/>
-										<br />
-									</Grid>
-								</>
-							);
-						})}
+		<ApiStateHandler isLoading={isLoading} isError={isError}>
+			{vendors && (
+				<Grid container spacing={4}>
+					<Grid item xs={12} md={8} lg={8}>
+						<Box>
+							<Grid container spacing={2}>
+								{vendors.map((vendor: IVendor, index: number) => {
+									return (
+										<>
+											<Grid item xs={8} md={6} lg={4}>
+												<Vendor
+													key={index}
+													id={vendor.id}
+													name={vendor.name}
+													phoneNumber={vendor.phoneNumber}
+													deleted={vendor.deleted}
+												/>
+												<br />
+											</Grid>
+										</>
+									);
+								})}
+							</Grid>
+						</Box>
 					</Grid>
-				</Box>
-			</Grid>
-			<Grid item xs={12} md={4} lg={4}>
-				<Grid
-					container
-					sx={
-						{
-							// display: { xs: "none", sm: "block" },
-						}
-					}
-				>
-					<Grid item xs={8} md={10} lg={8}>
+					<Grid item xs={8} md={4} lg={4}>
 						<Accordion>
 							<AccordionSummary
 								expandIcon={<ExpandMoreIcon />}
@@ -140,7 +138,13 @@ export const Vendors: React.FC<IVendorProps> = ({
 										await AdminService.createVendor({
 											name: name,
 											phoneNumber: phoneNo,
+										}).then((response: any) => {
+											setVendors((prevVendors) => {
+												return [...prevVendors, response.data];
+											});
 										});
+										setName("");
+										setPhoneNo("");
 									}}
 								>
 									Create 
@@ -149,7 +153,7 @@ export const Vendors: React.FC<IVendorProps> = ({
 						</Accordion>
 					</Grid>
 				</Grid>
-			</Grid>
-		</Grid>
+			)}
+		</ApiStateHandler>
 	);
 };
