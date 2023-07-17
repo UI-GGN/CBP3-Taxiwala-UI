@@ -8,3 +8,10 @@ export const headerType = {
   Admin: "Admin",
   Employee: "Employee"
 };
+
+export const requestStatusType = {
+  DECLINED: "DECLINED",
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  ALL: "ALL"
+};
