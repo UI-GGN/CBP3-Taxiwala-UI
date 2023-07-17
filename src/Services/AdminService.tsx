@@ -35,4 +35,11 @@ export const AdminService = {
 			method: "POST",
 		});
 	},
+	createVendor: async function (body: any) {
+		return await api.request({
+			url: "/vendor",
+			method: "POST",
+			data: body,
+		});
+	},
 };

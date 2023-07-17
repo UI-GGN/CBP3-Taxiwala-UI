@@ -1,12 +1,18 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import adminSat from "../../../assets/admin-satellite.jpg";
 import { AllRequests } from "./AllRequests";
 import { AllRoutes } from "./AllRoutes";
 import "./admin.css";
 import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
+import { IVehicle, IVendor, UseStateType } from "../../../Interfaces";
+import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
+import { AdminService } from "../../../Services/AdminService";
+import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
+import { Vendors } from "./Vendors";
+import { Vehicles } from "./Vehicles";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -44,35 +50,35 @@ function a11yProps(index: number) {
 export const AdminHome: React.FC = (): ReactElement => {
 	const theme = useTheme();
 	const [value, setValue] = React.useState(0);
-	// const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
-	// 	[] as IVendor[]
-	// );
-	// const [vehicles, setVehicles]: UseStateType<IVehicle[]> = useState(
-	// 	[] as IVehicle[]
-	// );
+	const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
+		[] as IVendor[]
+	);
+	const [vehicles, setVehicles]: UseStateType<IVehicle[]> = useState(
+		[] as IVehicle[]
+	);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		console.log(event);
 		setValue(newValue);
 	};
-	// const [vendorDataLoading, vendorDataError, vendorData] = GetApiEffect(
-	// 	AdminService.getAllVendors
-	// );
-	// const [vehicleDataLoading, vehicleDataError, vehicleData] = GetApiEffect(
-	// 	AdminService.getAllVehicles
-	// );
+	const [isVendorDataLoading, isVendorDataError, vendorData] = GetApiEffect(
+		AdminService.getAllVendors
+	);
+	const [isVehicleDataLoading, isVehicleDataError, vehicleData] = GetApiEffect(
+		AdminService.getAllVehicles
+	);
 
-	// useEffect(() => {
-	// 	setVendors(vendorData);
-	// }, [vendorData]);
+	useEffect(() => {
+		setVendors(vendorData);
+	}, [vendorData]);
 
-	// useEffect(() => {
-	// 	setVehicles(vehicleData);
-	// }, [vehicleData]);
+	useEffect(() => {
+		setVehicles(vehicleData);
+	}, [vehicleData]);
 
 	return (
 		<>
-			<HeaderBar headerType={headerType.Admin}/>
+			<HeaderBar headerType={headerType.Admin} />
 			<br />
 			<Box style={{ marginTop: "3rem", position: "relative" }}>
 				<img
@@ -92,7 +98,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 					<b>Admin Access</b>
 				</Typography>
 			</Box>
-			<Box sx={{ width: "100%" }}>
+			<Box sx={{ width: "100%", height: "max-content" }}>
 				<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
 					<Tabs
 						value={value}
@@ -101,8 +107,8 @@ export const AdminHome: React.FC = (): ReactElement => {
 					>
 						<Tab label="ALL REQUESTS" {...a11yProps(0)} />
 						<Tab label="ALL ROUTES" {...a11yProps(1)} />
-						{/* <Tab label="VENDORS" {...a11yProps(2)} />
-						<Tab label="VEHICLES" {...a11yProps(3)} /> */}
+						<Tab label="VENDORS" {...a11yProps(2)} />
+						<Tab label="VEHICLES" {...a11yProps(3)} />
 					</Tabs>
 				</Box>
 				<TabPanel value={value} index={0}>
@@ -111,24 +117,24 @@ export const AdminHome: React.FC = (): ReactElement => {
 				<TabPanel value={value} index={1}>
 					<AllRoutes />
 				</TabPanel>
-				{/* <TabPanel value={value} index={2}>
+				<TabPanel value={value} index={2}>
 					<ApiStateHandler
-						isLoading={vendorDataLoading}
-						isError={vendorDataError}
+						isLoading={isVendorDataLoading}
+						isError={isVendorDataError}
 					>
 						{vendors && <Vendors vendors={vendors} />}
 					</ApiStateHandler>
 				</TabPanel>
 				<TabPanel value={value} index={3}>
 					<ApiStateHandler
-						isLoading={vehicleDataLoading}
-						isError={vehicleDataError}
+						isLoading={isVehicleDataLoading}
+						isError={isVehicleDataError}
 					>
 						{vehicles && vendors && (
 							<Vehicles vehicles={vehicles} vendors={vendors} />
 						)}
 					</ApiStateHandler>
-				</TabPanel> */}
+				</TabPanel>
 			</Box>
 		</>
 	);
