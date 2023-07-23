@@ -8,7 +8,7 @@ import {
 import { FC } from "react";
 
 type DropdownValue = {
-	value: string;
+	value: string | number;
 	label: string;
 };
 

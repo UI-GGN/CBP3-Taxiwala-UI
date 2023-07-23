@@ -19,6 +19,7 @@ const request: ICabRequest = {
 	status: "PENDING",
 	deleted: false,
 	routeId: null,
+	vendorId: 2,
 };
 
 describe("Request card tests", () => {

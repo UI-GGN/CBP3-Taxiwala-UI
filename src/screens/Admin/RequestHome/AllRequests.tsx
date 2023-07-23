@@ -98,7 +98,7 @@ export const AllRequests: React.FC = (): ReactElement => {
 	if (vendorData !== null) {
 		console.log(selectedVendor);
 		console.log(
-			vendorData.filter((v) => {
+			vendorData.filter((v: any) => {
 				v.id.toString() === selectedVendor;
 			})[0]
 		);

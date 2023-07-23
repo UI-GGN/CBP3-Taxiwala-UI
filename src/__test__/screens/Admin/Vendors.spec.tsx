@@ -26,7 +26,7 @@ const vendors: IVendor[] = [
 
 describe("Vendor component tests", () => {
 	it("should render vendor name", () => {
-		render(<Vendors vendors={vendors} />);
+		render(<Vendors />);
 
 		const vendorsName: HTMLElement[] = screen.getAllByTestId("vendor_name");
 
@@ -36,7 +36,7 @@ describe("Vendor component tests", () => {
 	});
 
 	it("should render vendor Ids", () => {
-		render(<Vendors vendors={vendors} />);
+		render(<Vendors />);
 
 		const vendorsId: HTMLElement[] = screen.getAllByTestId("vendor_id");
 
@@ -46,7 +46,7 @@ describe("Vendor component tests", () => {
 	});
 
 	it("should render phone Icons", () => {
-		render(<Vendors vendors={vendors} />);
+		render(<Vendors />);
 
 		const phoneIcons: HTMLElement[] = screen.getAllByTestId("phoneIcon");
 

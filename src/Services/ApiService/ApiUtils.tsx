@@ -8,14 +8,15 @@ const apiStatus = {
 	error: "error",
 };
 
-export const GetApiEffect: (service: any) => [boolean, boolean, any] = (
-	service
-) => {
+export const GetApiEffect: (
+	service: any,
+	params?: any
+) => [boolean, boolean, any] = (service, params) => {
 	const [status, setStatus] = useState(apiStatus.loading);
 	const [data, setData] = useState(null);
 
 	useEffect(() => {
-		service()
+		service(params)
 			.then((data: any) => {
 				console.log(data);
 				setData(data);
@@ -29,14 +30,14 @@ export const GetApiEffect: (service: any) => [boolean, boolean, any] = (
 	return [status === apiStatus.loading, status === apiStatus.error, data];
 };
 
-export const PostService = (service) => {
+export const PostService = (service: any) => {
 	const [status, setStatus] = useState(apiStatus.onhold);
 	const [data, setData] = useState(null);
 
-	const postApi = (body, params?, successDelegate?) => {
+	const postApi = (body: any, params?: any, successDelegate?: any) => {
 		setStatus(apiStatus.loading);
 		service(body, params)
-			.then((data) => {
+			.then((data: any) => {
 				setData(data);
 				setStatus(apiStatus.complete);
 				successDelegate(data);

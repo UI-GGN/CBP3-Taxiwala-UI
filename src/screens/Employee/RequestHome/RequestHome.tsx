@@ -98,6 +98,8 @@ const LeftWindow = () => {
 		// console.log(location, employeeDetails, checkouttime);
 	};
 
+	console.log(data);
+
 	return (
 		<>
 			<Box style={{ marginTop: "8rem" }} className="left_box">
