@@ -35,4 +35,11 @@ export const AdminService = {
 			method: "POST",
 		});
 	},
+	updateRequestStatus: async function (body: any, params: { id: number }) {
+		return await api.request({
+			url: `/cab-request/${params.id}`,
+			method: "PUT",
+			data: body,
+		});
+	},
 };
