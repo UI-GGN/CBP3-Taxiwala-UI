@@ -4,6 +4,7 @@ import LoginScreen from "./Login/Login";
 import RequestHome from "./RequestHome/RequestHome";
 import Request from "./RequestHome/Request";
 import { userType } from "../../constants";
+import ProfileScreen from "./Profile/Profile";
 
 export const EmployeeRoutePaths: { [key: string]: RoutePath } = {
   "EmployeeLoginScreen": 
@@ -16,4 +17,7 @@ export const EmployeeRoutePaths: { [key: string]: RoutePath } = {
   "EmployeeRequestHome": 
     { name: "requestHomeScreen", path: "/employee/home", container: RequestHome, protected: false,
       userType: userType.Employee },
+  "ProfileScreen": 
+    { name: "profilescreen", path: "/employee/profile", container: ProfileScreen, protected: false,
+      userType: userType.Employee }
 };

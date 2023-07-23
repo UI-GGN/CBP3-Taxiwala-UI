@@ -28,7 +28,7 @@ function Thoughtworks() {
 }
 
 const navItems = [
-  { label: "Profile", route: "/profile" },
+  { label: "Profile", route: "/employee/profile" },
   { label: "All Requests", route: "/employee/allrequests/12345" },
 ];
 

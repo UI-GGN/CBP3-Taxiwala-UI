@@ -1,0 +1,40 @@
+.login_coverimg{
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.login_img_grid{
+    height: 100vh;
+}
+
+.login_signin_box{
+    margin-top: 8rem;
+}
+
+.signin_text {
+    font-size: 2.5rem;
+}
+
+.signin_headline {
+    width: 293px;
+    height: 26px;
+    left: 73px;
+    top: 257px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+    color: #838383;
+}
+
+.email_input {
+    position: relative;
+    top: 50px;
+    left: 0px;
+}
+
+.login_sendOTP_text{
+    margin-bottom: 0px ;
+    color: #838383;
+}
