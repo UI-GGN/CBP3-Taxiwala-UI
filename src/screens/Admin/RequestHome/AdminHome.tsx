@@ -3,10 +3,8 @@ import { useTheme } from "@mui/material/styles";
 import React, { ReactElement } from "react";
 import adminSat from "../../../assets/admin-satellite.jpg";
 import { AllRequests } from "./AllRequests";
-import { AllRoutes } from "./AllRoutes";
+import { Vendors } from "./Vendors";
 import "./admin.css";
-import HeaderBar from "../../../Components/Header/header";
-import { headerType } from "../../../constants";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -44,37 +42,15 @@ function a11yProps(index: number) {
 export const AdminHome: React.FC = (): ReactElement => {
 	const theme = useTheme();
 	const [value, setValue] = React.useState(0);
-	// const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
-	// 	[] as IVendor[]
-	// );
-	// const [vehicles, setVehicles]: UseStateType<IVehicle[]> = useState(
-	// 	[] as IVehicle[]
-	// );
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		console.log(event);
 		setValue(newValue);
 	};
-	// const [vendorDataLoading, vendorDataError, vendorData] = GetApiEffect(
-	// 	AdminService.getAllVendors
-	// );
-	// const [vehicleDataLoading, vehicleDataError, vehicleData] = GetApiEffect(
-	// 	AdminService.getAllVehicles
-	// );
-
-	// useEffect(() => {
-	// 	setVendors(vendorData);
-	// }, [vendorData]);
-
-	// useEffect(() => {
-	// 	setVehicles(vehicleData);
-	// }, [vehicleData]);
 
 	return (
 		<>
-			<HeaderBar headerType={headerType.Admin}/>
-			<br />
-			<Box style={{ marginTop: "3rem", position: "relative" }}>
+			<Box style={{ position: "relative" }}>
 				<img
 					src={theme.palette.mode === "light" ? adminSat : adminSat}
 					alt="cab parked"
@@ -100,26 +76,21 @@ export const AdminHome: React.FC = (): ReactElement => {
 						aria-label="basic tabs example"
 					>
 						<Tab label="ALL REQUESTS" {...a11yProps(0)} />
-						<Tab label="ALL ROUTES" {...a11yProps(1)} />
-						{/* <Tab label="VENDORS" {...a11yProps(2)} />
-						<Tab label="VEHICLES" {...a11yProps(3)} /> */}
+						{/* <Tab label="ALL ROUTES" {...a11yProps(1)} /> */}
+						<Tab label="VENDORS" {...a11yProps(1)} />
+						{/* <Tab label="VEHICLES" {...a11yProps(3)} /> */}
 					</Tabs>
 				</Box>
 				<TabPanel value={value} index={0}>
 					<AllRequests />
 				</TabPanel>
-				<TabPanel value={value} index={1}>
+				{/* <TabPanel value={value} index={1}>
 					<AllRoutes />
+				</TabPanel> */}
+				<TabPanel value={value} index={1}>
+					<Vendors />
 				</TabPanel>
-				{/* <TabPanel value={value} index={2}>
-					<ApiStateHandler
-						isLoading={vendorDataLoading}
-						isError={vendorDataError}
-					>
-						{vendors && <Vendors vendors={vendors} />}
-					</ApiStateHandler>
-				</TabPanel>
-				<TabPanel value={value} index={3}>
+				{/* <TabPanel value={value} index={3}>
 					<ApiStateHandler
 						isLoading={vehicleDataLoading}
 						isError={vehicleDataError}

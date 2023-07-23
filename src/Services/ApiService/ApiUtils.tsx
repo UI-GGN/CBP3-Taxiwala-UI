@@ -8,18 +8,20 @@ const apiStatus = {
 	error: "error",
 };
 
-export const GetApiEffect = (service, params) => {
+export const GetApiEffect: (service: any) => [boolean, boolean, any] = (
+	service
+) => {
 	const [status, setStatus] = useState(apiStatus.loading);
 	const [data, setData] = useState(null);
 
 	useEffect(() => {
-		service(params)
-			.then((data) => {
+		service()
+			.then((data: any) => {
 				console.log(data);
 				setData(data);
 				setStatus(apiStatus.complete);
 			})
-			.catch((error) => {
+			.catch(() => {
 				setStatus(apiStatus.error);
 			});
 	}, []);
