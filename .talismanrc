@@ -3,8 +3,6 @@ fileignoreconfig:
     checksum: 51efed76ffd4421848726ea9dfe3ed824300168d21ff76ec9c15d7542a8529f3
   - filename: yarn.lock
     checksum: 49ad670fe7af109f76723d7bd1f67b55fc27235f21e038c1ed504d8f89180f2d
-  - filename: src/Components/Header/header.tsx
-    checksum: 77e3337e2003b07215056094e89884c9c3697fae5854021954f53cbfccf5e52e
   - filename: src/Components/TextInput/Dropdown.tsx
     checksum: b5c95dcaf5d4e82477d0c66beed0b8536ccde38cff0ee406317f4aafd0b818f5
   - filename: src/screens/Admin/RequestHome/AllRequests.tsx
@@ -18,9 +16,7 @@ fileignoreconfig:
   - filename: src/screens/Admin/RequestHome/Vehicles.tsx
     checksum: 07d6face1c3350cb5d823bed5ed91a75a65a99f224c994d20c9358c8db77e84d
   - filename: src/Components/Header/header.tsx
-    checksum: 79cf63647497e8ab1d6703d4151fa95c817cea1ceb7af5b9a8dab4cf7009b678
-  - filename: src/Components/Header/header.tsx
     checksum: 03712d8fe8ee42a5c4262031740deb6e7c7cd428f93ad941626ba79c5bf2d3c9
   - filename: src/screens/Employee/RequestHome/Request.tsx
-    checksum: b5f0ba3f9076543eed5ed2571ccc1f6109b31867f7fa282be511891635f8d716
+    checksum: 5c8b2ba3fc70dd2b8b58b0e6ef678f70a2e7f8ea68305cb81cef9ce7d8af71c6
 version: ""

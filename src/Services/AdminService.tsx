@@ -42,4 +42,11 @@ export const AdminService = {
 			data: body,
 		});
 	},
+	createVehicle: async function (body: any) {
+		return await api.request({
+			url: "/vehicle",
+			method: "POST",
+			data: body,
+		});
+	},
 };
