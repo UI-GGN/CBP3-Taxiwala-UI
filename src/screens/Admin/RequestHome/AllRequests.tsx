@@ -1,5 +1,14 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Button, Grid, Modal, Typography } from "@mui/material";
+import {
+	Alert,
+	AlertTitle,
+	Box,
+	Button,
+	CircularProgress,
+	Grid,
+	Modal,
+	Typography,
+} from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
@@ -66,6 +75,7 @@ export const AllRequests: React.FC = (): ReactElement => {
 		status: requestStatusType.ALL,
 		emp: "",
 	});
+	const [action, setAction]: UseStateType<string> = useState("");
 
 	const handleModal: (index: any) => void = (index: any) => {
 		setSelectedCabRequestIndex(index);
@@ -73,8 +83,6 @@ export const AllRequests: React.FC = (): ReactElement => {
 	};
 
 	const handleDeclineRequest: () => void = () => {
-		setShowModal(false);
-		setSelectedVendor("");
 		if (selectedCabRequestIndex !== null) {
 			postApi(
 				{
@@ -84,6 +92,9 @@ export const AllRequests: React.FC = (): ReactElement => {
 					id: cabRequestData[selectedCabRequestIndex].id,
 				},
 				() => {
+					setShowModal(false);
+					setSelectedVendor("");
+					setAction("");
 					setCabRequestData((cabRequests: ICabRequest[]) =>
 						cabRequests.map((x: ICabRequest, index: number) => {
 							return index === selectedCabRequestIndex
@@ -109,7 +120,6 @@ export const AllRequests: React.FC = (): ReactElement => {
 	}
 
 	const handleAssignVendor: () => void = () => {
-		setShowModal(false);
 		if (selectedCabRequestIndex !== null) {
 			postApi(
 				{
@@ -120,6 +130,8 @@ export const AllRequests: React.FC = (): ReactElement => {
 					id: cabRequestData[selectedCabRequestIndex].id,
 				},
 				() => {
+					setShowModal(false);
+					setAction("");
 					setCabRequestData((cabRequests: ICabRequest[]) =>
 						cabRequests.map((x: ICabRequest, index: number) => {
 							return index === selectedCabRequestIndex
@@ -141,6 +153,8 @@ export const AllRequests: React.FC = (): ReactElement => {
 			);
 		}
 	};
+
+	console.log(cabRequestData);
 
 	useEffect(() => {
 		if (vendorData !== null) {
@@ -243,26 +257,50 @@ export const AllRequests: React.FC = (): ReactElement => {
 								/>
 								<br />
 								<br />
+								{isError && (
+									<>
+										<Alert severity="error">
+											<AlertTitle>Error</AlertTitle>
+											Something went wrong. Try again!
+										</Alert>
+										<br />
+									</>
+								)}
+								<br />
 								<div className="modal_buttons">
-									<Button
-										variant="contained"
-										sx={{
-											backgroundColor: "red",
-											color: "white",
-											marginRight: "5px",
-										}}
-										onClick={() => handleDeclineRequest()}
-									>
-										Decline
-									</Button>
-									<Button
-										variant="contained"
-										sx={{ backgroundColor: "green", color: "white" }}
-										disabled={selectedVendor === ""}
-										onClick={() => handleAssignVendor()}
-									>
-										Assign
-									</Button>
+									{isLoading && action === "decline" ? (
+										<CircularProgress />
+									) : (
+										<Button
+											variant="contained"
+											sx={{
+												backgroundColor: "red",
+												color: "white",
+												marginRight: "5px",
+											}}
+											onClick={() => {
+												setAction("decline");
+												handleDeclineRequest();
+											}}
+										>
+											Decline
+										</Button>
+									)}
+									{isLoading && action === "assign" ? (
+										<CircularProgress />
+									) : (
+										<Button
+											variant="contained"
+											sx={{ backgroundColor: "green", color: "white" }}
+											disabled={selectedVendor === ""}
+											onClick={() => {
+												setAction("assign");
+												handleAssignVendor();
+											}}
+										>
+											Assign
+										</Button>
+									)}
 								</div>
 								<Button
 									sx={{

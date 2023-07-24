@@ -104,7 +104,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 										}}
 									/>
 									<Chip
-										label={`Vendor : ${request.vendorId}`}
+										label={`Vendor : ${request.vendorName}`}
 										style={{
 											backgroundColor: "#FFD8B0",
 											color: "#824303",
