@@ -35,6 +35,13 @@ export const AdminService = {
 			method: "POST",
 		});
 	},
+	updateRequestStatus: async function (body: any, params: { id: number }) {
+		return await api.request({
+			url: `/cab-request/${params.id}`,
+			method: "PUT",
+			data: body,
+		});
+	},
 	createVendor: async function (body: any) {
 		return await api.request({
 			url: "/vendor",

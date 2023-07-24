@@ -5,19 +5,26 @@ import {
 	Accordion,
 	AccordionDetails,
 	AccordionSummary,
+	Alert,
+	AlertTitle,
 	Box,
 	Button,
 	Card,
 	CardContent,
+	CircularProgress,
 	Grid,
 	Stack,
 } from "@mui/material";
-import { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
-import TextInput from "../../../Components/TextInput/TextInput";
 import { IVendor, UseStateType } from "../../../Interfaces";
 import { AdminService } from "../../../Services/AdminService";
-import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
+import {
+	GetApiEffect,
+	PostService,
+} from "../../../Services/ApiService/ApiUtils";
+import "./admin.css";
+import TextInput from "../../../Components/TextInput/TextInput";
 
 const Vendor = ({ id, name, phoneNumber }: IVendor): ReactElement => {
 	return (
@@ -50,32 +57,56 @@ const Vendor = ({ id, name, phoneNumber }: IVendor): ReactElement => {
 	);
 };
 
-export const Vendors = (): ReactElement => {
+export const Vendors: React.FC = (): ReactElement => {
+	const [isVendorDataLoading, isVendorDataError, vendorData]: [
+		boolean,
+		boolean,
+		IVendor[]
+	] = GetApiEffect(AdminService.getAllVendors);
+	const { postApi, data, isLoading, isError } = PostService(
+		AdminService.createVendor
+	);
+
 	const [vendors, setVendors]: UseStateType<IVendor[]> = useState(
 		[] as IVendor[]
 	);
 	const [name, setName]: UseStateType<string> = useState("");
-	const [phoneNo, setPhoneNo]: UseStateType<string> = useState("");
-
-	const [isLoading, isError, vendorData] = GetApiEffect(
-		AdminService.getAllVendors
-	);
+	const [phoneNumber, setPhoneNumber]: UseStateType<string> = useState("");
 
 	useEffect(() => {
 		setVendors(vendorData);
 	}, [vendorData]);
 
+	const createNewVendor: () => void = () => {
+		postApi(
+			{
+				name: name,
+				phoneNumber: phoneNumber,
+			},
+			null,
+			(response: any) => {
+				console.log(data);
+				setVendors((prevVendors: IVendor[]) => [...prevVendors, response.data]);
+				setName("");
+				setPhoneNumber("");
+			}
+		);
+	};
+
 	return (
-		<ApiStateHandler isLoading={isLoading} isError={isError}>
+		<ApiStateHandler
+			isLoading={isVendorDataLoading}
+			isError={isVendorDataError}
+		>
 			{vendors && (
-				<Grid container spacing={4}>
-					<Grid item xs={12} md={8} lg={8}>
+				<Grid container spacing={2}>
+					<Grid item xs={10} sm={12} md={8} lg={8}>
 						<Box>
 							<Grid container spacing={2}>
 								{vendors.map((vendor: IVendor, index: number) => {
 									return (
 										<>
-											<Grid item xs={8} md={6} lg={4}>
+											<Grid item xs={12} sm={6} md={6} lg={4}>
 												<Vendor
 													key={index}
 													id={vendor.id}
@@ -91,64 +122,55 @@ export const Vendors = (): ReactElement => {
 							</Grid>
 						</Box>
 					</Grid>
-					<Grid item xs={8} md={4} lg={4}>
+					<Grid item xs={10} sm={8} md={4} lg={3}>
 						<Accordion>
-							<AccordionSummary
-								expandIcon={<ExpandMoreIcon />}
-								aria-controls="panel1a-content"
-								id="panel1a-header"
-							>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 								<Typography variant="h6"> Create New Vendor </Typography>
 							</AccordionSummary>
 							<AccordionDetails>
 								<TextInput
 									placeholder="Vendor name"
 									type="text"
+									value={name}
+									handleChange={(text: string) => setName(text)}
 									styles={{
 										width: "90%",
 										height: "49.4px",
 										marginRight: "40px",
-									}}
-									value={name}
-									handleChange={(text: string) => {
-										console.log(text);
-										setName(text);
 									}}
 								/>
 								<TextInput
 									placeholder="Phone number"
 									type="number"
+									value={phoneNumber}
+									handleChange={(text: string) => setPhoneNumber(text)}
 									styles={{
 										width: "90%",
 										height: "49.4px",
 										marginTop: "30px",
 										marginRight: "40px",
-										marginBottom: "30px",
 									}}
-									handleChange={(text: string) => {
-										setPhoneNo(text);
-									}}
-									value={phoneNo}
 								/>
-								<Button
-									variant="contained"
-									disabled={name === "" || phoneNo === ""}
-									data-testid="create_button"
-									onClick={async () => {
-										await AdminService.createVendor({
-											name: name,
-											phoneNumber: phoneNo,
-										}).then((response: any) => {
-											setVendors((prevVendors) => {
-												return [...prevVendors, response.data];
-											});
-										});
-										setName("");
-										setPhoneNo("");
-									}}
-								>
-									Create 
-								</Button>
+								<br />
+								<br />
+								{isError && (
+									<Alert severity="error">
+										<AlertTitle>Error</AlertTitle>
+										Something went wrong. Try again!
+									</Alert>
+								)}
+								{isLoading ? (
+									<CircularProgress />
+								) : (
+									<Button
+										variant="contained"
+										disabled={name === "" || phoneNumber === ""}
+										data-testid="create_button"
+										onClick={() => createNewVendor()}
+									>
+										Create
+									</Button>
+								)}
 							</AccordionDetails>
 						</Accordion>
 					</Grid>

@@ -45,9 +45,9 @@ export interface IRequestStep2Props {
 	cabType: string;
 	employeeDetails: IEmmployeeDetails;
 	setEmployeeDetails: React.Dispatch<React.SetStateAction<IEmmployeeDetails>>;
-	submitFn?: any,
-	isLoading: boolean,
-	isError: boolean
+	submitFn?: any;
+	isLoading: boolean;
+	isError: boolean;
 }
 
 export interface ILocationAccordianProps {
@@ -72,6 +72,8 @@ export interface ICabRequest {
 	deleted: boolean;
 	routeId: number | null;
 	routeName?: string;
+	vendorId: number | null;
+	vendorName?: string;
 }
 
 export interface IRequestCardProps {
