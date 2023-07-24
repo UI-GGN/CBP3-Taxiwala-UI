@@ -44,7 +44,6 @@ export default function HeaderBar(props: any) {
 				pt: 3,
 				pb: 1,
 				px: 0,
-
 				position: "fixed",
 				width: "100%",
 				zIndex: 999,

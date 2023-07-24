@@ -5,6 +5,9 @@ import adminSat from "../../../assets/admin-satellite.jpg";
 import { AllRequests } from "./AllRequests";
 import { Vendors } from "./Vendors";
 import "./admin.css";
+import { Vehicles } from "./Vehicles";
+import { headerType } from "../../../constants";
+import HeaderBar from "../../../Components/Header/header";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -50,7 +53,9 @@ export const AdminHome: React.FC = (): ReactElement => {
 
 	return (
 		<>
-			<Box style={{ position: "relative" }}>
+			<HeaderBar headerType={headerType.Admin} />
+			<br />
+			<Box style={{ marginTop: "3rem", position: "relative" }}>
 				<img
 					src={theme.palette.mode === "light" ? adminSat : adminSat}
 					alt="cab parked"
@@ -78,7 +83,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 						<Tab label="ALL REQUESTS" {...a11yProps(0)} />
 						{/* <Tab label="ALL ROUTES" {...a11yProps(1)} /> */}
 						<Tab label="VENDORS" {...a11yProps(1)} />
-						{/* <Tab label="VEHICLES" {...a11yProps(3)} /> */}
+						<Tab label="VEHICLES" {...a11yProps(2)} />
 					</Tabs>
 				</Box>
 				<TabPanel value={value} index={0}>
@@ -90,16 +95,9 @@ export const AdminHome: React.FC = (): ReactElement => {
 				<TabPanel value={value} index={1}>
 					<Vendors />
 				</TabPanel>
-				{/* <TabPanel value={value} index={3}>
-					<ApiStateHandler
-						isLoading={vehicleDataLoading}
-						isError={vehicleDataError}
-					>
-						{vehicles && vendors && (
-							<Vehicles vehicles={vehicles} vendors={vendors} />
-						)}
-					</ApiStateHandler>
-				</TabPanel> */}
+				<TabPanel value={value} index={2}>
+					<Vehicles />
+				</TabPanel>
 			</Box>
 		</>
 	);

@@ -10,7 +10,7 @@ import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import { RequestCard } from "../../../Components/Cards/RequestCard";
 import Dropdown from "../../../Components/TextInput/Dropdown";
 import TextInput from "../../../Components/TextInput/TextInput";
-import { ICabRequest, UseStateType } from "../../../Interfaces";
+import { ICabRequest, IVendor, UseStateType } from "../../../Interfaces";
 import { AdminService } from "../../../Services/AdminService";
 import {
 	GetApiEffect,
@@ -38,12 +38,16 @@ export const AllRequests: React.FC = (): ReactElement => {
 		p: 4,
 	};
 
-	const [isVendorDataLoading, isVendorDataError, vendorData] = GetApiEffect(
-		AdminService.getAllVendors
-	);
-	const [isRequestDataLoading, isRequestDataError, requestData] = GetApiEffect(
-		AdminService.getAllRequests
-	);
+	const [isVendorDataLoading, isVendorDataError, vendorData]: [
+		boolean,
+		boolean,
+		IVendor[]
+	] = GetApiEffect(AdminService.getAllVendors);
+	const [isRequestDataLoading, isRequestDataError, requestData]: [
+		boolean,
+		boolean,
+		any
+	] = GetApiEffect(AdminService.getAllRequests);
 	const { postApi, data, isLoading, isError } = PostService(
 		AdminService.updateRequestStatus
 	);
@@ -141,7 +145,7 @@ export const AllRequests: React.FC = (): ReactElement => {
 	useEffect(() => {
 		if (vendorData !== null) {
 			setVendors(() =>
-				vendorData.map((vendor) => {
+				vendorData.map((vendor: any) => {
 					return {
 						value: vendor.id,
 						label: vendor.name,
@@ -161,7 +165,7 @@ export const AllRequests: React.FC = (): ReactElement => {
 		console.log(sortBy);
 		console.log(filterBy);
 		console.log(requestData);
-		const filteredData = requestData.filter((req) => {
+		const filteredData = requestData.filter((req: any) => {
 			return (
 				(filterBy.status === requestStatusType.ALL
 					? req

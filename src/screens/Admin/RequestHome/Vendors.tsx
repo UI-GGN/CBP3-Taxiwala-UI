@@ -58,9 +58,11 @@ const Vendor = ({ id, name, phoneNumber }: IVendor): ReactElement => {
 };
 
 export const Vendors: React.FC = (): ReactElement => {
-	const [isVendorDataLoading, isVendorDataError, vendorData] = GetApiEffect(
-		AdminService.getAllVendors
-	);
+	const [isVendorDataLoading, isVendorDataError, vendorData]: [
+		boolean,
+		boolean,
+		IVendor[]
+	] = GetApiEffect(AdminService.getAllVendors);
 	const { postApi, data, isLoading, isError } = PostService(
 		AdminService.createVendor
 	);
@@ -122,11 +124,7 @@ export const Vendors: React.FC = (): ReactElement => {
 					</Grid>
 					<Grid item xs={10} sm={8} md={4} lg={3}>
 						<Accordion>
-							<AccordionSummary
-								expandIcon={<ExpandMoreIcon />}
-								aria-controls="panel1a-content"
-								id="panel1a-header"
-							>
+							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 								<Typography variant="h6"> Create New Vendor </Typography>
 							</AccordionSummary>
 							<AccordionDetails>
