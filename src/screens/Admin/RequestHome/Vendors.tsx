@@ -86,7 +86,7 @@ export const Vendors: React.FC = (): ReactElement => {
 			null,
 			(response: any) => {
 				console.log(data);
-				setVendors((prevVendors: IVendor[]) => [...prevVendors, response.data]);
+				setVendors((prevVendors: IVendor[]) => [response.data, ...prevVendors]);
 				setName("");
 				setPhoneNumber("");
 			}

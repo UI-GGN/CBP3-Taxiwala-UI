@@ -126,10 +126,23 @@ export const Vehicles: React.FC = (): ReactElement => {
 				  };
 
 		postApi(body, null, (response: any) => {
-			setVehicles((prevVehicles: IVehicle[]) => [
-				...prevVehicles,
-				response.data,
-			]);
+			const newVehicle: IVehicle =
+				vendorType === "existing"
+					? {
+							...response.data,
+							vendorName: vendors.filter((v: IVendor) => {
+								return v.id.toString() === existingVendor;
+							})[0].name,
+							vendorPhoneNumber: vendors.filter((v: IVendor) => {
+								return v.id.toString() === existingVendor;
+							})[0].phoneNumber,
+					  }
+					: {
+							...response.data,
+							vendorName: name,
+							vendorPhoneNumber: phoneNumber,
+					  };
+			setVehicles((prevVehicles: IVehicle[]) => [newVehicle, ...prevVehicles]);
 			setName("");
 			setPhoneNumber("");
 			setVehicleId("");
