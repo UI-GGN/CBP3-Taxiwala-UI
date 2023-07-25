@@ -68,8 +68,24 @@ export const Vehicles: React.FC = (): ReactElement => {
 	);
 
 	useEffect(() => {
-		setVehicles(vehicleData);
-	}, [vehicleData]);
+		if (vendorData !== null && vehicleData !== null) {
+			setVehicles(() => {
+				return vehicleData.map((vehicle: IVehicle) => {
+					const assignedVendor: IVendor = vendorData.filter(
+						(vendor: IVendor) => {
+							return vendor.id === vehicle.vendorId;
+						}
+					)[0];
+
+					return {
+						...vehicle,
+						vendorName: assignedVendor.name,
+						vendorPhoneNumber: assignedVendor.phoneNumber,
+					};
+				});
+			});
+		}
+	}, [vehicleData, vendorData]);
 
 	useEffect(() => {
 		setVendors(vendorData);
@@ -134,10 +150,6 @@ export const Vehicles: React.FC = (): ReactElement => {
 						<Box>
 							<Grid container spacing={2}>
 								{vehicles.map((vehicle: IVehicle, index: number) => {
-									const vendor: IVendor = vendors.filter(
-										(v) => v.id === vehicle.vendorId
-									)[0];
-
 									return (
 										<>
 											<Grid item xs={10} sm={6} md={6} lg={4} key={index}>
@@ -178,8 +190,9 @@ export const Vehicles: React.FC = (): ReactElement => {
 																data-testid="vendor_phoneNumber"
 																style={{ marginRight: "2rem" }}
 															>
-																<b> Vendor Details :</b> {vendor.name},{" "}
-																{vendor.phoneNumber}
+																<b> Vendor Details :</b> {vehicle.vendorName},
+																&nbsp;
+																{vehicle.vendorPhoneNumber}
 															</Typography>
 														</Stack>
 													</CardContent>

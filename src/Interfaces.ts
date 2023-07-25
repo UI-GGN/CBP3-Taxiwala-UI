@@ -112,6 +112,8 @@ export interface IVehicle {
 	driverName: string;
 	vendorId: number;
 	deleted: boolean;
+	vendorName?: string;
+	vendorPhoneNumber?: string;
 }
 
 export interface IVendor {

@@ -1,4 +1,5 @@
 import {
+	Box,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -50,11 +51,13 @@ const Dropdown: FC<IDropdownProps> = ({
 					value={value}
 					displayEmpty
 				>
-					{dropdownvalues.map((value, label) => (
-						<MenuItem key={label} value={value.value}>
-							{value.label}
-						</MenuItem>
-					))}
+					<Box sx={{ height: "150px" }}>
+						{dropdownvalues.map((value, label) => (
+							<MenuItem key={label} value={value.value}>
+								{value.label}
+							</MenuItem>
+						))}
+					</Box>
 				</Select>
 			</FormControl>
 		</>
