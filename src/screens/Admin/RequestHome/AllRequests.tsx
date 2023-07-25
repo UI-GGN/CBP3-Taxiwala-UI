@@ -226,7 +226,9 @@ export const AllRequests: React.FC = (): ReactElement => {
 			header: true,
 		});
 		const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-		saveAs(blob, "Requests Data.csv");
+    const date = new Date();
+    const month = date.getMonth()+1;
+		saveAs(blob, "CabRequest-" + date.getDate()+"-"+ month+ "-"+date.getFullYear()+".csv");
 	};
 
 	return (
