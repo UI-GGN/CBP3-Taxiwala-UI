@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { getUserDetailsFromToken } from "../../utils/userValidation";
 
 const apiStatus = {
 	onhold: "onhold",
@@ -12,22 +13,27 @@ export const GetApiEffect: (
 	service: any,
 	params?: any
 ) => [boolean, boolean, any] = (service, params) => {
-	const [status, setStatus] = useState(apiStatus.loading);
-	const [data, setData] = useState(null);
+  const [status, setStatus] = useState(apiStatus.loading);
+  const [data, setData] = useState(null);
 
-	useEffect(() => {
-		service(params)
-			.then((data: any) => {
-				console.log(data);
-				setData(data);
-				setStatus(apiStatus.complete);
-			})
-			.catch(() => {
-				setStatus(apiStatus.error);
-			});
-	}, []);
+  useEffect(() => {
+    const userdetail = getUserDetailsFromToken();
+    service({
+      id: userdetail.employeeId
+    }).then(data => {
+      console.log(data);
+      setData(data);
+      setStatus(apiStatus.complete);
+    }).catch(error => {
+      setStatus(apiStatus.error);
+    });
+  }, []);
 
-	return [status === apiStatus.loading, status === apiStatus.error, data];
+  return [
+    status === apiStatus.loading,
+    status === apiStatus.error,
+    data
+  ];
 };
 
 export const PostService = (service: any) => {

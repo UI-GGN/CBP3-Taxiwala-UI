@@ -21,42 +21,42 @@ import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
 
 const AllRequestPage: React.FC = (): ReactElement => {
-	const params = useParams();
-	const [isLoading, isError, data] = GetApiEffect(CabRequestService.get, {
-		id: params.id,
-	});
-	const navigate = useNavigate();
+  const params = useParams();
+  const [isLoading, isError, data] = GetApiEffect(CabRequestService.get);
+  const navigate = useNavigate();
 
-	return (
-		<>
-			<HeaderBar headerType={headerType.Employee} />
-			<ApiStateHandler isLoading={isLoading} isError={isError}>
-				{data && (
-					<Grid container spacing={2}>
-						<Grid item xs={12} md={8} lg={8}>
-							<Container>
-								<Box className="left_box allrequest_box">
-									<div className="allrequests_text">All requests</div>
-									<br />
-									<Grid container spacing={1}>
-										{data.map((req: ICabRequest, index: number) => (
-											<Grid item xs={12} md={6} lg={6} key={index}>
-												<Card
-													sx={{ boxShadow: 2, mb: 2, cursor: "pointer" }}
-													onClick={() =>
-														navigate(`/employee/request/${params.id}/${req.id}`)
-													}
-												>
-													<Typography
-														variant="caption"
-														sx={{
-															marginLeft: "10px",
-															// fontSize: "10px",
-															marginTop: "5px",
-														}}
-													>
-														{`Req Id : ${req.id}`}
-													</Typography>
+  return (
+    <>
+      <HeaderBar headerType={headerType.Employee} />
+    	<ApiStateHandler isLoading={isLoading} isError={isError}>
+        	{data && <Grid container spacing={2}>
+          	<Grid item xs={12} md={8} lg={8}>
+            <Container >
+              <Box className="left_box allrequest_box">
+                <div className="allrequests_text">All requests</div>
+                <br />
+                <Grid container spacing={1}>
+                  {data.map((req: ICabRequest, index) => (
+                    <Grid
+                      item
+                      xs={12}
+                      md={6}
+                      lg={6}
+                      key={index}
+                    >
+                      <Card sx={{ boxShadow: 2, mb: 2, cursor: "pointer"}} 
+                        onClick={() => navigate(`/employee/request/${req.id}`)}
+                      >
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            marginLeft: "10px",
+                            // fontSize: "10px",
+                            marginTop: "5px",
+                          }}
+                        >
+                          {`Req Id : ${req.id}`}
+                        </Typography>
 
 													<Typography
 														variant="caption"
@@ -163,8 +163,8 @@ const AllRequestPage: React.FC = (): ReactElement => {
 							<img src={logo} alt="notes img" className="requests_image" />
 						</Grid>
 					</Grid>
-				)}
-			</ApiStateHandler>
+				}
+		</ApiStateHandler>
 		</>
 	);
 };

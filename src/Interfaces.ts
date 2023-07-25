@@ -16,6 +16,7 @@ export interface ILocation {
 export interface IEmmployeeDetails {
 	id: string;
 	projectCode: string;
+	phoneNumber: string;
 }
 
 export interface IRequestStep1Props {

@@ -21,6 +21,7 @@ import { CabRequestService } from "../../../Services/CabRequestService";
 import { useNavigate } from "react-router-dom";
 import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
+import { getUserDetailsFromToken } from "../../../utils/userValidation";
 
 export const RightWindow = () => {
 	const theme = useTheme();
@@ -58,45 +59,36 @@ const LeftWindow = () => {
 	});
 	const [employeeDetails, setEmployeeDetails]: UseStateType<IEmmployeeDetails> =
 		useState({
-			id: "",
-			projectCode: "",
+		  id: "",
+		  projectCode: "",
+      phoneNumber: ""
 		});
-	const { postApi, data, isLoading, isError } = PostService(
-		CabRequestService.create
-	);
-	const submitFn = () => {
-		console.log(cabtype, checkintime, location.address);
-		postApi(
-			{
-				employeeId: employeeDetails.id,
-				employeeName: "Vansh Kapoor",
-				pickupLocation:
-					cabtype === "pick"
-						? location.address +
-						  " pincode: " +
-						  location.pincode +
-						  " landmark: " +
-						  location.landmark
-						: "International Tech Park, Sector 59, Gurugram, Haryana, 122102",
-				dropLocation:
-					cabtype === "pick"
-						? "International Tech Park, Sector 59, Gurugram, Haryana, 122102"
-						: location.address +
-						  " pincode: " +
-						  location.pincode +
-						  " landmark: " +
-						  location.landmark,
-				pickupTime: cabtype === "pick" ? checkintime : checkouttime,
-				projectCode: employeeDetails.projectCode,
-				phoneNumber: "1234567890",
-			},
-			(data: any) => {
-				console.log(data);
-				navigate(`/employee/request/11111/${data.data.id}`);
-			}
-		);
-		// console.log(location, employeeDetails, checkouttime);
-	};
+  const { postApi, data, isLoading, isError } = PostService(CabRequestService.create);
+
+  
+  const submitFn = () => {
+  const userdetails = getUserDetailsFromToken();
+    postApi(
+      {
+        "employeeId": userdetails.employeeId,
+        "employeeName": userdetails.name,
+        "pickupLocation": cabtype === "pick"? 
+          location.address + " pincode: " + location.pincode + " landmark: " + location.landmark :
+          "International Tech Park, Sector 59, Gurugram, Haryana, 122102",
+        "dropLocation": cabtype === "pick"? 
+          "International Tech Park, Sector 59, Gurugram, Haryana, 122102":
+          location.address + " pincode: " + location.pincode + " landmark: " + location.landmark,
+        "pickupTime": cabtype === "pick"? "2023-08-18T08:55:18.252Z" : checkouttime,
+        "projectCode": employeeDetails.projectCode,
+        "phoneNumber": employeeDetails.phoneNumber
+      },
+      (data) => {
+		    console.log(data);
+        navigate(`/employee/request/${data.data.id}`);
+      }
+    );
+    // console.log(location, employeeDetails, checkouttime);
+  };
 
 	console.log(data);
 
