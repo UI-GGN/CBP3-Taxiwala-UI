@@ -1,35 +1,78 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import daycab from "../../../assets/parked_cab.jpg";
 import nightcab from "../../../assets/night-cab.jpeg";
 import "./Login.css";
-import TextInput from "../../../Components/TextInput/TextInput";
-import { Button, Typography } from "@mui/material";
-import { useState } from "react";
+import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import HeaderBar from "../../../Components/Header/header";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+import { PostService } from "../../../Services/ApiService/ApiUtils";
+import { LoginService } from "../../../Services/LoginService";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import CircularProgress from '@mui/material/CircularProgress';
+import { userType } from "../../../constants";
+import { getUserDetailsFromToken, isLoggedinUser } from "../../../utils/userValidation";
+import TextInput from "../../../Components/TextInput/TextInput";
 
 const LoginScreen: React.FC = (): ReactElement => {
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [showOTPFields, setShowOTPFields] = useState(false);
   const navigate = useNavigate();
   const theme = useTheme();
+  const [ showEmployeeid, setShowEmployeeid ] = useState(false);
+  const [ userDetails, setUserDetails ] = useState({
+    name: "",
+    email: "",
+    employeeId: ""
+  });
+  const { postApi, data, isLoading, isError } = PostService(LoginService.login);
 
-	const sendOTP = () => {
-		setShowOTPFields(true);
-	};
 
-	const submitOTP = () => {
-		navigate("/employee/home");
-	};
+  useEffect(() => {
+    if(isLoggedinUser()){
+      const userTokenDecoded = getUserDetailsFromToken();
+
+      if(userTokenDecoded.usertype === userType.Admin) {
+        navigate("/admin/home");
+      }
+      if(userTokenDecoded.usertype === userType.Employee)
+        navigate("/employee/home");
+    }
+  }, []);
+  
+
+  const login = () => {
+    console.log(userDetails);
+    postApi(userDetails, (data) => {
+      localStorage.setItem("usertoken", data.token);
+      const usertoken = jwt_decode(data.token);
+      if(usertoken.usertype === userType.Admin) {
+        navigate("/admin/home");
+        window.location.reload(false);
+      }
+      if(usertoken.usertype === userType.Employee) {
+        navigate("/employee/home");
+        window.location.reload(false);
+      }
+    });
+  };
+
+  const googleAuthResponse = (response) => {
+    const userObject = jwt_decode(response.credential);
+    const { name, email } = userObject;
+    console.log(userObject);
+    setUserDetails({name, email});
+    setShowEmployeeid(true);
+  };
 
   return (
     <>
-     <HeaderBar />
+      <HeaderBar />
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={6}>
           <Container maxWidth="md">
@@ -39,76 +82,76 @@ const LoginScreen: React.FC = (): ReactElement => {
               </h1>
               <Typography
                 color="typography.primary"
-                variant="h6"
+                variant="h7"
                 style={{ margin: "0px", marginTop: "-10px" }}
               >
 								Start booking office cabs now!
               </Typography>
-              <TextInput
-                placeholder="Enter your work Email ID"
-                type="email"
-                value={email}
-                disabled={showOTPFields}
-                handleChange={(text: string) => setEmail(text)}
-                styles={{
-                  width: "390px",
-                  height: "49.4px",
-                  marginTop: "40px",
-                  marginBottom: "10px",
-                  marginRight: "40px",
-                }}
-              />
-              {showOTPFields && (
-                <>
-                  <TextInput
-                    placeholder="Enter OTP sent to your Email ID"
-                    type="number"
-                    value={otp}
-                    handleChange={(text: string) => setOtp(text)}
-                    styles={{
-                      width: "390px",
-                      height: "49.4px",
-                      marginTop: "10px",
-                      marginRight: "40px",
-                    }}
-                  />
-                  <p className="login_sendOTP_text">
-										Didn't receive OTP?{" "}
-                    <span
-                      onClick={() => window.location.reload()}
-                      style={{ color: "steelblue", cursor: "pointer" }}
+              <br />           
+              <br />           
+              {
+                isError&&<Alert severity="error">
+                  <AlertTitle>Error</AlertTitle>
+                Something went wrong. Try again!
+                </Alert>
+              }
+       
+              <GoogleOAuthProvider 
+                clientId="993661792510-ijjr431srdei4root779d4qrc3srar9n.apps.googleusercontent.com"
+              >
+                <GoogleLogin
+                  render={(renderProps) => (
+                    <button
+                      type="button"
+                      className=""
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
                     >
-											Try again.
-                    </span>
-                  </p>
-                </>
-              )}
-              <br />
-              {showOTPFields ? (
-                <Button
-                  data-testid="submitOTP_button"
-                  variant="contained"
-                  disableElevation
-                  style={{
-                    marginTop: "20px",
+                      <FcGoogle className="" /> Sign in with google
+                    </button>
+                  )}
+                  onSuccess={googleAuthResponse}
+                  onFailure={googleAuthResponse}
+                  cookiePolicy="single_host_origin"
+                />
+              </GoogleOAuthProvider>
+
+              {
+                showEmployeeid&&<><TextInput
+                  placeholder="Enter Employee Id"
+                  type="string"
+                  value={userDetails.employeeId || ""}
+                  handleChange={(text: string) => {
+                    setUserDetails((userdetail) => {
+                      return {
+                        ...userdetail,
+                        employeeId: text
+                      };
+                    });
                   }}
-                  onClick={() => submitOTP()}
-                >
-									Submit OTP
-                </Button>
-              ) : (
-                <Button
-                  data-testid="sendOTP_button"
-                  variant="contained"
-                  disableElevation
-                  style={{
-                    marginTop: "20px",
+                  styles={{
+                    width: "390px",
+                    height: "49.4px",
+                    marginTop: "10px",
+                    marginRight: "40px",
                   }}
-                  onClick={() => sendOTP()}
-                >
-									Send OTP
-                </Button>
-              )}
+                />
+                <Button
+                data-testid="login_button"
+                variant="contained"
+                disabled={!(userDetails.employeeId && userDetails.employeeId.length>=5)}
+                style={{
+                  marginTop: "20px",
+                }}
+                onClick={() => login()}
+              >
+									LOGIN
+              </Button>
+              </>
+              }
+
+              
+           
             </Box>
           </Container>
         </Grid>

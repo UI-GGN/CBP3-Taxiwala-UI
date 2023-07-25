@@ -1,6 +1,6 @@
 export const userType = {
-  Admin: "Admin",
-  Employee: "Employee"
+  Admin: "admin",
+  Employee: "employee"
 };
 
 export const headerType = {

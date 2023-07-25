@@ -56,7 +56,7 @@ export const shouldSubmitButtonDisabled: (
 	return (
 		location.address === "" ||
 		location.pincode === "" ||
-		employeeDetails.id === "" ||
+		employeeDetails.phoneNumber === "" ||
 		employeeDetails.projectCode === ""
 	);
 };

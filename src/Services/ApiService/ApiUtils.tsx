@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { getUserDetailsFromToken } from "../../utils/userValidation";
 
 const apiStatus = {
   onhold: "onhold",
@@ -8,13 +9,15 @@ const apiStatus = {
   error: "error"
 };
 
-export const GetApiEffect = (service, params) => {
+export const GetApiEffect = (service, params?) => {
   const [status, setStatus] = useState(apiStatus.loading);
   const [data, setData] = useState(null);
 
   useEffect(() => {
-
-    service(params).then(data => {
+    const userdetail = getUserDetailsFromToken();
+    service({
+      id: userdetail.employeeId
+    }).then(data => {
       console.log(data);
       setData(data);
       setStatus(apiStatus.complete);

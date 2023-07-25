@@ -22,9 +22,7 @@ import { headerType } from "../../../constants";
 
 const AllRequestPage: React.FC = (): ReactElement => {
   const params = useParams();
-  const [isLoading, isError, data] = GetApiEffect(CabRequestService.get, {
-    id: params.id,
-  });
+  const [isLoading, isError, data] = GetApiEffect(CabRequestService.get);
   const navigate = useNavigate();
 
   return (
@@ -47,7 +45,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
                       key={index}
                     >
                       <Card sx={{ boxShadow: 2, mb: 2, cursor: "pointer"}} 
-                        onClick={() => navigate(`/employee/request/${params.id}/${req.id}`)}
+                        onClick={() => navigate(`/employee/request/${req.id}`)}
                       >
                         <Typography
                           variant="caption"

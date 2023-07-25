@@ -10,6 +10,7 @@ import { ColorContext } from "../../App";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { headerType } from "../../constants";
+import { logout } from "../../utils/userValidation";
 
 function Thoughtworks() {
   return (
@@ -28,8 +29,7 @@ function Thoughtworks() {
 }
 
 const navItems = [
-  { label: "Profile", route: "/profile" },
-  { label: "All Requests", route: "/employee/allrequests/12345" },
+  { label: "All Requests", route: "/employee/allrequests/" },
 ];
 
 
@@ -57,7 +57,15 @@ export default function HeaderBar(props) {
     >
       <Grid container >
         <Grid item xs={12} md={8} lg={8}>
-          <Container sx={{cursor: "pointer"}} onClick={() => navigate("/")}>
+          <Container sx={{cursor: "pointer"}} onClick={() => {            
+            if(props.headerType === headerType.Employee){
+              navigate("/employee/home");
+            } 
+            if(props.headerType === headerType.Admin){
+              navigate("/admin/home");
+            }
+          }
+          }>
             <Typography
               variant="body1"
               sx={{
@@ -78,7 +86,10 @@ export default function HeaderBar(props) {
           <Container sx={{ float: "right", marginTop: 1,borderRight:0 }}>            
 
             { ( props.headerType === headerType.Employee || props.headerType === headerType.Admin ) && <Button
-              onClick={ () => {} }
+              onClick={ () => {
+                logout();
+                navigate("/");
+              } }
               key={"logout"}
               sx={{ color: "typography.primary", float: "right", marginRight: "10px" }}
             >

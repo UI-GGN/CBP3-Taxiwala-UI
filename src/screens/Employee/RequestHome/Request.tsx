@@ -87,9 +87,7 @@ const LeftWindow = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  const [isLoading, isError, data] = GetApiEffect(CabRequestService.get, {
-    id: params.empId,
-  });
+  const [isLoading, isError, data] = GetApiEffect(CabRequestService.get);
 
   return (
     <>
@@ -98,7 +96,7 @@ const LeftWindow = () => {
           <Button
             variant="outlined"
             onClick={() => {
-              navigate("/employee/allrequests/12345");
+              navigate("/employee/allrequests/");
             }}
           >
             <ArrowBackIcon sx={{ marginRight: "10px" }} /> Back to
