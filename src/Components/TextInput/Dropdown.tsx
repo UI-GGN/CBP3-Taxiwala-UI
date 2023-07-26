@@ -51,13 +51,13 @@ const Dropdown: FC<IDropdownProps> = ({
 					value={value}
 					displayEmpty
 				>
-					<Box sx={{ height: "150px" }}>
-						{dropdownvalues.map((value, label) => (
-							<MenuItem key={label} value={value.value}>
-								{value.label}
-							</MenuItem>
-						))}
-					</Box>
+					{/* <Box sx={{ height: "150px" }}> */}
+					{dropdownvalues.map((value, label) => (
+						<MenuItem key={label} value={value.value}>
+							{value.label}
+						</MenuItem>
+					))}
+					{/* </Box> */}
 				</Select>
 			</FormControl>
 		</>

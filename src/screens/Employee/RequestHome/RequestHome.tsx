@@ -59,36 +59,49 @@ const LeftWindow = () => {
 	});
 	const [employeeDetails, setEmployeeDetails]: UseStateType<IEmmployeeDetails> =
 		useState({
-		  id: "",
-		  projectCode: "",
-      phoneNumber: ""
+			id: "",
+			projectCode: "",
+			phoneNumber: "",
 		});
-  const { postApi, data, isLoading, isError } = PostService(CabRequestService.create);
+	const { postApi, data, isLoading, isError } = PostService(
+		CabRequestService.create
+	);
 
-  
-  const submitFn = () => {
-  const userdetails = getUserDetailsFromToken();
-    postApi(
-      {
-        "employeeId": userdetails.employeeId,
-        "employeeName": userdetails.name,
-        "pickupLocation": cabtype === "pick"? 
-          location.address + " pincode: " + location.pincode + " landmark: " + location.landmark :
-          "International Tech Park, Sector 59, Gurugram, Haryana, 122102",
-        "dropLocation": cabtype === "pick"? 
-          "International Tech Park, Sector 59, Gurugram, Haryana, 122102":
-          location.address + " pincode: " + location.pincode + " landmark: " + location.landmark,
-        "pickupTime": cabtype === "pick"? "2023-08-18T08:55:18.252Z" : checkouttime,
-        "projectCode": employeeDetails.projectCode,
-        "phoneNumber": employeeDetails.phoneNumber
-      },
-      (data) => {
-		    console.log(data);
-        navigate(`/employee/request/${data.data.id}`);
-      }
-    );
-    // console.log(location, employeeDetails, checkouttime);
-  };
+	const submitFn = () => {
+		const userdetails = getUserDetailsFromToken();
+		postApi(
+			{
+				employeeId: userdetails.employeeId,
+				employeeName: userdetails.name,
+				pickupLocation:
+					cabtype === "pick"
+						? location.address +
+						  " pincode: " +
+						  location.pincode +
+						  " landmark: " +
+						  location.landmark
+						: "International Tech Park, Sector 59, Gurugram, Haryana, 122102",
+				dropLocation:
+					cabtype === "pick"
+						? "International Tech Park, Sector 59, Gurugram, Haryana, 122102"
+						: location.address +
+						  " pincode: " +
+						  location.pincode +
+						  " landmark: " +
+						  location.landmark,
+				pickupTime:
+					cabtype === "pick" ? "2023-08-18T08:55:18.252Z" : checkouttime,
+				projectCode: employeeDetails.projectCode,
+				phoneNumber: employeeDetails.phoneNumber,
+			},
+			null,
+			(data) => {
+				console.log(data);
+				navigate(`/employee/request/${data.data.id}`);
+			}
+		);
+		// console.log(location, employeeDetails, checkouttime);
+	};
 
 	console.log(data);
 
