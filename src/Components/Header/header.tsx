@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -13,135 +14,135 @@ import { headerType } from "../../constants";
 import { logout } from "../../utils/userValidation";
 
 function Thoughtworks() {
-	return (
-		<Typography
-			variant="overline"
-			sx={{
-				fontWeight: 400,
-				textTransform: "none",
-				padding: "5px",
-				color: "typography.primary",
-			}}
-		>
+  return (
+    <Typography
+      variant="overline"
+      sx={{
+        fontWeight: 400,
+        textTransform: "none",
+        padding: "5px",
+        color: "typography.primary",
+      }}
+    >
 			/thoughtworks
-		</Typography>
-	);
+    </Typography>
+  );
 }
 
 const navItems = [
-	{ label: "Profile", route: "/employee/profile" },
-	{ label: "All Requests", route: "/employee/allrequests/" },
+  { label: "Profile", route: "/employee/profile" },
+  { label: "All Requests", route: "/employee/allrequests/" },
 ];
 
 export default function HeaderBar(props: any) {
-	const theme = useTheme();
-	const navigate = useNavigate();
-	const color = useContext(ColorContext);
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const color = useContext(ColorContext);
 
-	return (
-		<Box
-			component="header"
-			sx={{
-				pt: 3,
-				pb: 1,
-				px: 0,
+  return (
+    <Box
+      component="header"
+      sx={{
+        pt: 3,
+        pb: 1,
+        px: 0,
 
-				position: "fixed",
-				width: "100%",
-				zIndex: 999,
-				// display: { xs: "none", sm: "block"},
-				fontWeight: "700px",
-				margin: "0px",
-				backgroundColor: "background.header",
-			}}
-		>
-			<Grid container>
-				<Grid item xs={12} md={8} lg={8}>
-					<Container
-						sx={{ cursor: "pointer" }}
-						onClick={() => {
-							if (props.headerType === headerType.Employee) {
-								navigate("/employee/home");
-							}
-							if (props.headerType === headerType.Admin) {
-								navigate("/admin/home");
-							}
-						}}
-					>
-						<Typography
-							variant="body1"
-							sx={{
-								fontSize: "28px",
-								fontWeight: 700,
-								justifyContent: "right",
-								marginTop: "5px",
-								paddingLeft: "30px",
-							}}
-						>
+        position: "fixed",
+        width: "100%",
+        zIndex: 999,
+        // display: { xs: "none", sm: "block"},
+        fontWeight: "700px",
+        margin: "0px",
+        backgroundColor: "background.header",
+      }}
+    >
+      <Grid container>
+        <Grid item xs={12} md={8} lg={8}>
+          <Container
+            sx={{ cursor: "pointer" }}
+            onClick={() => {
+              if (props.headerType === headerType.Employee) {
+                navigate("/employee/home");
+              }
+              if (props.headerType === headerType.Admin) {
+                navigate("/admin/home");
+              }
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "28px",
+                fontWeight: 700,
+                justifyContent: "right",
+                marginTop: "5px",
+                paddingLeft: "30px",
+              }}
+            >
 							TaxiWala
-							<Thoughtworks />
-						</Typography>
-					</Container>
-				</Grid>
-				<Grid
-					item
-					xs={12}
-					md={4}
-					lg={4}
-					sx={{ marginTop: 0, display: { xs: "none", sm: "block" } }}
-				>
-					<Container sx={{ float: "right", marginTop: 1, borderRight: 0 }}>
-						{(props.headerType === headerType.Employee ||
+              <Thoughtworks />
+            </Typography>
+          </Container>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          lg={4}
+          sx={{ marginTop: 0, display: { xs: "none", sm: "block" } }}
+        >
+          <Container sx={{ float: "right", marginTop: 1, borderRight: 0 }}>
+            {(props.headerType === headerType.Employee ||
 							props.headerType === headerType.Admin) && (
-							<Button
-								onClick={() => {
-									logout();
-									navigate("/");
-								}}
-								key={"logout"}
-								sx={{
-									color: "typography.primary",
-									float: "right",
-									marginRight: "10px",
-								}}
-							>
+              <Button
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+                key={"logout"}
+                sx={{
+                  color: "typography.primary",
+                  float: "right",
+                  marginRight: "10px",
+                }}
+              >
 								LogOut
-							</Button>
-						)}
+              </Button>
+            )}
 
-						{props.headerType === headerType.Employee &&
+            {props.headerType === headerType.Employee &&
 							navItems.map((item) => (
-								<Button
-									onClick={() => navigate(item.route)}
-									key={item.label}
-									sx={{
-										color: "typography.primary",
-										float: "right",
-										marginRight: "10px",
-									}}
-								>
-									{item.label}
-								</Button>
+							  <Button
+							    onClick={() => navigate(item.route)}
+							    key={item.label}
+							    sx={{
+							      color: "typography.primary",
+							      float: "right",
+							      marginRight: "10px",
+							    }}
+							  >
+							    {item.label}
+							  </Button>
 							))}
 
-						<IconButton
-							sx={{
-								color: "typography.primary",
-								float: "right",
-								marginRight: "5px",
-							}}
-							onClick={color.toggleColor}
-							color="inherit"
-						>
-							{theme.palette.mode === "dark" ? (
-								<Brightness7Icon />
-							) : (
-								<Brightness4Icon />
-							)}
-						</IconButton>
-					</Container>
-				</Grid>
-			</Grid>
-		</Box>
-	);
+            <IconButton
+              sx={{
+                color: "typography.primary",
+                float: "right",
+                marginRight: "5px",
+              }}
+              onClick={color.toggleColor}
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness4Icon />
+              )}
+            </IconButton>
+          </Container>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 }

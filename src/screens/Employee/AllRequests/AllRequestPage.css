@@ -35,16 +35,16 @@
 }
 
 .declined {
-  color: #cc0d0d !important;
-  background: #fec1c1 !important;
+  color: #ffffff !important;
+  background: #F2617A !important;
 }
 .pending {
-    color: #073d6f    !important;
-    background: #8bcfff9f !important;
+    color: #ffffff    !important;
+    background: #47A1AD !important;
   }
 .assigned{
-    color: #01452d    !important;
-    background: #87fa98a5 !important;
+    color: #ffffff    !important;
+    background: #6B9E78 !important;
 }
 
 .status-box{

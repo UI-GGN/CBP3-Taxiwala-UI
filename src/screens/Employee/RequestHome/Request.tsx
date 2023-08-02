@@ -17,18 +17,21 @@ import {
 } from "../../../utils/CabRequestHelper";
 import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import PendingIcon from '@mui/icons-material/Pending';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const RequestStatusText: FC<{ status: string }> = ({ status }): JSX.Element => {
   switch (status) {
   case "PENDING":
     return (
       <>
-        <h1 className="request_headline" style={{ margin: "0px" }}>
-						Request in Progress
+        <h1 className="request_headline" style={{ margin: "0px", color: "#47A1AD" }}>
+						<PendingIcon /> Request in Progress
         </h1>
         <Typography
           variant="h6"
-          color="typography.primary"
+          color="typography.secondary"
           style={{ margin: "0px" }}
         >
 						Your request has been shared with Gurgaon office Admins. They will
@@ -39,28 +42,28 @@ const RequestStatusText: FC<{ status: string }> = ({ status }): JSX.Element => {
   case "DECLINED":
     return (
       <>
-        <h1 className="request_headline" style={{ margin: "0px" }}>
-						Request Declined
+        <h1 className="request_headline" style={{ margin: "0px", color: "#F2617A" }}>
+						<DangerousIcon /> Request Declined
         </h1>
         <Typography
           variant="h6"
-          color="typography.primary"
+          color="typography.secondary"
           style={{ margin: "0px" }}
         >
 						Your request could not be fulfilled at the moment.
-          <br /> Please contact admin staff at <b>Phone number: 987654321</b>
+          <br /> Please contact admin staff at 987654321
         </Typography>
       </>
     );
   case "APPROVED":
     return (
       <>
-        <h1 className="request_headline" style={{ margin: "0px" }}>
-						Request Approved
+        <h1 className="request_headline" style={{ margin: "0px", color: "#6B9E78" }}>
+						<CheckCircleIcon />Request Approved
         </h1>
         <Typography
           variant="h6"
-          color="typography.primary"
+          color="typography.secondary"
           style={{ margin: "0px" }}
         >
 						Thank you from booking via portal. Please share your feedback!
@@ -112,21 +115,25 @@ const LeftWindow = () => {
                 )
                 .map((req: ICabRequest, index: number) => (
                   <>
+                    <Typography sx={{ color: "typography.secondary" }}>
+                      Raised at : {convertDateFormat(req.expireDate)}
+                    </Typography>
                     <RequestStatusText key={index} status={req.status} />
                     <br />
+                    {console.log(data)}
                     <Box
                       sx={{
                         width: "60%",
                         height: "fit-content",
                         backgroundColor: "background.secondary",
                         borderRadius: "20px",
-                        padding: "15px 20px",
                       }}
                     >
                       <Typography
                         variant="body2"
-                        sx={{ color: "typography.secondary", fontSize: "19px" }}
+                        sx={{ fontSize: "19px" }}
                       >
+
 												Date: {convertDateFormat(req.expireDate)}
                         <br />
 												Checkin Time: {convertTimeFormat(req.pickupTime)}
@@ -138,9 +145,9 @@ const LeftWindow = () => {
                       pickUpLocation={req.pickupLocation}
                       dropLocation={req.dropLocation}
                     />
-                    <hr />
+                    {/* <hr /> */}
                     <br />
-                    <Typography
+                    {/* <Typography
                       variant="body2"
                       sx={{ color: "typography.secondary", fontSize: "19px" }}
                     >
@@ -157,7 +164,7 @@ const LeftWindow = () => {
                       variant="outlined"
                     >
 											Delete your request
-                    </Button>
+                    </Button> */}
                     <br />										
                   </>
                 ))}

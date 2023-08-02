@@ -9,4 +9,11 @@ export const LoginService = {
     });
     return response.data;
   },
+  getUser: async function (emailid: any) {
+    const response = await loginapi.request({
+      url: `/users/${emailid}/employeeId`,
+      method: "GET",
+    });
+    return response.data;
+  },
 };
