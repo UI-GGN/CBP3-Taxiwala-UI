@@ -214,7 +214,18 @@ export const AllRequests: React.FC = (): ReactElement => {
 			return 0;
 		});
 
-		setCabRequestData(sortedData);
+		setCabRequestData(() => {
+			return sortedData.map((r) => {
+				return {
+					...r,
+					vendorName:
+						r.vendorId &&
+						vendorData.filter((v: IVendor) => {
+							return v.id === r.vendorId;
+						})[0].name,
+				};
+			});
+		});
 	};
 
 	const exportCsv = (data: ICabRequest[]) => {
@@ -226,9 +237,18 @@ export const AllRequests: React.FC = (): ReactElement => {
 			header: true,
 		});
 		const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const date = new Date();
-    const month = date.getMonth()+1;
-		saveAs(blob, "CabRequest-" + date.getDate()+"-"+ month+ "-"+date.getFullYear()+".csv");
+		const date = new Date();
+		const month = date.getMonth() + 1;
+		saveAs(
+			blob,
+			"CabRequest-" +
+				date.getDate() +
+				"-" +
+				month +
+				"-" +
+				date.getFullYear() +
+				".csv"
+		);
 	};
 
 	return (
