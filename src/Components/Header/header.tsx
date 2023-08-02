@@ -21,16 +21,24 @@ function Thoughtworks() {
         fontWeight: 400,
         textTransform: "none",
         padding: "5px",
-        color: "typography.primary",
+        color: "typography.secondaryred",
       }}
     >
-			/thoughtworks
+			/
+      <Typography
+        variant="overline"
+        sx={{
+          fontWeight: 400,
+          textTransform: "none",
+          color: "typography.secondaryblue",
+        }}
+      >thoughtworks</Typography>
     </Typography>
   );
 }
 
 const navItems = [
-  { label: "Profile", route: "/employee/profile" },
+  // { label: "Profile", route: "/employee/profile" },
   { label: "All Requests", route: "/employee/allrequests/" },
 ];
 
@@ -71,6 +79,7 @@ export default function HeaderBar(props: any) {
           >
             <Typography
               variant="body1"
+              color="typography.primaryblue"
               sx={{
                 fontSize: "28px",
                 fontWeight: 700,

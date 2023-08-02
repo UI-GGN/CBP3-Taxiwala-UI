@@ -29,21 +29,22 @@ export const shouldNextButtonDisabled: (
 	}
 
 	if (alignment === "Regular") {
-		if (noEndDateNeeded === true) {
-			if (cabtype === "") return true;
-			else if (cabtype === "pick") {
-				return checkintime === "" || startDate === null;
-			} else {
-				return checkouttime === "" || startDate === null;
-			}
-		} else {
-			if (cabtype === "") return true;
-			else if (cabtype === "pick") {
-				return checkintime === "" || startDate === null || endDate === null;
-			} else {
-				return checkouttime === "" || startDate === null || endDate === null;
-			}
-		}
+		return true;
+		// if (noEndDateNeeded === true) {
+		// 	if (cabtype === "") return true;
+		// 	else if (cabtype === "pick") {
+		// 		return checkintime === "" || startDate === null;
+		// 	} else {
+		// 		return checkouttime === "" || startDate === null;
+		// 	}
+		// } else {
+		// 	if (cabtype === "") return true;
+		// 	else if (cabtype === "pick") {
+		// 		return checkintime === "" || startDate === null || endDate === null;
+		// 	} else {
+		// 		return checkouttime === "" || startDate === null || endDate === null;
+		// 	}
+		// }
 	}
 
 	return false;

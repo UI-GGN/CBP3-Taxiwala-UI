@@ -1,4 +1,6 @@
 import Container from "@mui/material/Container";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 interface IApiStateHandlerProps {
 	isLoading: boolean;
@@ -22,9 +24,9 @@ const ApiStateHandler: React.FC<IApiStateHandlerProps> = ({
 	}
 	return isLoading ? (
 		<>
-			<Container maxWidth="sm" sx={{ paddingTop: "8rem" }}>
-				<h1>Loading....</h1>
-			</Container>
+			<Box sx={{ paddingTop: "20%", paddingBottom: "25%", textAlign: "center" }}>
+      <CircularProgress />
+    </Box>
 		</>
 	) : (
 		children

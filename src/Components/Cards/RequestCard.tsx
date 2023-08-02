@@ -16,6 +16,9 @@ import {
 	convertDateFormat,
 	convertTimeFormat,
 } from "../../utils/CabRequestHelper";
+import PhoneIcon from '@mui/icons-material/Phone';
+import WorkIcon from '@mui/icons-material/Work';
+
 
 export const RequestCard: FC<IRequestCardProps> = ({
 	request,
@@ -23,25 +26,25 @@ export const RequestCard: FC<IRequestCardProps> = ({
 	handleModal,
 }: IRequestCardProps): JSX.Element => {
 	return (
-		<Card sx={{ minWidth: 275 }}>
+		<Card sx={{ minWidth: 275, boxShadow: 2,  cursor: 'pointer' }} onClick={() => handleModal(index)}>
 			<CardContent sx={{ pb: 0, paddingRight: 0 }}>
 				<Grid container spacing={1}>
 					<Grid item xs={8} md={8} lg={8}>
 						<Typography sx={{ fontSize: 16 }} color="text.secondary">
 							<b>
 								{" "}
-								{request.employeeName}, {request.employeeId}
+								{request.employeeName} ({request.employeeId})
 							</b>
 						</Typography>
-						<Typography sx={{ fontSize: 16 }} color="text.secondary">
-							{request.phoneNumber}
+						<Typography sx={{ fontSize: 16, display: 'flex', alignItems: 'center' }} color="text.secondary">
+							<PhoneIcon style={{ fontSize: 16, paddingRight: '4px'  }}/> {request.phoneNumber}
 						</Typography>
 						<Typography
-							sx={{ fontSize: 16 }}
+							sx={{ fontSize: 16, display: 'flex', alignItems: 'center' }}
 							color="text.secondary"
 							marginBottom="10px"
 						>
-							Project code: {request.projectCode}
+							<WorkIcon style={{ fontSize: 16, paddingRight: '4px'  }}/> Project code: {request.projectCode}
 						</Typography>
 						<Typography>
 							Cab required Date: {convertDateFormat(request.pickupTime)}
@@ -77,8 +80,8 @@ export const RequestCard: FC<IRequestCardProps> = ({
 								<Chip
 									label={request.status}
 									style={{
-										backgroundColor: "#BDDFFF",
-										color: "#1E3583",
+										color: "#ffffff",
+    									background: "#47A1AD",
 										marginBottom: "5px",
 									}}
 								/>
@@ -87,8 +90,8 @@ export const RequestCard: FC<IRequestCardProps> = ({
 								<Chip
 									label={request.status}
 									style={{
-										backgroundColor: "#FFBDBD",
-										color: "#831E1E",
+										color: "#ffffff",
+  										background: "#F2617A",
 										marginBottom: "5px",
 									}}
 								/>
@@ -98,16 +101,18 @@ export const RequestCard: FC<IRequestCardProps> = ({
 									<Chip
 										label={request.status}
 										style={{
-											backgroundColor: "#BDFFC0",
-											color: "#1E8371",
+											color: "#ffffff",
+											background: "#6B9E78",
 											marginBottom: "5px",
 										}}
 									/>
 									<Chip
+										variant="outlined"
+										color="primary"
 										label={`Vendor : ${request.vendorName}`}
 										style={{
-											backgroundColor: "#FFD8B0",
-											color: "#824303",
+											// backgroundColor: "#CC850A",
+											// color: "#ffffff",
 											marginBottom: "5px",
 										}}
 									/>
@@ -123,7 +128,6 @@ export const RequestCard: FC<IRequestCardProps> = ({
 								marginRight: "30px",
 								":hover": "backgroundColor: red",
 							}}
-							onClick={() => handleModal(index)}
 						>
 							<ArrowForwardIcon sx={{ color: "typography.primary" }} />
 						</Button>

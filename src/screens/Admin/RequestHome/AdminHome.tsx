@@ -47,7 +47,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		console.log(event);
+		// console.log(event);
 		setValue(newValue);
 	};
 
@@ -58,7 +58,7 @@ export const AdminHome: React.FC = (): ReactElement => {
 			<Box style={{ marginTop: "3rem", position: "relative" }}>
 				<img
 					src={theme.palette.mode === "light" ? adminSat : adminSat}
-					alt="cab parked"
+					alt="satellite"
 					className="admin_coverimg"
 				/>
 				<Typography

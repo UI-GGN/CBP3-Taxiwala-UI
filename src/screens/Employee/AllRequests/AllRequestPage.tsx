@@ -15,7 +15,7 @@ import { CabRequestService } from "../../../Services/CabRequestService";
 import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import { useNavigate } from "react-router-dom";
 import { ICabRequest } from "../../../Interfaces";
-import { convertTimeFormat } from "../../../utils/CabRequestHelper";
+import { convertDateFormat, convertTimeFormat } from "../../../utils/CabRequestHelper";
 import { useParams } from "react-router-dom";
 import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
@@ -33,9 +33,13 @@ const AllRequestPage: React.FC = (): ReactElement => {
           	<Grid item xs={12} md={8} lg={8}>
             <Container >
               <Box className="left_box allrequest_box">
-                <div className="allrequests_text">All requests</div>
+                <Typography variant="h4" color="typography.primaryblue"
+                  sx={{
+                    fontSize: "28px",
+                    fontWeight: 700,
+                  }}>All requests</Typography>
                 <br />
-                <Grid container spacing={1}>
+                <Grid container spacing={3}>
                   {data.map((req: ICabRequest, index) => (
                     <Grid
                       item
@@ -44,11 +48,12 @@ const AllRequestPage: React.FC = (): ReactElement => {
                       lg={6}
                       key={index}
                     >
-                      <Card sx={{ boxShadow: 2, mb: 2, cursor: "pointer"}} 
+                      <Card sx={{ boxShadow: 3, mb: 2, cursor: "pointer", borderRadius: '16px'}} 
                         onClick={() => navigate(`/employee/request/${req.id}`)}
                       >
                         <Typography
                           variant="caption"
+                          color="typography.secondary"
                           sx={{
                             marginLeft: "10px",
                             // fontSize: "10px",
@@ -60,6 +65,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
 
                         <Typography
                           variant="caption"
+                          color="typography.secondary"
                           sx={{
                             float: "right",
                             marginRight: "10px",
@@ -71,32 +77,32 @@ const AllRequestPage: React.FC = (): ReactElement => {
                         </Typography>
 
                         <CardContent className="card-content">
-                          <Typography variant="subtitle2" sx={{ mb: 1 }}>
+                          {/* <Typography variant="subtitle2" sx={{ mb: 1 }}>
                             <b>
 							 Ride dates: {`${req.pickupTime.split("T")[0]}`}
                             </b>
-                          </Typography>
+                          </Typography> */}
                           <Grid container className="grid">
-                            <Grid item xs={6} md={6} lg={6}>
-                              <Typography variant="subtitle2">
+                            <Grid item xs={8} md={8} lg={8}>
+                              <Typography >
                                 <b>Pickup point: </b>
                                 <span className="details">
                                   {`${req.pickupLocation}`}
                                 </span>
                               </Typography>
                             </Grid>
-                            <Grid item xs={6} md={6} lg={6}>
-                              <Typography variant="subtitle2">
-                                <b>Pickup time: </b>
+                            <Grid item xs={4} md={4} lg={4}>
+                              <Typography >
+                                <b>Pickup at: </b>
                                 <span className="details">
                                   {" "}
-                                  {`${convertTimeFormat(req.pickupTime)}`}
+                                  {convertDateFormat(req.pickupTime)}, {`${convertTimeFormat(req.pickupTime)}`}
                                   {/* {`${req.pickupTime.split("T")[1]}`} */}
                                 </span>
                               </Typography>
                             </Grid>
                             <Grid item xs={6} md={6} lg={6}>
-                              <Typography variant="subtitle2">
+                              <Typography >
                                 <b>Drop point: </b>
                                 <span className="details">
                                   {`${req.dropLocation}`}

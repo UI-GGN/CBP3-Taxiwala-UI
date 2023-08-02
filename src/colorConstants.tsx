@@ -7,7 +7,8 @@ export const LightMode = {
   typography: {
     primary: "#474646",
     secondary: "#999797",
-    primaryblue: "#163c4d"
+    primaryblue: "#163c4d",
+    secondaryred: "#F2617A"
   },
   declineRed: "#F2617A",
   successGreen: "#6B9E78",
@@ -24,6 +25,8 @@ export const DarkMode = {
     primary: "#ffffffb8",
     secondary: "#c1c1c1",
     primaryblue: "#ffffffb8",
+    secondaryred: "#F2617A",
+    pendingBlue: "#47A1AD"
   },
   declineRed: "#F2617A",
   successGreen: "#6B9E78",

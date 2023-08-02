@@ -27,10 +27,10 @@ const RequestStatusText: FC<{ status: string }> = ({ status }): JSX.Element => {
     return (
       <>
         <h1 className="request_headline" style={{ margin: "0px", color: "#47A1AD" }}>
-						<PendingIcon /> Request in Progress
+          <PendingIcon /> Request in Progress
         </h1>
         <Typography
-          variant="h6"
+          sx={{ fontSize: "17px" }}
           color="typography.secondary"
           style={{ margin: "0px" }}
         >
@@ -43,10 +43,10 @@ const RequestStatusText: FC<{ status: string }> = ({ status }): JSX.Element => {
     return (
       <>
         <h1 className="request_headline" style={{ margin: "0px", color: "#F2617A" }}>
-						<DangerousIcon /> Request Declined
+          <DangerousIcon /> Request Declined
         </h1>
         <Typography
-          variant="h6"
+          sx={{ fontSize: "17px" }}
           color="typography.secondary"
           style={{ margin: "0px" }}
         >
@@ -59,10 +59,10 @@ const RequestStatusText: FC<{ status: string }> = ({ status }): JSX.Element => {
     return (
       <>
         <h1 className="request_headline" style={{ margin: "0px", color: "#6B9E78" }}>
-						<CheckCircleIcon />Request Approved
+          <CheckCircleIcon />Request Approved
         </h1>
         <Typography
-          variant="h6"
+          sx={{ fontSize: "17px" }}
           color="typography.secondary"
           style={{ margin: "0px" }}
         >
@@ -91,11 +91,13 @@ const LeftWindow = () => {
   const params = useParams();
 
   const [isLoading, isError, data] = GetApiEffect(CabRequestService.get);
+  const [isVendorLoading, isVendorError, vendordata] = GetApiEffect(CabRequestService.getVendors);
 
   return (
     <>
-      <ApiStateHandler isLoading={isLoading} isError={isError}>
-        <Box style={{ marginTop: "8rem" }} className="left_box">
+      <ApiStateHandler isLoading={isLoading||isVendorLoading} isError={isError||isVendorError}>
+        {console.log(vendordata)}
+        <Box style={{ marginTop: "6rem" }} className="left_box">
           <Button
             variant="outlined"
             onClick={() => {
@@ -107,6 +109,8 @@ const LeftWindow = () => {
           </Button>
           <br />
           <br />
+          <br />
+          <br />
           {data && (
             <>
               {data
@@ -116,11 +120,11 @@ const LeftWindow = () => {
                 .map((req: ICabRequest, index: number) => (
                   <>
                     <Typography sx={{ color: "typography.secondary" }}>
-                      Raised at : {convertDateFormat(req.expireDate)}
+                      Raised at : {convertDateFormat(req.createdAt)}
                     </Typography>
                     <RequestStatusText key={index} status={req.status} />
                     <br />
-                    {console.log(data)}
+                    
                     <Box
                       sx={{
                         width: "60%",
@@ -133,11 +137,28 @@ const LeftWindow = () => {
                         variant="body2"
                         sx={{ fontSize: "19px" }}
                       >
-
-												Date: {convertDateFormat(req.expireDate)}
-                        <br />
-												Checkin Time: {convertTimeFormat(req.pickupTime)}
+											<b>Pickup Time : </b> {convertTimeFormat(req.pickupTime)}, {convertDateFormat(req.pickupTime)}
                       </Typography>
+
+                      {
+                        req.vendorId && vendordata && (
+                          <>
+                            {
+                              vendordata
+                                .filter((vehicleobj) => vehicleobj.id === req.vendorId)
+                                .map((assignedVehicle) => (
+                                  <>
+                                    <Typography variant="body2"
+                                      sx={{ fontSize: "19px" }}>
+                                      <b>Driver Assigned : </b> {assignedVehicle.name} (Ph no. {assignedVehicle.phoneNumber})
+                                    </Typography>
+
+                                  </>
+                                ))
+                            }
+                          </>
+                        )
+                      }
                     </Box>
                     <br />
                     <TimelineComponent
@@ -147,6 +168,7 @@ const LeftWindow = () => {
                     />
                     {/* <hr /> */}
                     <br />
+               
                     {/* <Typography
                       variant="body2"
                       sx={{ color: "typography.secondary", fontSize: "19px" }}

@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import daycab from "../../../assets/parked_cab.jpg";
 import nightcab from "../../../assets/night-cab.jpeg";
+import hdbanner from "../../../assets/banner2.jpeg";
 import "./Login.css";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -202,7 +203,7 @@ const LoginScreen: React.FC = (): ReactElement => {
           sx={{ display: { xs: "none", sm: "block" } }}
         >
           <img
-            src={theme.palette.mode === "light" ? daycab : nightcab}
+            src={ theme.palette.mode === "light" ? hdbanner : hdbanner }
             alt="cab parked"
             className="login_coverimg"
           />

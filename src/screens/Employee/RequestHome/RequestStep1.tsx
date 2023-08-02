@@ -141,10 +141,13 @@ const RequestStep1: FC<IRequestStep1Props> = ({
 			)}
 			{alignment == "Regular" && (
 				<div>
-					<Alert severity="info">
+					<Alert severity="error">
+						Feature In progress. To be introduced soon.
+					</Alert>
+					{/* <Alert severity="info">
 						Regular requests are when you plan to come for few days to office.
 						These are to be made 1 day before by 10pm.
-					</Alert>
+					</Alert> */}
 					<br />
 					<div className="date_picker">
 						<LocalizationProvider dateAdapter={AdapterDayjs}>

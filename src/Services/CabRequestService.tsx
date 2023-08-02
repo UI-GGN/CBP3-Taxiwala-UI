@@ -14,5 +14,12 @@ export const CabRequestService = {
       method: "POST",
       data: body
     });
-  } 
+  },
+  getVendors: async function () {
+    const response = await api.request({
+      url: "/vendor",
+      method: "GET"
+    });
+    return response.data;
+  }
 };

@@ -52,7 +52,9 @@ const App = (): ReactElement => {
           typography: {
             primary: LightMode.typography.primary,
             secondary: LightMode.typography.secondary,
-            primaryblue: LightMode.typography.primaryblue
+            primaryblue: LightMode.typography.primaryblue,
+            secondaryblue: LightMode.typography.primaryblue,
+            secondaryred: LightMode.typography.secondaryred
           },
           linecolor: LightMode.linecolor,
 				  }
@@ -69,7 +71,9 @@ const App = (): ReactElement => {
           typography: {
             primary: DarkMode.typography.primary,
             secondary: DarkMode.typography.secondary,
-            primaryblue: DarkMode.typography.primaryblue
+            primaryblue: DarkMode.typography.primaryblue,
+            secondaryblue: DarkMode.typography.pendingBlue,
+            secondaryred: DarkMode.typography.secondaryred
           },
           linecolor: DarkMode.linecolor,
 				  }),
