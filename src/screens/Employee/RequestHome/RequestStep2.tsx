@@ -139,6 +139,7 @@ const RequestStep2: FC<IRequestStep2Props> = ({
             <Button
               data-testid="submit_button"
               variant="contained"
+              sx={{ width: "200px" }}
               disabled={shouldSubmitButtonDisabled(location, employeeDetails)}
               onClick={() => submitFn()}
             >

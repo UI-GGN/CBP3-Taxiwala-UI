@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
 import { getUserDetailsFromToken } from "../../../utils/userValidation";
+import moment from "moment";
 
 export const RightWindow = () => {
   const theme = useTheme();
@@ -71,6 +72,23 @@ const LeftWindow = () => {
   
   const submitFn = () => {
     const userdetails = getUserDetailsFromToken();
+    const formattedAdhocDate = new Date(dateForAdHoc);
+    const selectedDate = moment(formattedAdhocDate).format("YYYY-MM-DD");
+
+    const formattedTime = new Date(checkintime);
+    const selectedTime = moment(formattedTime).format("HH:mm:ss");
+    console.log(selectedTime);
+    console.log(selectedDate+"T"+selectedTime+".000Z");
+    const pickTime = selectedDate+"T"+selectedTime+".000Z";
+
+    const formatedCheckoutTime = new Date(checkouttime);
+    const selectedCheckoutTime = moment(formatedCheckoutTime).format("HH:mm:ss");
+    console.log(selectedCheckoutTime);
+    console.log(selectedDate+"T"+selectedCheckoutTime+".000Z");
+    const dropTime = selectedDate+"T"+selectedCheckoutTime+".000Z";
+    // navigate(`/employee/request/${63}`);
+    // return;
+
     postApi(
       {
         "employeeId": userdetails.employeeId,
@@ -81,19 +99,19 @@ const LeftWindow = () => {
         "dropLocation": cabtype === "pick"? 
           "International Tech Park, Sector 59, Gurugram, Haryana, 122102":
           location.address + " pincode: " + location.pincode + " landmark: " + location.landmark,
-        "pickupTime": cabtype === "pick"? "2023-08-18T08:55:18.252Z" : checkouttime,
+        "pickupTime": cabtype === "pick"? pickTime : dropTime,
         "projectCode": employeeDetails.projectCode,
         "phoneNumber": employeeDetails.phoneNumber
       },
+      undefined,
       (data) => {
 		    console.log(data);
         navigate(`/employee/request/${data.data.id}`);
+        return;
       }
     );
     // console.log(location, employeeDetails, checkouttime);
   };
-
-  console.log(data);
 
   return (
     <>

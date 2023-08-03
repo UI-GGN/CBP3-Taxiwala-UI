@@ -3,10 +3,10 @@ import { useState } from "react";
 import { getUserDetailsFromToken } from "../../utils/userValidation";
 
 const apiStatus = {
-	onhold: "onhold",
-	loading: "loading",
-	complete: "complete",
-	error: "error",
+  onhold: "onhold",
+  loading: "loading",
+  complete: "complete",
+  error: "error",
 };
 
 export const GetApiEffect: (
@@ -37,26 +37,27 @@ export const GetApiEffect: (
 };
 
 export const PostService = (service: any) => {
-	const [status, setStatus] = useState(apiStatus.onhold);
-	const [data, setData] = useState(null);
+  const [status, setStatus] = useState(apiStatus.onhold);
+  const [data, setData] = useState(null);
 
-	const postApi = (body: any, params?: any, successDelegate?: any) => {
-		setStatus(apiStatus.loading);
-		service(body, params)
-			.then((data: any) => {
-				setData(data);
-				setStatus(apiStatus.complete);
-				successDelegate(data);
-			})
-			.catch(() => {
-				setStatus(apiStatus.error);
-			});
-	};
+  const postApi = (body: any, params?: any, successDelegate?: any) => {
+    setStatus(apiStatus.loading);
+    service(body, params)
+      .then((data: any) => {
+        setData(data);
+        setStatus(apiStatus.complete);
+        successDelegate(data);
+        return;
+      })
+      .catch(() => {
+        setStatus(apiStatus.error);
+      });
+  };
 
-	return {
-		postApi: postApi,
-		data,
-		isLoading: status === apiStatus.loading,
-		isError: status === apiStatus.error,
-	};
+  return {
+    postApi: postApi,
+    data,
+    isLoading: status === apiStatus.loading,
+    isError: status === apiStatus.error,
+  };
 };

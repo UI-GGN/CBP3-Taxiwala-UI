@@ -40,7 +40,9 @@ const AllRequestPage: React.FC = (): ReactElement => {
                   }}>All requests</Typography>
                 <br />
                 <Grid container spacing={3}>
-                  {data.map((req: ICabRequest, index) => (
+                  {data
+                    .slice(0)
+                    .reverse().map((req: ICabRequest, index) => (
                     <Grid
                       item
                       xs={12}
