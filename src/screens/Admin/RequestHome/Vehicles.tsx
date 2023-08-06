@@ -19,7 +19,7 @@ import {
 	RadioGroup,
 	Stack,
 } from "@mui/material";
-import React, { ReactElement, useEffect, useState, useReducer } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
 import Dropdown from "../../../Components/TextInput/Dropdown";
 import TextInput from "../../../Components/TextInput/TextInput";
@@ -66,6 +66,8 @@ export const Vehicles: React.FC = (): ReactElement => {
 	const [vendorDropdownValues, setVendorDropdownValues] = useState(
 		[] as IVendorDropdownValue[]
 	);
+
+	console.log(isVendorDataLoading, isVendorDataError, data);
 
 	useEffect(() => {
 		if (vendorData !== null && vehicleData !== null) {

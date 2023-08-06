@@ -121,7 +121,7 @@ export interface IVendor {
 	id: number;
 	name: string;
 	deleted: boolean;
-	phoneNumber?: string;
+	phoneNumber: string;
 }
 
 export interface IRouteCardProps {

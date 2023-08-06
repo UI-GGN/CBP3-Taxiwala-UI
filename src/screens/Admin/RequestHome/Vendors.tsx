@@ -81,7 +81,7 @@ export const Vendors: React.FC = (): ReactElement => {
 		postApi(
 			{
 				name: name,
-				phoneNumber: phoneNumber,
+				phoneNumber: "+91" + phoneNumber,
 			},
 			null,
 			(response: any) => {
@@ -150,6 +150,7 @@ export const Vendors: React.FC = (): ReactElement => {
 										marginTop: "30px",
 										marginRight: "40px",
 									}}
+									icon={"+91"}
 								/>
 								<br />
 								<br />

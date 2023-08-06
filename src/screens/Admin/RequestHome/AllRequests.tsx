@@ -122,6 +122,8 @@ export const AllRequests: React.FC = (): ReactElement => {
 		);
 	}
 
+	console.log(data);
+
 	const handleAssignVendor: () => void = () => {
 		if (selectedCabRequestIndex !== null) {
 			postApi(
@@ -136,7 +138,9 @@ export const AllRequests: React.FC = (): ReactElement => {
 					setShowModal(false);
 					setAction("");
 					notifyVendor(
-						"+919582688606",
+						vendorData.filter((v) => {
+							return v.id.toString() == selectedVendor;
+						})[0].phoneNumber,
 						cabRequestData[selectedCabRequestIndex]
 					);
 					setCabRequestData((cabRequests: ICabRequest[]) =>

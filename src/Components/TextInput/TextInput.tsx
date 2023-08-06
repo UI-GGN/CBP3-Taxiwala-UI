@@ -2,6 +2,7 @@ import TextField from "@mui/material/TextField";
 import { FC } from "react";
 import CSS from "csstype";
 import React from "react";
+import { InputAdornment } from "@mui/material";
 
 interface ITextInputProps {
 	placeholder: string;
@@ -12,6 +13,7 @@ interface ITextInputProps {
 	disabled?: boolean;
 	value: string;
 	id?: number;
+	icon?: string;
 }
 
 const TextInput: FC<ITextInputProps> = ({
@@ -22,6 +24,7 @@ const TextInput: FC<ITextInputProps> = ({
 	disabled,
 	value,
 	id,
+	icon,
 }: ITextInputProps): JSX.Element => {
 	return (
 		<>
@@ -47,6 +50,9 @@ const TextInput: FC<ITextInputProps> = ({
 						color: "typography.primary",
 						paddingLeft: "15px",
 					},
+					startAdornment: icon ? (
+						<InputAdornment position="start">{icon}</InputAdornment>
+					) : null,
 					// disableUnderline: true
 				}}
 				className="TextInput"
