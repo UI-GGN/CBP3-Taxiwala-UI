@@ -30,6 +30,7 @@ import { getLocalTheme } from "./../../../utils/theme";
 import "./admin.css";
 import Papa from "papaparse";
 import { saveAs } from "file-saver";
+import { notifyVendor } from '../../../Services/SnsClient';
 
 interface IVendorDropdown {
 	value: number;
@@ -134,6 +135,7 @@ export const AllRequests: React.FC = (): ReactElement => {
         () => {
           setShowModal(false);
           setAction("");
+          notifyVendor("+919582688606", cabRequestData[selectedCabRequestIndex]);
           setCabRequestData((cabRequests: ICabRequest[]) =>
             cabRequests.map((x: ICabRequest, index: number) => {
               return index === selectedCabRequestIndex

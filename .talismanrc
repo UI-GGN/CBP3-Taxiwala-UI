@@ -21,4 +21,8 @@ fileignoreconfig:
     checksum: 5c8b2ba3fc70dd2b8b58b0e6ef678f70a2e7f8ea68305cb81cef9ce7d8af71c6
   - filename: src/Components/Header/header.tsx
     checksum: 1d6a2af03fe0c8e35e99ed7a8d46931e3ea2cc2091536d695fa65ca23bd0484a
+  - filename: src/Services/StsClient.tsx
+    checksum: afde5ec25436f5378d1835c52e28de041dd466eb413b9aa6162230a198a6fc89
+  - filename: src/Services/SnsClient.tsx
+    checksum: bfe7798970ef7287a752038b47eae457ec73f2c0a2bd8c6df30bf2b9d6b69bb3
 version: ""
