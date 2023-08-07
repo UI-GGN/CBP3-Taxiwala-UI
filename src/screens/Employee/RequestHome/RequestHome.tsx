@@ -65,9 +65,7 @@ const LeftWindow = () => {
 			projectCode: "",
 			phoneNumber: "",
 		});
-	const { postApi, data, isLoading, isError } = PostService(
-		CabRequestService.create
-	);
+	const { postApi, isLoading, isError } = PostService(CabRequestService.create);
 
 	const submitFn = () => {
 		const userdetails = getUserDetailsFromToken();
@@ -76,15 +74,11 @@ const LeftWindow = () => {
 
 		const formattedTime = new Date(checkintime);
 		const selectedTime = moment(formattedTime).format("HH:mm:ss");
-		console.log(selectedTime);
-		console.log(selectedDate + "T" + selectedTime + ".000Z");
 		const pickTime = selectedDate + "T" + selectedTime + ".000Z";
 
 		const formatedCheckoutTime = new Date(checkouttime);
 		const selectedCheckoutTime =
 			moment(formatedCheckoutTime).format("HH:mm:ss");
-		console.log(selectedCheckoutTime);
-		console.log(selectedDate + "T" + selectedCheckoutTime + ".000Z");
 		const dropTime = selectedDate + "T" + selectedCheckoutTime + ".000Z";
 		// navigate(`/employee/request/${63}`);
 		// return;

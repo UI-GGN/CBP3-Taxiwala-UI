@@ -12,7 +12,7 @@ const apiStatus = {
 export const GetApiEffect: (
 	service: any,
 	params?: any
-) => [boolean, boolean, any] = (service, params) => {
+) => [boolean, boolean, any] = (service) => {
 	const [status, setStatus] = useState(apiStatus.loading);
 	const [data, setData] = useState(null);
 

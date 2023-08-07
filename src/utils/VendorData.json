@@ -1,22 +1,26 @@
 [
     {
         "id": 1,
+        "name": "XYZ",
+        "phoneNumber": "911234567440",
+        "deleted": false
+    },
+    {
+        "id": 2,
+        "name": "Vikram",
+        "phoneNumber": "911234567440",
+        "deleted": false
+    },
+    {
+        "id": 3,
+        "name": "Test",
+        "phoneNumber": "+918307822712",
+        "deleted": false
+    },
+    {
+        "id": 7,
         "name": "vendor name",
-        "deleted": false
-    },
-    {
-        "id": 11,
-        "name": "vendor name1",
-        "deleted": false
-    },
-    {
-        "id": 13,
-        "name": "vendor name2",
-        "deleted": false
-    },
-    {
-        "id": 14,
-        "name": "Unique name ....",
+        "phoneNumber": "911234567440",
         "deleted": false
     }
 ]

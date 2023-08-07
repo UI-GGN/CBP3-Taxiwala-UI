@@ -1,27 +1,25 @@
-import React, { ReactElement } from "react";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {
-  Grid,
+  Box,
   Card,
   CardContent,
-  Typography,
-  Box,
   Container,
+  Grid,
+  Typography,
 } from "@mui/material/";
-import "./AllRequestPage.css";
-import logo from "../../../assets/image1.png";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import React, { ReactElement } from "react";
+import { useNavigate } from "react-router-dom";
+import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
+import HeaderBar from "../../../Components/Header/header";
+import { ICabRequest } from "../../../Interfaces";
 import { GetApiEffect } from "../../../Services/ApiService/ApiUtils";
 import { CabRequestService } from "../../../Services/CabRequestService";
-import ApiStateHandler from "../../../Components/ApiHandler/ApiStateHandler";
-import { useNavigate } from "react-router-dom";
-import { ICabRequest } from "../../../Interfaces";
-import { convertDateFormat, convertTimeFormat } from "../../../utils/CabRequestHelper";
-import { useParams } from "react-router-dom";
-import HeaderBar from "../../../Components/Header/header";
+import logo from "../../../assets/image1.png";
 import { headerType } from "../../../constants";
+import { convertDateFormat, convertTimeFormat } from "../../../utils/CabRequestHelper";
+import "./AllRequestPage.css";
 
 const AllRequestPage: React.FC = (): ReactElement => {
-  const params = useParams();
   const [isLoading, isError, data] = GetApiEffect(CabRequestService.get);
   const navigate = useNavigate();
 
@@ -42,7 +40,7 @@ const AllRequestPage: React.FC = (): ReactElement => {
                 <Grid container spacing={3}>
                   {data
                     .slice(0)
-                    .reverse().map((req: ICabRequest, index) => (
+                    .reverse().map((req: ICabRequest, index: number) => (
                     <Grid
                       item
                       xs={12}
