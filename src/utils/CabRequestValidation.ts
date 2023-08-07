@@ -5,18 +5,12 @@ export const shouldNextButtonDisabled: (
 	cabtype: string,
 	checkintime: string,
 	checkouttime: string,
-	startDate: Date | null,
-	endDate: Date | null,
-	noEndDateNeeded: boolean | undefined,
 	dateForAdHoc: Date | null
 ) => boolean = (
 	alignment: string,
 	cabtype: string,
 	checkintime: string,
 	checkouttime: string,
-	startDate: Date | null,
-	endDate: Date | null,
-	noEndDateNeeded: boolean | undefined,
 	dateForAdHoc: Date | null
 ) => {
 	if (alignment === "Ad-Hoc") {

@@ -245,9 +245,6 @@ const RequestStep1: FC<IRequestStep1Props> = ({
 						cabType,
 						checkInTime,
 						checkOutTime,
-						startDate,
-						endDate,
-						noEndDateNeeded,
 						dateForAdHoc
 					) || isStartDateGreaterThanEndDate
 				}
