@@ -9,7 +9,7 @@ api.interceptors.response.use(undefined, (error) => {
 });
 
 export const loginapi = axios.create({
-	baseURL: "http://localhost:5000/api/v1",
+	baseURL: "https://cbp-taxiwala-backend-x1cd.vercel.app/api/v1",
 });
 
 loginapi.interceptors.response.use(undefined, (error) => {
