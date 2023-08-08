@@ -13,7 +13,7 @@ import HeaderBar from "../../../Components/Header/header";
 import TextInput from "../../../Components/TextInput/TextInput";
 import { PostService } from "../../../Services/ApiService/ApiUtils";
 import { LoginService } from "../../../Services/LoginService";
-import hdbanner from "../../../assets/banner2.jpeg";
+import logincover from "../../../assets/logincover.jpg";
 import { userType } from "../../../constants";
 import {
 	getUserDetailsFromToken,
@@ -199,8 +199,8 @@ const LoginScreen: React.FC = (): ReactElement => {
 					<div style={{ backgroundColor: theme.palette.mode==="light"?"#00000000":"#00000054", width: "-webkit-fill-available", height: "100%", position: "absolute"}}>
 					</div>
 					<img
-						src="https://www.thoughtworks.com/content/dam/thoughtworks/images/photography/collection-of-media/insights/in_com_articles.jpg"
-						// src={theme.palette.mode === "light" ? hdbanner : hdbanner}
+						// src="https://www.thoughtworks.com/content/dam/thoughtworks/images/photography/collection-of-media/insights/in_com_articles.jpg"
+						src={logincover}
 						alt="cab parked"
 						className="login_coverimg"
 					/>
