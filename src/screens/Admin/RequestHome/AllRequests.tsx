@@ -207,9 +207,9 @@ export const AllRequests: React.FC = (): ReactElement => {
 				(filterBy.status === requestStatusType.ALL
 					? req
 					: req.status === filterBy.status) &&
-				(req.employeeName.toLowerCase().includes(filterBy.emp.toLowerCase()) ||
-					req.phoneNumber.toLowerCase().includes(filterBy.emp.toLowerCase()) ||
-					req.employeeId.toLowerCase().includes(filterBy.emp.toLowerCase()))
+				(req.employeeName.toLowerCase().includes(filterBy.emp.trim().toLowerCase()) ||
+					req.phoneNumber.toLowerCase().includes(filterBy.emp.trim().toLowerCase()) ||
+					req.employeeId.toLowerCase().includes(filterBy.emp.trim().toLowerCase()))
 			);
 		});
 		const sortedData = [...filteredData].sort((a, b) => {
@@ -473,7 +473,7 @@ export const AllRequests: React.FC = (): ReactElement => {
 									]}
 								/>
 								<TextInput
-									placeholder="Employee Id/ Employee Name/ Project Code"
+									placeholder="Employee Id / Employee Name / Employee Ph."
 									type="text"
 									value={filterBy.emp}
 									handleChange={(text: string) => {

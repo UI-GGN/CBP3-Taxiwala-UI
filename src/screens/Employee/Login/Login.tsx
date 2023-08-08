@@ -130,7 +130,7 @@ const LoginScreen: React.FC = (): ReactElement => {
 								</Alert>
 							)}
 
-							<GoogleOAuthProvider clientId="993661792510-ijjr431srdei4root779d4qrc3srar9n.apps.googleusercontent.com">
+							<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_PROVIDER}>
 								<GoogleLogin
 									render={(renderProps) => (
 										<button
@@ -196,11 +196,15 @@ const LoginScreen: React.FC = (): ReactElement => {
 					className="login_img_grid"
 					sx={{ display: { xs: "none", sm: "block" } }}
 				>
+					<div style={{ backgroundColor: theme.palette.mode==="light"?"#00000000":"#00000054", width: "-webkit-fill-available", height: "100%", position: "absolute"}}>
+					</div>
 					<img
-						src={theme.palette.mode === "light" ? hdbanner : hdbanner}
+						src="https://www.thoughtworks.com/content/dam/thoughtworks/images/photography/collection-of-media/insights/in_com_articles.jpg"
+						// src={theme.palette.mode === "light" ? hdbanner : hdbanner}
 						alt="cab parked"
 						className="login_coverimg"
 					/>
+					
 				</Grid>
 			</Grid>
 		</>

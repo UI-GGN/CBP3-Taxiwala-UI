@@ -29,7 +29,7 @@ function Thoughtworks() {
         variant="overline"
         sx={{
           fontWeight: 400,
-          textTransform: "none",
+          textTransform: "none !important",
           color: "typography.secondaryblue",
         }}
       >thoughtworks</Typography>
@@ -81,10 +81,10 @@ export default function HeaderBar(props: any) {
               variant="body1"
               color="typography.primaryblue"
               sx={{
-                fontSize: "28px",
-                fontWeight: 700,
+                fontSize: "28px !important",
+                fontWeight: "700 !important",
                 justifyContent: "right",
-                marginTop: "5px",
+                marginTop: "5px !important",
                 paddingLeft: "30px",
               }}
             >

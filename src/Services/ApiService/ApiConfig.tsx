@@ -9,7 +9,7 @@ api.interceptors.response.use(undefined, (error) => {
 });
 
 export const loginapi = axios.create({
-	baseURL: "http://localhost:5001/api/v1",
+	baseURL: "http://localhost:5000/api/v1",
 });
 
 loginapi.interceptors.response.use(undefined, (error) => {
