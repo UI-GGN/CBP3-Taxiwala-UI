@@ -110,7 +110,7 @@ const LeftWindow = () => {
 						  location.landmark,
 				pickupTime: cabtype === "pick" ? pickTime : dropTime,
 				projectCode: employeeDetails.projectCode,
-				phoneNumber: employeeDetails.phoneNumber,
+				phoneNumber: "+91" + employeeDetails.phoneNumber,
 			},
 			undefined,
 			(data: any) => {
@@ -118,7 +118,7 @@ const LeftWindow = () => {
 				navigate(`/employee/request/${data.data.id}`);
 				const requestDetails = {
 					employeeName: userdetails.name,
-					phoneNumber: employeeDetails.phoneNumber,
+					phoneNumber: "+91" + employeeDetails.phoneNumber,
 					pickupLocation:
 						cabtype === "pick"
 							? location.address +

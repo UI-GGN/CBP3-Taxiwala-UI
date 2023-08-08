@@ -123,7 +123,7 @@ export const Vehicles: React.FC = (): ReactElement => {
 						driverName: driverName,
 						vendor: {
 							name: name,
-							phoneNumber: phoneNumber,
+							phoneNumber: "+91" + phoneNumber,
 						},
 				  };
 
@@ -142,7 +142,7 @@ export const Vehicles: React.FC = (): ReactElement => {
 					: {
 							...response.data,
 							vendorName: name,
-							vendorPhoneNumber: phoneNumber,
+							vendorPhoneNumber: "+91" + phoneNumber,
 					  };
 			setVehicles((prevVehicles: IVehicle[]) => [newVehicle, ...prevVehicles]);
 			setName("");
@@ -315,6 +315,7 @@ export const Vehicles: React.FC = (): ReactElement => {
 												marginTop: "30px",
 												marginRight: "40px",
 											}}
+											icon={"+91"}
 										/>
 										<br />
 										<br />
