@@ -69,7 +69,7 @@ const LeftWindow = () => {
 	const { postApi, isLoading, isError } = PostService(CabRequestService.create);
 
 	const submitFn = () => {
-		const userdetails = getUserDetailsFromToken();
+		const userdetails: any = getUserDetailsFromToken();
 		const formattedAdhocDate = new Date(dateForAdHoc);
 		const selectedDate = moment(formattedAdhocDate).format("YYYY-MM-DD");
 

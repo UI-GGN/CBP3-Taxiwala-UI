@@ -33,7 +33,7 @@ const LoginScreen: React.FC = (): ReactElement => {
 	const [authloading, setAuthloading] = useState(false);
 	const [authError, setAuthError] = useState(false);
 	const [loginEnabled, setLoginEnabled] = useState(false);
-	const { postApi, data, isLoading, isError } = PostService(LoginService.login);
+	const { postApi, isError } = PostService(LoginService.login);
 
 	const isLoginDisabled = () => {
 		if (!showEmployeeid) {
@@ -61,11 +61,11 @@ const LoginScreen: React.FC = (): ReactElement => {
 			const usertoken = jwt_decode(data.token);
 			if (usertoken.usertype === userType.Admin) {
 				navigate("/admin/home");
-				window.location.reload(false);
+				window.location.reload();
 			}
 			if (usertoken.usertype === userType.Employee) {
 				navigate("/employee/home");
-				window.location.reload(false);
+				window.location.reload();
 			}
 		});
 	};
@@ -96,7 +96,7 @@ const LoginScreen: React.FC = (): ReactElement => {
 				}
 				setAuthloading(false);
 			})
-			.catch((err) => {
+			.catch(() => {
 				setLoginEnabled(false);
 				setAuthError(true);
 				setAuthloading(false);
