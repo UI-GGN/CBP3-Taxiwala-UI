@@ -24,7 +24,6 @@ jobs:
 
   deploy-preview:
     name: Deploy Preview
-    needs: test
     runs-on: ubuntu-latest
 
     steps:
