@@ -56,7 +56,7 @@ const LoginScreen: React.FC = (): ReactElement => {
 
 	const login = () => {
 		console.log(userDetails);
-		postApi(userDetails, undefined, (data: any) => {
+		postApi(userDetails, undefined, (data) => {
 			localStorage.setItem("usertoken", data.token);
 			const usertoken = jwt_decode(data.token);
 			if (usertoken.usertype === userType.Admin) {
@@ -96,7 +96,7 @@ const LoginScreen: React.FC = (): ReactElement => {
 				}
 				setAuthloading(false);
 			})
-			.catch(() => {
+			.catch((err) => {
 				setLoginEnabled(false);
 				setAuthError(true);
 				setAuthloading(false);

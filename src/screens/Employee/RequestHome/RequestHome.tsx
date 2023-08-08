@@ -24,6 +24,7 @@ import HeaderBar from "../../../Components/Header/header";
 import { headerType } from "../../../constants";
 import { getUserDetailsFromToken } from "../../../utils/userValidation";
 import moment from "moment";
+import { sendEmailNotification } from "../../../Services/SesClient";
 
 export const RightWindow = () => {
 	const theme = useTheme();
@@ -74,11 +75,15 @@ const LeftWindow = () => {
 
 		const formattedTime = new Date(checkintime);
 		const selectedTime = moment(formattedTime).format("HH:mm:ss");
+		console.log(selectedTime);
+		console.log(selectedDate + "T" + selectedTime + ".000Z");
 		const pickTime = selectedDate + "T" + selectedTime + ".000Z";
 
 		const formatedCheckoutTime = new Date(checkouttime);
 		const selectedCheckoutTime =
 			moment(formatedCheckoutTime).format("HH:mm:ss");
+		console.log(selectedCheckoutTime);
+		console.log(selectedDate + "T" + selectedCheckoutTime + ".000Z");
 		const dropTime = selectedDate + "T" + selectedCheckoutTime + ".000Z";
 		// navigate(`/employee/request/${63}`);
 		// return;
@@ -111,6 +116,35 @@ const LeftWindow = () => {
 			(data: any) => {
 				console.log(data);
 				navigate(`/employee/request/${data.data.id}`);
+				const requestDetails = {
+					employeeName: userdetails.name,
+					phoneNumber: employeeDetails.phoneNumber,
+					pickupLocation:
+						cabtype === "pick"
+							? location.address +
+							  " pincode: " +
+							  location.pincode +
+							  " landmark: " +
+							  location.landmark
+							: "International Tech Park, Sector 59, Gurugram, Haryana, 122102",
+					dropLocation:
+						cabtype === "pick"
+							? "International Tech Park, Sector 59, Gurugram, Haryana, 122102"
+							: location.address +
+							  " pincode: " +
+							  location.pincode +
+							  " landmark: " +
+							  location.landmark,
+					pickupTime: cabtype === "pick" ? pickTime : dropTime,
+				};
+				sendEmailNotification(
+					requestDetails,
+					import.meta.env.VITE_ADMIN_EMAIL,
+					{
+						SourceArn: import.meta.env.VITE_SOURCE_ARN,
+						Source: import.meta.env.VITE_SOURCE_EMAIL,
+					}
+				);
 				return;
 			}
 		);

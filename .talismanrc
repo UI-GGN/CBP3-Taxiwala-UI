@@ -25,4 +25,6 @@ fileignoreconfig:
     checksum: afde5ec25436f5378d1835c52e28de041dd466eb413b9aa6162230a198a6fc89
   - filename: src/Services/SnsClient.tsx
     checksum: bfe7798970ef7287a752038b47eae457ec73f2c0a2bd8c6df30bf2b9d6b69bb3
+  - filename: src/Services/SesClient.tsx
+    checksum: 0bdebd9880d677abe72918b8f1c7ecfbd882cbe1d934db0733925b288d2724aa
 version: ""

@@ -16,17 +16,46 @@ import {
 	convertDateFormat,
 	convertTimeFormat,
 } from "../../utils/CabRequestHelper";
-import PhoneIcon from '@mui/icons-material/Phone';
-import WorkIcon from '@mui/icons-material/Work';
+import PhoneIcon from "@mui/icons-material/Phone";
+import WorkIcon from "@mui/icons-material/Work";
 
+function convertDateFormatToISOFormat(inputDate: string): string {
+	const [datePart, timePart] = inputDate.split(", ");
+	const [day, month, year] = datePart.split("/");
+	const [hours, minutes, seconds] = timePart.split(":");
+
+	const isoDate = new Date(
+		Date.UTC(
+			Number(year),
+			Number(month) - 1,
+			Number(day),
+			Number(hours),
+			Number(minutes),
+			Number(seconds)
+		)
+	);
+	const isoString = isoDate.toISOString();
+
+	return isoString;
+}
 
 export const RequestCard: FC<IRequestCardProps> = ({
 	request,
 	index,
 	handleModal,
 }: IRequestCardProps): JSX.Element => {
+	const requestCreatedDate: string = new Date(request.createdAt).toLocaleString(
+		undefined,
+		{ timeZone: "Asia/Kolkata" }
+	);
+	const requestCreatedDateinISO: string =
+		convertDateFormatToISOFormat(requestCreatedDate);
+
 	return (
-		<Card sx={{ minWidth: 275, boxShadow: 2,  cursor: 'pointer' }} onClick={() => handleModal(index)}>
+		<Card
+			sx={{ minWidth: 275, boxShadow: 2, cursor: "pointer" }}
+			onClick={() => handleModal(index)}
+		>
 			<CardContent sx={{ pb: 0, paddingRight: 0 }}>
 				<Grid container spacing={1}>
 					<Grid item xs={8} md={8} lg={8}>
@@ -36,15 +65,20 @@ export const RequestCard: FC<IRequestCardProps> = ({
 								{request.employeeName} ({request.employeeId})
 							</b>
 						</Typography>
-						<Typography sx={{ fontSize: 16, display: 'flex', alignItems: 'center' }} color="text.secondary">
-							<PhoneIcon style={{ fontSize: 16, paddingRight: '4px'  }}/> {request.phoneNumber}
+						<Typography
+							sx={{ fontSize: 16, display: "flex", alignItems: "center" }}
+							color="text.secondary"
+						>
+							<PhoneIcon style={{ fontSize: 16, paddingRight: "4px" }} />{" "}
+							{request.phoneNumber}
 						</Typography>
 						<Typography
-							sx={{ fontSize: 16, display: 'flex', alignItems: 'center' }}
+							sx={{ fontSize: 16, display: "flex", alignItems: "center" }}
 							color="text.secondary"
 							marginBottom="10px"
 						>
-							<WorkIcon style={{ fontSize: 16, paddingRight: '4px'  }}/> Project code: {request.projectCode}
+							<WorkIcon style={{ fontSize: 16, paddingRight: "4px" }} /> Project
+							code: {request.projectCode}
 						</Typography>
 						<Typography>
 							Cab required Date: {convertDateFormat(request.pickupTime)}
@@ -55,9 +89,9 @@ export const RequestCard: FC<IRequestCardProps> = ({
 							color="text.secondary"
 							sx={{ fontSize: 15, float: "right", paddingRight: "10px" }}
 						>
-							{`${convertDateFormat(request.createdAt)}, ${convertTimeFormat(
-								request.createdAt
-							)}`}
+							{`${convertDateFormat(
+								requestCreatedDateinISO
+							)}, ${convertTimeFormat(requestCreatedDateinISO)}`}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -81,7 +115,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 									label={request.status}
 									style={{
 										color: "#ffffff",
-    									background: "#47A1AD",
+										background: "#47A1AD",
 										marginBottom: "5px",
 									}}
 								/>
@@ -91,7 +125,7 @@ export const RequestCard: FC<IRequestCardProps> = ({
 									label={request.status}
 									style={{
 										color: "#ffffff",
-  										background: "#F2617A",
+										background: "#F2617A",
 										marginBottom: "5px",
 									}}
 								/>
