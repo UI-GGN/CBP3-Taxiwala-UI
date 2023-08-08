@@ -1,360 +1,189 @@
-import React, { ReactElement } from "react";
-import WindowLayout from "../../../Components/WindowLayout";
-import daycab from "../../../assets/parked_cab.jpg";
-import nightcab from "../../../assets/night-cab.jpeg";
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useState } from "react";
-import {
-	Button,
-	Accordion,
-	AccordionSummary,
-	AccordionDetails,
-	Typography,
-	Grid,
-	ToggleButtonGroup,
-	ToggleButton,
-	Alert,
-} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TextInput from "../../../Components/TextInput/TextInput";
-import Dropdown from "../../../Components/TextInput/Dropdown";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import React, { ReactElement, useState } from "react";
+import WindowLayout from "../../../Components/WindowLayout";
+import {
+  IEmmployeeDetails,
+  ILocation,
+  UseStateType,
+  UseStateTypeForDate,
+} from "../../../Interfaces";
+import nightcab from "../../../assets/night-cab.jpeg";
+import daycab from "../../../assets/parked_cab.jpg";
 // import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import Checkbox from "@mui/material/Checkbox";
 // import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from "@mui/material/FormControlLabel";
 import "./RequestHome.css";
+import RequestStep1 from "./RequestStep1";
+import RequestStep2 from "./RequestStep2";
+import { PostService } from "../../../Services/ApiService/ApiUtils";
+import { CabRequestService } from "../../../Services/CabRequestService";
+import { useNavigate } from "react-router-dom";
+import HeaderBar from "../../../Components/Header/header";
+import { headerType } from "../../../constants";
+import { getUserDetailsFromToken } from "../../../utils/userValidation";
+import moment from "moment";
 
 export const RightWindow = () => {
-	const theme = useTheme();
+  const theme = useTheme();
 
-	return (
-		<img
-			src={theme.palette.mode === "light" ? daycab : nightcab}
-			alt="cab parked"
-			className="login_coverimg"
-		/>
-	);
+  return (
+    <img
+      src={theme.palette.mode === "light" ? daycab : nightcab}
+      alt="cab parked"
+      className="login_coverimg"
+    />
+  );
 };
 
 const LeftWindow = () => {
-	const TotalSteps = 2;
-	const [currentstep, setCurrentstep] = useState(0);
-	const [alignment, setAlignment] = React.useState("Ad-Hoc");
-	const [cabtype, setCabtype] = useState("");
-	const [checkintime, setCheckintime] = useState("");
-	const [checkouttime, setCheckouttime] = useState("");
-	const [noEndDateNeeded, setNoEndDateNeeded] = useState(false);
-	const dropdownvalues = [
-		{
-			value: "9:00",
-			label: "9:00",
-		},
-		{
-			value: "10:00",
-			label: "10:00",
-		},
-	];
+  const TotalSteps = 2;
+  const navigate = useNavigate();
+  const [currentstep, setCurrentstep]: UseStateType<number> = useState(0);
+  const [cabtype, setCabtype]: UseStateType<string> = useState("");
+  const [checkintime, setCheckintime]: UseStateType<string> = useState("");
+  const [checkouttime, setCheckouttime]: UseStateType<string> = useState("");
+  const [noEndDateNeeded, setNoEndDateNeeded]: UseStateType<boolean> =
+		useState(false);
+  const [dateForAdHoc, setDateForAdHoc]: UseStateTypeForDate =
+		useState<Date | null>(null);
+  const [startDate, setStartDate]: UseStateTypeForDate = useState<Date | null>(
+    null
+  );
+  const [endDate, setEndDate]: UseStateTypeForDate = useState<Date | null>(
+    null
+  );
+  const [location, setLocation]: UseStateType<ILocation> = useState({
+    address: "",
+    pincode: "",
+    landmark: "",
+  });
+  const [employeeDetails, setEmployeeDetails]: UseStateType<IEmmployeeDetails> =
+		useState({
+		  id: "",
+		  projectCode: "",
+		  phoneNumber: ""
+		});
+  const { postApi, data, isLoading, isError } = PostService(
+    CabRequestService.create
+  );
 
-	const Step1 = () => {
-		const handleChange = (
-			event: React.MouseEvent<HTMLElement>,
-			newAlignment: string
-		) => {
-			console.log(event);
-			newAlignment && setAlignment(newAlignment);
-		};
+  
+  const submitFn = () => {
+    const userdetails = getUserDetailsFromToken();
+    const formattedAdhocDate = new Date(dateForAdHoc);
+    const selectedDate = moment(formattedAdhocDate).format("YYYY-MM-DD");
 
-		return (
-			<>
-				<ToggleButtonGroup
-					color="primary"
-					value={alignment}
-					exclusive
-					onChange={handleChange}
-					aria-label="Platform"
-				>
-					<ToggleButton value="Ad-Hoc">Ad-Hoc</ToggleButton>
-					<ToggleButton value="Regular">Regular</ToggleButton>
-				</ToggleButtonGroup>
-				<br />
-				<br />
+    const formattedTime = new Date(checkintime);
+    const selectedTime = moment(formattedTime).format("HH:mm:ss");
+    console.log(selectedTime);
+    console.log(selectedDate+"T"+selectedTime+".000Z");
+    const pickTime = selectedDate+"T"+selectedTime+".000Z";
 
-				{alignment == "Ad-Hoc" && (
-					<div>
-						<Alert severity="info">
-							Ad-Hoc requests are request on demand basis for the specific day.
-							These are to be made 1 hour before atleast.
-						</Alert>
-						<br />
+    const formatedCheckoutTime = new Date(checkouttime);
+    const selectedCheckoutTime = moment(formatedCheckoutTime).format("HH:mm:ss");
+    console.log(selectedCheckoutTime);
+    console.log(selectedDate+"T"+selectedCheckoutTime+".000Z");
+    const dropTime = selectedDate+"T"+selectedCheckoutTime+".000Z";
+    // navigate(`/employee/request/${63}`);
+    // return;
 
-						<Dropdown
-							label="Select specific cab need"
-							handleChange={(value: string) => setCabtype(value)}
-							value={cabtype}
-							dropdownvalues={[
-								{ value: "pick", label: "Need cab for pickup only" },
-								{ value: "drop", label: "Need cab for drop only" },
-								{ value: "both", label: "Need cab for both pick and drop" },
-							]}
-						/>
-						<br />
-						{(cabtype == "pick" || cabtype == "both") && (
-							<Dropdown
-								label="Check In Time"
-								handleChange={(value: string) => setCheckintime(value)}
-								value={checkintime}
-								dropdownvalues={dropdownvalues}
-							/>
-						)}
-						{(cabtype == "drop" || cabtype == "both") && (
-							<Dropdown
-								label="Check Out Time"
-								handleChange={(value) => setCheckouttime(value)}
-								value={checkouttime}
-								dropdownvalues={dropdownvalues}
-							/>
-						)}
-					</div>
-				)}
-				{alignment == "Regular" && (
-					<div>
-						<Alert severity="info">
-							Regular requests are when you plan to come for few days to office.
-							These are to be made 1 day before by 10pm.
-						</Alert>
-						<br />
-						<div>
-							<LocalizationProvider dateAdapter={AdapterDayjs}>
-								{/* <DemoContainer components={["DatePicker"]}> */}
-								<DatePicker label="Select start date" />
-								<DatePicker
-									label="Select end date"
-									disabled={noEndDateNeeded}
-								/>
-								{/* </DemoContainer> */}
-							</LocalizationProvider>
-						</div>
+    postApi(
+      {
+        "employeeId": userdetails.employeeId,
+        "employeeName": userdetails.name,
+        "pickupLocation": cabtype === "pick"? 
+          location.address + " pincode: " + location.pincode + " landmark: " + location.landmark :
+          "International Tech Park, Sector 59, Gurugram, Haryana, 122102",
+        "dropLocation": cabtype === "pick"? 
+          "International Tech Park, Sector 59, Gurugram, Haryana, 122102":
+          location.address + " pincode: " + location.pincode + " landmark: " + location.landmark,
+        "pickupTime": cabtype === "pick"? pickTime : dropTime,
+        "projectCode": employeeDetails.projectCode,
+        "phoneNumber": employeeDetails.phoneNumber
+      },
+      undefined,
+      (data) => {
+		    console.log(data);
+        navigate(`/employee/request/${data.data.id}`);
+        return;
+      }
+    );
+    // console.log(location, employeeDetails, checkouttime);
+  };
 
-						<FormControlLabel
-							control={
-								<Checkbox
-									checked={noEndDateNeeded}
-									onChange={(e) => setNoEndDateNeeded(e.target.checked)}
-									name="isEndDate"
-								/>
-							}
-							label="No End Date decided"
-						/>
-						<br />
-						<br />
-						<Dropdown
-							label="Check In Time"
-							handleChange={(value: string) => setCheckintime(value)}
-							value={checkintime}
-							dropdownvalues={dropdownvalues}
-						/>
-						<br />
-						<Dropdown
-							label="Check Out Time"
-							handleChange={(value) => setCheckouttime(value)}
-							value={checkouttime}
-							dropdownvalues={dropdownvalues}
-						/>
-					</div>
-				)}
-			</>
-		);
-	};
-
-	const Step2 = () => {
-		return (
-			<>
-				<Accordion>
-					<AccordionSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
-					>
-						<Typography>Enter your Pickup location</Typography>
-					</AccordionSummary>
-					<AccordionDetails>
-						<div>
-							<Typography>
-								Pickup point is where you will be coming from towards office!
-							</Typography>
-							<TextInput
-								placeholder="Enter your pickup location"
-								type="text"
-								value={""}
-								handleChange={(text: string) => console.log(text)}
-								styles={{
-									width: "100%",
-									height: "49.4px",
-									marginTop: "10px",
-									marginRight: "40px",
-								}}
-							/>
-							<Grid container spacing={2}>
-								<Grid item xs={12} md={6} lg={6}>
-									<TextInput
-										placeholder="PIN Code"
-										type="text"
-										value={""}
-										handleChange={(text: string) => console.log(text)}
-										styles={{
-											width: "100%",
-											height: "49.4px",
-											marginTop: "10px",
-											marginRight: "40px",
-										}}
-									/>
-								</Grid>
-								<Grid item xs={12} md={6} lg={6}>
-									<TextInput
-										placeholder="Nearest Landmark"
-										type="text"
-										value={""}
-										handleChange={(text: string) => console.log(text)}
-										styles={{
-											width: "100%",
-											height: "49.4px",
-											marginTop: "10px",
-											marginRight: "40px",
-										}}
-									/>
-								</Grid>
-							</Grid>
-						</div>
-					</AccordionDetails>
-				</Accordion>
-				<br />
-				<Accordion>
-					<AccordionSummary
-						expandIcon={<ExpandMoreIcon />}
-						aria-controls="panel1a-content"
-						id="panel1a-header"
-					>
-						<Typography>Enter your Drop location</Typography>
-					</AccordionSummary>
-					<AccordionDetails>
-						<div>
-							<Typography>
-								Drop point is where you will be going to after the office!
-							</Typography>
-							<TextInput
-								placeholder="Enter your pickup location"
-								type="text"
-								value={""}
-								handleChange={(text: string) => console.log(text)}
-								styles={{
-									width: "100%",
-									height: "49.4px",
-									marginTop: "10px",
-									marginRight: "40px",
-								}}
-							/>
-							<Grid container spacing={2}>
-								<Grid item xs={12} md={6} lg={6}>
-									<TextInput
-										placeholder="PIN Code"
-										type="text"
-										value={""}
-										handleChange={(text: string) => console.log(text)}
-										styles={{
-											width: "100%",
-											height: "49.4px",
-											marginTop: "10px",
-											marginRight: "40px",
-										}}
-									/>
-								</Grid>
-								<Grid item xs={12} md={6} lg={6}>
-									<TextInput
-										placeholder="Nearest Landmark"
-										type="text"
-										value={""}
-										handleChange={(text: string) => console.log(text)}
-										styles={{
-											width: "100%",
-											height: "49.4px",
-											marginTop: "10px",
-											marginRight: "40px",
-										}}
-									/>
-								</Grid>
-							</Grid>
-						</div>
-					</AccordionDetails>
-				</Accordion>
-				<br />
-			</>
-		);
-	};
-
-	return (
-		<>
-			<Box style={{ marginTop: "8rem" }} className="left_box">
-				<Typography
-					color="typography.primary"
-					style={{ margin: "0px", marginBottom: "-13px" }}
-				>
-					Looking for office cab?
-				</Typography>
-				{/* <Typography variant="h3">Request one now</Typography> */}
-				<h1 className="request_headline" style={{ margin: "0px" }}>
+  return (
+    <>
+      <Box style={{ marginTop: "8rem" }} className="left_box">
+        <Typography
+          color="typography.primary"
+          style={{ margin: "0px", marginBottom: "-10px" }}
+        >
+					Looking for office cab? {isLoading ? "loading" : "done"}
+        </Typography>
+        {/* <Typography variant="h3">Request one now</Typography> */}
+        <Typography variant="h3"
+          sx={{
+            fontSize: "2.5rem",
+            fontWeight: 700,
+            color: "typography.primaryblue",
+            justifyContent: "right",
+          }}>
 					Request one now
-				</h1>
-				<div>
-					<p className="stepsBox">
+        </Typography>
+        <div>
+          <p className="stepsBox">
 						Step {currentstep + 1}/{TotalSteps}
-					</p>
-				</div>
-				<br />
-
-				{currentstep == 0 && <Step1 />}
-				{currentstep == 1 && <Step2 />}
-
-				<div style={{ display: "flex" }}>
-					{currentstep > 0 && (
-						<Button
-							variant="outlined"
-							sx={{
-								mr: 1,
-							}}
-							onClick={() => {
-								currentstep > 0 && setCurrentstep((prevStep) => prevStep - 1);
-							}}
-						>
-							<ArrowBackIcon />
-						</Button>
-					)}
-					<Button
-						variant="contained"
-						disableElevation
-						onClick={() => {
-							currentstep < TotalSteps - 1 &&
-								setCurrentstep((prevStep) => prevStep + 1);
-						}}
-					>
-						{currentstep == TotalSteps - 1 ? "Submit" : "Next"}
-					</Button>
-				</div>
-			</Box>
-		</>
-	);
+          </p>
+        </div>
+        <br />
+        {currentstep == 0 && (
+          <RequestStep1
+            cabType={cabtype}
+            setCabType={setCabtype}
+            checkInTime={checkintime}
+            setCheckInTime={setCheckintime}
+            checkOutTime={checkouttime}
+            setCheckOutTime={setCheckouttime}
+            dateForAdHoc={dateForAdHoc}
+            setDateForAdHoc={setDateForAdHoc}
+            noEndDateNeeded={noEndDateNeeded}
+            setNoEndDateNeeded={setNoEndDateNeeded}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            currentstep={currentstep}
+            setCurrentstep={setCurrentstep}
+          />
+        )}
+        {currentstep == 1 && (
+          <RequestStep2
+            location={location}
+            setLocation={setLocation}
+            currentstep={currentstep}
+            setCurrentstep={setCurrentstep}
+            cabType={cabtype}
+            employeeDetails={employeeDetails}
+            setEmployeeDetails={setEmployeeDetails}
+            submitFn={submitFn}
+            isLoading={isLoading}
+            isError={isError}
+          />
+        )}
+      </Box>
+    </>
+  );
 };
 
 const RequestHome: React.FC = (): ReactElement => {
-	return (
-		<>
-			<WindowLayout leftWindow={<LeftWindow />} rightWindow={<RightWindow />} />
-		</>
-	);
+  return (
+    <>
+      <HeaderBar headerType={headerType.Employee} />
+      <WindowLayout leftWindow={<LeftWindow />} rightWindow={<RightWindow />} />
+    </>
+  );
 };
 
 export default RequestHome;

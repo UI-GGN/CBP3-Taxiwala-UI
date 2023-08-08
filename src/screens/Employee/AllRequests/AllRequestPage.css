@@ -1,0 +1,61 @@
+
+.allrequest_box{
+  margin-top: 8rem;
+}
+
+.allrequests_text {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.requests_image {
+  height: 350px;
+  object-fit: cover;
+  width: 325px;
+  margin-left: 15% !important;
+  margin-top: 35% !important;
+}
+.details {
+  /* font-size: 12px !important; */
+}
+
+.status {
+  border-radius: 12px !important;
+  width: 180px !important;
+  height: 30px !important;
+  cursor: pointer !important;
+  outline: none !important;
+  text-transform: none !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.declined {
+  color: #ffffff !important;
+  background: #F2617A !important;
+}
+.pending {
+    color: #ffffff    !important;
+    background: #47A1AD !important;
+  }
+.assigned{
+    color: #ffffff    !important;
+    background: #6B9E78 !important;
+}
+
+.status-box{
+    margin-top: 15px;
+}
+
+.arrow{
+    display: flex;
+    justify-content: end;
+}
+
+.card-content{
+    padding-bottom: 12px !important;
+}

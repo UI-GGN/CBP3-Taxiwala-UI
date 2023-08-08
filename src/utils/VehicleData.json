@@ -1,0 +1,26 @@
+[
+    {
+        "id": "AB1111111",
+        "driverName": "driver name new",
+        "vendorId": 1,
+        "deleted": false
+    },
+    {
+        "id": "AB123456",
+        "driverName": "driver name",
+        "vendorId": 1,
+        "deleted": false
+    },
+    {
+        "id": "UP14ABC",
+        "driverName": "some name",
+        "vendorId": 14,
+        "deleted": false
+    },
+    {
+        "id": "UP15D1222",
+        "driverName": "unique sa name",
+        "vendorId": 14,
+        "deleted": false
+    }
+]

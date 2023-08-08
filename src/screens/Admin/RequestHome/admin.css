@@ -3,3 +3,24 @@
     object-fit: cover;
     width: 100%;
 }
+
+.modal_buttons {
+    float: right;
+    display: flex;
+    width: 60%;
+    justify-content: space-evenly;
+}
+
+.date_picker {
+    display: flex;
+}
+
+.modal_box {
+   width: 400px;
+}
+
+@media screen and (max-width: 500px) {
+    .modal_box {
+        width: 100%;
+     }
+}

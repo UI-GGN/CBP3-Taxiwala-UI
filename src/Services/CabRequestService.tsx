@@ -1,22 +1,25 @@
 import { api } from "./ApiService/ApiConfig";
 
 export const CabRequestService = {
-  get: async function (id: string) {
-    return await api.request({
-      url: `/cab-request/employee/${id}`,
+  get: async function (params: { id: string }) {
+    const response = await api.request({
+      url: `/cab-request/employee/${params.id}`,
       method: "GET"
     });
+    return response.data;
   },
-  getAll: async function () {
+  create: async function (body: any) {
     return await api.request({
       url: "/cab-request",
+      method: "POST",
+      data: body
+    });
+  },
+  getVendors: async function () {
+    const response = await api.request({
+      url: "/vendor",
       method: "GET"
     });
-  },
-  create: async function () {
-    return await api.request({
-      url: "/cab-request",
-      method: "POST"
-    });
-  } 
+    return response.data;
+  }
 };

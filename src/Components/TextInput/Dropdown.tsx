@@ -1,4 +1,5 @@
 import {
+	Box,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -8,7 +9,7 @@ import {
 import { FC } from "react";
 
 type DropdownValue = {
-	value: string;
+	value: string | number;
 	label: string;
 };
 
@@ -17,6 +18,7 @@ interface IDropdownProps {
 	handleChange: (text: string) => void;
 	value: string;
 	dropdownvalues: DropdownValue[];
+	width?: string;
 }
 
 const Dropdown: FC<IDropdownProps> = ({
@@ -33,10 +35,11 @@ const Dropdown: FC<IDropdownProps> = ({
 			label: "10:00",
 		},
 	],
+	width = "100%",
 }: IDropdownProps): JSX.Element => {
 	return (
 		<>
-			<FormControl sx={{ mb: 2, minWidth: "100%" }}>
+			<FormControl sx={{ mb: 2, minWidth: { width } }}>
 				<InputLabel id="demo-simple-select-helper-label">{label}</InputLabel>
 				<Select
 					variant="filled"
@@ -48,9 +51,13 @@ const Dropdown: FC<IDropdownProps> = ({
 					value={value}
 					displayEmpty
 				>
-					{dropdownvalues.map((value) => (
-						<MenuItem value={value.value}>{value.label}</MenuItem>
+					{/* <Box sx={{ height: "150px" }}> */}
+					{dropdownvalues.map((value, label) => (
+						<MenuItem key={label} value={value.value}>
+							{value.label}
+						</MenuItem>
 					))}
+					{/* </Box> */}
 				</Select>
 			</FormControl>
 		</>

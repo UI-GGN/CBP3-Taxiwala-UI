@@ -1,10 +1,10 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Button, Typography } from "@mui/material";
+import React, { ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import WindowLayout from "../../../Components/WindowLayout";
 import "../../../index.css";
 import { RightWindow } from "./RequestHome";
-import { ReactElement } from "react";
 
 const LeftWindow = () => {
 	const navigate = useNavigate();
@@ -28,7 +28,7 @@ const LeftWindow = () => {
 					variant="outlined"
 					className="actions"
 					onClick={() => {
-						navigate("/employee/allrequests");
+						navigate("/employee/allrequests/");
 					}}
 				>
 					<ArrowBackIcon />
