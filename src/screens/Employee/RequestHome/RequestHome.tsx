@@ -139,10 +139,10 @@ const LeftWindow = () => {
 				};
 				sendEmailNotification(
 					requestDetails,
-					import.meta.env.VITE_ADMIN_EMAIL,
+					process.env.VITE_ADMIN_EMAIL,
 					{
-						SourceArn: import.meta.env.VITE_SOURCE_ARN,
-						Source: import.meta.env.VITE_SOURCE_EMAIL,
+						SourceArn: process.env.VITE_SOURCE_ARN,
+						Source: process.env.VITE_SOURCE_EMAIL,
 					}
 				);
 				return;

@@ -130,7 +130,7 @@ const LoginScreen: React.FC = (): ReactElement => {
 								</Alert>
 							)}
 
-							<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_PROVIDER}>
+							<GoogleOAuthProvider clientId={process.env.VITE_GOOGLE_AUTH_PROVIDER}>
 								<GoogleLogin
 									render={(renderProps) => (
 										<button

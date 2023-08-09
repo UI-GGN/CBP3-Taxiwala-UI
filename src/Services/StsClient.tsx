@@ -1,18 +1,18 @@
 import { STSClient, AssumeRoleCommand } from "@aws-sdk/client-sts";
 
 const client = new STSClient({
-	region: import.meta.env.VITE_REGION,
+	region: process.env.VITE_REGION,
 	credentials: {
-		accessKeyId: import.meta.env.VITE_ACCESS_ID,
-		secretAccessKey: import.meta.env.VITE_SECRET_ACCESS_KEY,
+		accessKeyId: process.env.VITE_ACCESS_ID,
+		secretAccessKey: process.env.VITE_SECRET_ACCESS_KEY,
 	},
 });
 
 export const getIAMCreds = async () => {
 	const roleToAssume = {
-		RoleArn: import.meta.env.VITE_ROLE_ARM,
-		RoleSessionName: import.meta.env.VITE_ROLE_SESSION_NAME,
-		DurationSeconds: import.meta.env.VITE_SESSION_DURATION,
+		RoleArn: process.env.VITE_ROLE_ARM,
+		RoleSessionName: process.env.VITE_ROLE_SESSION_NAME,
+		DurationSeconds: process.env.VITE_SESSION_DURATION,
 	};
 	const command = new AssumeRoleCommand(roleToAssume);
 

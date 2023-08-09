@@ -15,7 +15,7 @@ export const notifyVendor = async (
 	try {
 		const creds = await getIAMCreds();
 		const snsClient = new SNSClient({
-			region: import.meta.env.VITE_REGION,
+			region: process.env.VITE_REGION,
 			credentials: {
 				secretAccessKey: creds?.SecretAccessKey || "",
 				accessKeyId: creds?.AccessKeyId || "",
@@ -24,7 +24,7 @@ export const notifyVendor = async (
 		});
 		const { Subscriptions } = await snsClient.send(
 			new ListSubscriptionsByTopicCommand({
-				TopicArn: import.meta.env.VITE_TOPIC_ARN,
+				TopicArn: process.env.VITE_TOPIC_ARN,
 			})
 		);
 		const subscription = Subscriptions?.find(
@@ -34,7 +34,7 @@ export const notifyVendor = async (
 			await snsClient.send(
 				new SubscribeCommand({
 					Protocol: "SMS",
-					TopicArn: import.meta.env.VITE_TOPIC_ARN,
+					TopicArn: process.env.VITE_TOPIC_ARN,
 					Endpoint: phoneNumber,
 				})
 			);

@@ -22,7 +22,7 @@ export const sendEmailNotification = async (
 	try {
 		const creds = await getIAMCreds();
 		const sesClient = new SESClient({
-			region: import.meta.env.VITE_REGION,
+			region: process.env.VITE_REGION,
 
 			credentials: {
 				secretAccessKey: creds?.SecretAccessKey || "",
